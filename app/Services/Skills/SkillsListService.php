@@ -17,6 +17,6 @@ class SkillsListService
      */
     public function getList(array $columns = ['id','name'],string $orderBy = 'id') :Collection
     {
-        return $this->getCollection(Skill::all(),$columns,$orderBy);
+        return Skill::orderBy($orderBy)->get($columns);
     }
 }
