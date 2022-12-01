@@ -18,6 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('profile')->group(function (Request $request){
-   return 'profile';
+Route::prefix('profile')->group(function () {
+    Route::get('/', function () {
+        return 'foo';
+    });
 });
