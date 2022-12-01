@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('profile')->group(function () {
-    Route::get('/', function () {
-        return 'foo';
-    });
+    Route::get('/', [ProfileController::class,'index']);
 });
