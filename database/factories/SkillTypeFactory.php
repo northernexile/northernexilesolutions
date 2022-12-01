@@ -3,14 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Foundation\Testing\WithFaker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SkillType>
  */
 class SkillTypeFactory extends Factory
 {
-    use WithFaker;
     /**
      * Define the model's default state.
      *
@@ -19,7 +17,7 @@ class SkillTypeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name
+            'name' => ''
         ];
     }
 }
