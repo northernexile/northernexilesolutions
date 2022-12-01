@@ -25,5 +25,7 @@ Route::prefix('profile')->group(function () {
 });
 
 Route::prefix('skills')->group(function (){
-    Route::get('/',[SkillsController::class,'index']);
+    Route::get('',[SkillsController::class,'index'])->name('skill.index');
+    Route::get('{id}',[SkillsController::class,'show'])->name('skill.show');
+    Route::get('/search/{term}',[SkillsController::class,'search'])->name('skill.search');
 });
