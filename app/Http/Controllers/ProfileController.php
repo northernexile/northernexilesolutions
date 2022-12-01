@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\JsonResponseTrait;
+use App\Services\Profile\Profile;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -24,12 +25,14 @@ class ProfileController extends Controller
     /**
      * @return JsonResponse
      */
-    public function index() :JsonResponse
+    public function index(
+        Profile $profile
+    ) :JsonResponse
     {
         $response = null;
 
         try {
-            $response = $this->success('Profile found',200,['profile'=>null]);
+            $response = $this->success('Profile found',200,['profile'=>$profile]);
         } catch (\Throwable $throwable) {
             $response = $this->failure('Profile load failed',422,['message'=>$throwable->getMessage()]);
         } finally {
