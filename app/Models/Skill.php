@@ -23,4 +23,12 @@ class Skill extends Model
         'name',
         'skill_type_id'
     ];
+
+    /**
+     * @return SkillType
+     */
+    public function types() :SkillType
+    {
+        return $this->hasOne(SkillType::class,'skill_type_id','id');
+    }
 }
