@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use App\Services\Formatting\SnakeToCamelFormatter;
 use Illuminate\Http\JsonResponse;
 
 trait JsonResponseTrait
@@ -16,8 +17,9 @@ trait JsonResponseTrait
     {
         return response()->json([
             'success' => true,
-            'data' => $data,
+            'data' => SnakeToCamelFormatter::convert($data),
             'message' => $message,
+            'code'  =>  $status
         ], $status);
     }
 
@@ -32,7 +34,8 @@ trait JsonResponseTrait
         return response()->json([
             'success' => false,
             'message' => $message,
-            'data' => $data
+            'data' => SnakeToCamelFormatter::convert($data),
+            'code' => $status
         ], $status);
     }
 }

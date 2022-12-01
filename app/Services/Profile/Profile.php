@@ -38,6 +38,8 @@ class Profile implements \JsonSerializable
         if(is_null($this->users)){
             $this->users = User::orderBy('name')->get(['id','name','email']);
         }
+
+        return $this->users;
     }
 
     /**
