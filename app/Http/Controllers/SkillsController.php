@@ -57,9 +57,9 @@ class SkillsController extends Controller
     ) :JsonResponse
     {
         try {
-            $skills = $skillsSearchService->setTerm($request->route()->parameter('term'))->search();
+            $skills = $skillsSearchService->setTerm($request->route()->parameter('term',''))->search();
 
-            $response =$this->success('Search complete',200,['skills'=>$skills,'count'=>$skills->count()]);
+            $response = $this->success('Search complete',200,['skills'=>$skills,'count'=>$skills->count()]);
         } catch (\Throwable $throwable) {
             $response = $this->failure('Search failed',422,['message'=>$throwable->getMessage()]);
         } finally {

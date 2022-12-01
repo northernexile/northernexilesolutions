@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Skills;
+namespace App\Services\Skills\Types;
 
-use App\Models\Skill;
+use App\Models\SkillType;
 use Illuminate\Database\Eloquent\Collection;
 
-class SkillsListService
+class SkillTypesListService
 {
     /**
      * @param array $columns
@@ -14,6 +14,6 @@ class SkillsListService
      */
     public function getList(array $columns = ['id','name'],string $orderBy = 'id') :Collection
     {
-        return Skill::orderBy($orderBy)->get($columns);
+        return SkillType::orderBy($orderBy)->get($columns);
     }
 }
