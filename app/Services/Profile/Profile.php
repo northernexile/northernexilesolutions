@@ -2,6 +2,7 @@
 
 namespace App\Services\Profile;
 
+use App\Models\Skill;
 use App\Models\SkillType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -17,6 +18,9 @@ class Profile implements \JsonSerializable
 
     /** @var Collection|null  */
     protected ?Collection $users = null;
+
+    /** @var Collection|null  */
+    protected ?Collection $skills = null;
 
     /**
      * @return Collection
@@ -43,13 +47,26 @@ class Profile implements \JsonSerializable
     }
 
     /**
+     * @return Collection
+     */
+    public function getSkillsList() :Collection
+    {
+        if(is_null($this->skills)) {
+            $this->skills = Skill::orderBy('skill_type_id')->get(['id', 'name', 'skill_type_id']);
+        }
+
+        return $this->skills;
+    }
+
+    /**
      * @return Collection[]
      */
     public function toArray() :array
     {
         return [
             'users' =>  $this->getUsers(),
-            'skillTypes'=>$this->getSkillTypes()
+            'skillTypes'=>$this->getSkillTypes(),
+            'skills'    =>  $this->getSkillsList()
         ];
     }
 
