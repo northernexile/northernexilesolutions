@@ -5,6 +5,7 @@ namespace App\Services\Profile;
 use App\Models\Skill;
 use App\Models\SkillType;
 use App\Models\User;
+use App\Models\UserSkill;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -21,6 +22,24 @@ class Profile implements \JsonSerializable
 
     /** @var Collection|null  */
     protected ?Collection $skills = null;
+
+    /** @var Collection|null  */
+    protected ?Collection $userSkills = null;
+
+    /**
+     * @var int
+     */
+    protected int $userId = 1;
+
+    /**
+     * @param int $userId
+     * @return $this
+     */
+    public function setUserId(int $userId = 1) :Profile
+    {
+        $this->userId = $userId;
+        return $this;
+    }
 
     /**
      * @return Collection
@@ -49,6 +68,20 @@ class Profile implements \JsonSerializable
     /**
      * @return Collection
      */
+    public function getUserSkills() :Collection
+    {
+        if(is_null($this->userSkills)){
+            $this->userSkills = UserSkill::where('user_id','=',$this->userId)
+                ->orderBy('skill_id')
+                ->get(['*']);
+        }
+
+        return $this->userSkills;
+    }
+
+    /**
+     * @return Collection
+     */
     public function getSkillsList() :Collection
     {
         if(is_null($this->skills)) {
@@ -66,7 +99,8 @@ class Profile implements \JsonSerializable
         return [
             'users' =>  $this->getUsers(),
             'skillTypes'=>$this->getSkillTypes(),
-            'skills'    =>  $this->getSkillsList()
+            'skills'    =>  $this->getSkillsList(),
+            'userSkills'    =>  $this->getUserSkills()
         ];
     }
 
