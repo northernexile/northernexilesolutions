@@ -16,7 +16,7 @@ class Profile implements \JsonSerializable
     public function getSkillTypes() :Collection
     {
         if(is_null($this->skillTypes)){
-            $this->skillTypes = SkillType::get(['id','name']);
+            $this->skillTypes = SkillType::orderBy('name')->get(['id','name']);
         }
 
         return $this->skillTypes;
