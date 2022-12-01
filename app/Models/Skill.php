@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\IndexedModelArrayTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -27,7 +28,7 @@ class Skill extends Model
     /**
      * @return SkillType
      */
-    public function types() :SkillType
+    public function types() :HasOne
     {
         return $this->hasOne(SkillType::class,'skill_type_id','id');
     }
