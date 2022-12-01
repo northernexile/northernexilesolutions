@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SkillsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class,'index']);
 });
+
+Route::prefix('skills')->group(function (){
+    Route::get('/',[SkillsController::class,'index']);
+})
