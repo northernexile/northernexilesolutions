@@ -30,6 +30,6 @@ class Skill extends Model
      */
     public function types() :HasOne
     {
-        return $this->hasOne(SkillType::class,'skill_type_id','id');
+        return $this->hasOne(SkillType::class,'id','skill_type_id');
     }
 }
