@@ -6,6 +6,7 @@ use App\Models\Skill;
 use App\Models\SkillType;
 use App\Models\User;
 use App\Models\UserSkill;
+use App\Services\Skills\SkillsListService;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -21,15 +22,25 @@ class Profile implements \JsonSerializable
     protected ?Collection $users = null;
 
     /** @var Collection|null  */
-    protected ?Collection $skills = null;
-
-    /** @var Collection|null  */
     protected ?Collection $userSkills = null;
+
+    /**
+     * @var SkillsListService
+     */
+    protected SkillsListService $skillsListService;
 
     /**
      * @var int
      */
     protected int $userId = 1;
+
+    /**
+     * @param SkillsListService $skillsListService
+     */
+    public function __construct(SkillsListService $skillsListService)
+    {
+        $this->skillsListService = $skillsListService;
+    }
 
     /**
      * @param int $userId
@@ -82,13 +93,9 @@ class Profile implements \JsonSerializable
     /**
      * @return Collection
      */
-    public function getSkillsList() :Collection
+    public function getSkillsList() :\Illuminate\Support\Collection
     {
-        if(is_null($this->skills)) {
-            $this->skills = Skill::orderBy('skill_type_id')->get(['id', 'name', 'skill_type_id']);
-        }
-
-        return $this->skills;
+        return $this->skillsListService->getList(['id','name','skill_type_id']);
     }
 
     /**
