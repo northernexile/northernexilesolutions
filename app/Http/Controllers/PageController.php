@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ApiFormRequestInterface;
 use App\Http\Requests\Page\PageDeleteRequest;
 use App\Http\Requests\Page\PageListRequest;
 use App\Http\Requests\Page\PageSaveRequest;
@@ -53,6 +52,7 @@ class PageController extends Controller
      * @return JsonResponse
      */
     public function show(
+        int $id,
         ViewPageRequest $request,
         PageViewService $service
     ): JsonResponse
@@ -72,6 +72,7 @@ class PageController extends Controller
                 ]
             );
         } catch (\Throwable $throwable) {
+            echo $throwable->getMessage();
             $response = $this->failure('Could not list pages.',422,['message'=>$throwable->getMessage()]);
         } finally {
             return $response;

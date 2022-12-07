@@ -14,6 +14,14 @@ abstract class AbstractFormRequest extends FormRequest implements ApiFormRequest
         return true;
     }
 
+    public function all($keys = null)
+    {
+        $request = request()->all();
+        $request['id'] = $this->route('id');
+        return $request;
+
+    }
+
     /**
      * @return array
      */

@@ -33,7 +33,7 @@ class PageViewService implements IdentifiableInterface
         if($this->withContent){
             $page->content = PageContent::where('page_id','=',$this->identity)
                 ->join('content','content.id','=','page_content.content_id')
-                ->get([]);
+                ->get(['*']);
         }
 
         return $page;
