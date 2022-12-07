@@ -4,11 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SkillRequest extends FormRequest
+abstract class AbstractFormRequest extends FormRequest implements ApiFormRequestInterface
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
      * @return bool
      */
     public function authorize():bool
@@ -17,14 +15,12 @@ class SkillRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules() :array
     {
         return [
-            'id' => 'required'
+
         ];
     }
 }

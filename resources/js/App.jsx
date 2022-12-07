@@ -7,6 +7,7 @@ import { appTheme } from "./components/Theme/Theme";
 import Root from "./routes/root"
 import ErrorPage from "./errors/ErrorPage";
 import Login from "./components/Login/Login";
+import Home from "./components/Home/Home"
 import {
     createBrowserRouter,
     RouterProvider,
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         element: <Root />,
         errorElement: <ErrorPage />,
         children: [
+            {
+                index: true,
+                element: <Home />
+            },
             {
                 path: "login",
                 element: <Login />

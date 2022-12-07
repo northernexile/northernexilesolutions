@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\SkillTypesController;
@@ -35,4 +36,12 @@ Route::prefix('skills')->group(function (){
     Route::get('/',[SkillsController::class,'index'])->name('skill.index');
     Route::get('/{id}',[SkillsController::class,'show'])->name('skill.show');
     Route::get('/search/{term}',[SkillsController::class,'search'])->name('skill.search');
+});
+
+Route::prefix('pages')->group(function (){
+   Route::get('/',[PageController::class,'index'])->name('pages.index');
+   Route::get('/{id}',[PageController::class,'show'])->name('pages.show');
+   Route::post('/{id}',[PageController::class,'edit'])->name('pages.save');
+   Route::delete('/{id}',[PageController::class,'delete'])->name('pages.delete');
+   Route::get('/search/{term}',[PageController::class,'search'])->name('pages.search');
 });
