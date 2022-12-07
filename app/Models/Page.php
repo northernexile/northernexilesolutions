@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @property int $id
@@ -34,4 +36,12 @@ class Page extends Model
         'name',
         'slug'
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function pageContent() :HasMany
+    {
+        return $this->hasMany(PageContent::class);
+    }
 }

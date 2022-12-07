@@ -60,12 +60,14 @@ class PageController extends Controller
         $response = null;
 
         try {
+
             $response = $this->success(
                 'Page found',
                 200,
                 [
                     'page'=>$service
                         ->setIdentity($request->route()->parameter('id'))
+                        ->setWithContent(true)
                         ->get(),
                 ]
             );
