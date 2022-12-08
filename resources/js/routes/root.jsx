@@ -2,7 +2,7 @@ import React from 'react'
 import ButtonAppBar from "../components/Header/Header";
 import { Outlet } from "react-router-dom";
 import SiteBottomNavigation from "../components/Footer/BottomNavigation";
-import {Grid} from "@mui/material";
+import {Grid,Box} from "@mui/material";
 
 export default function Root() {
     return (
@@ -11,10 +11,12 @@ export default function Root() {
                 <ButtonAppBar />
             </div>
             <div id="content">
-                <Grid container spacing={2}>
-                    <Outlet />
-                    <Grid item xs={4}>R Nav</Grid>
-                </Grid>
+                <Box display="flex"
+                     justifyContent="center">
+                    <Grid containerspacing={1}>
+                        <Outlet />
+                    </Grid>
+                </Box>
             </div>
             <div id="footer">
                 <SiteBottomNavigation />

@@ -5,7 +5,13 @@ import {Grid, Paper} from "@mui/material";
 export default function Home() {
     return (
         <Grid item xs={8}>
-            <Paper>
+            <Paper elevation={2}
+                   style={{
+                       padding: 8,
+                       marginTop:8,
+                       marginBottom:8
+                   }}
+            >
                 <h2>Welcome to Northern Exile Solutions Ltd</h2>
                 <p>We are based in the Forest of Dean and Wye Valley, providing web development solutions primarily on
                 a contract basis.</p>
@@ -22,7 +28,6 @@ export default function Home() {
                     <li>Price Comparison</li>
                 </ul>
                 <p>We strive to remain current and on top of the latest innovations in our working practices</p>
-                <hr />
                 <p>We are especially interested in working with progressive well organised teams, who are committed to open and accountable communication and delivering quality software.</p>
             </Paper>
         </Grid>

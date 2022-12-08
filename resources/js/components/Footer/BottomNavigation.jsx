@@ -10,7 +10,7 @@ export default function SiteBottomNavigation() {
     const [value, setValue] = React.useState(0);
 
     return (
-        <Box sx={{ width: 500 }}>
+        <Box sx={{ position: 'fixed', bottom: 0, width: 1.0}}>
             <BottomNavigation
                 showLabels
                 value={value}
