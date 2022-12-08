@@ -11,12 +11,7 @@ export default function Root() {
                 <ButtonAppBar />
             </div>
             <div id="content">
-                <Box display="flex"
-                     justifyContent="center">
-                    <Grid containerspacing={1}>
-                        <Outlet />
-                    </Grid>
-                </Box>
+                <Outlet />
             </div>
             <div id="footer">
                 <SiteBottomNavigation />
