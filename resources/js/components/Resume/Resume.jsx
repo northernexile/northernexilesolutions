@@ -2,8 +2,8 @@
 import React from "react";
 import {Grid} from "@mui/material";
 
-export default function Login() {
+export default function Resume() {
     return (
-        <Grid item xs={8}>Login</Grid>
+        <Grid item xs={8}>Resume</Grid>
     )
 }

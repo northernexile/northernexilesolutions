@@ -8,11 +8,15 @@ import Root from "./routes/root"
 import ErrorPage from "./errors/ErrorPage";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home"
+import Resume from "./components/Resume/Resume";
 import {
     createBrowserRouter,
     RouterProvider,
     Route,
-} from "react-router-dom";
+}from "react-router-dom";
+import Logout from "./components/Logout/Logout";
+import Contact from "./components/Contact/Contact";
+
 
 const router = createBrowserRouter([
     {
@@ -27,6 +31,18 @@ const router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login />
+            },
+            {
+                path: "logout",
+                element: <Logout />
+            },
+            {
+                path: "resume",
+                element: <Resume />
+            },
+            {
+                path: "contact",
+                element: <Contact />
             }
         ]
     },
