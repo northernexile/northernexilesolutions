@@ -1,5 +1,20 @@
 import React from "react"
 import {Card, CardContent, CardHeader} from "@mui/material";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faLaravel,
+    faBootstrap,
+    faPhp,
+    faSymfony,
+    faMagento,
+    faLess,
+    faHtml5,
+    faShopify,
+    faVuejs,
+    faReact,
+    faAws,
+    faWordpress,
+    faAngular,
+    faPython} from '@fortawesome/free-brands-svg-icons'
 
 export default function Technologies() {
     return (
@@ -13,6 +28,7 @@ export default function Technologies() {
             >
                 <CardHeader title={'Technologies'}/>
                 <CardContent>
+                    <FontAwesomeIcon icon={faLaravel} />
                 </CardContent>
             </Card>
     )

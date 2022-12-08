@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * @property int $id
  * @property string $name
+ * @property null|string $icon
  * @property int $skill_type_id
  */
 class Skill extends Model
@@ -22,6 +23,7 @@ class Skill extends Model
      */
     protected $fillable = [
         'name',
+        'icon',
         'skill_type_id'
     ];
 
