@@ -7,10 +7,10 @@ trait IdentifiableTrait
     protected ?int $identity = null;
 
     /**
-     * @param int $identity
+     * @param null|int $identity
      * @return IdentifiableInterface
      */
-    public function setIdentity(int $identity) :IdentifiableInterface
+    public function setIdentity(?int $identity) :IdentifiableInterface
     {
         $this->identity = $identity;
 

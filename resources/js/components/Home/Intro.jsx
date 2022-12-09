@@ -1,10 +1,27 @@
 
 import {Card, CardContent, CardHeader} from "@mui/material";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
+import ContentService from "../../services/ContentService";
 
-export default function Intro() {
+const Intro = React.FC = () => {
+    const [content, setContent] = useState([]);
+
+    useEffect(() => {
+        retrieveContent()
+    }, []);
+
+    const retrieveContent = () => {
+        ContentService.get(1).then((response) => {
+            setContent(response.data.data.content);
+            console.log(response.data.data.content);
+        }).catch((e) => {
+            console.log('error')
+            console.log(e);
+        })
+    }
+
     return (
             <Card elevation={2}
                    style={{
@@ -15,10 +32,11 @@ export default function Intro() {
             >
                 <CardHeader title="About us"/>
                 <CardContent>
-                    <Typography variant="p" component="div" >We are Software Developers based in The Forest of Dean & provide web development solutions primarily on
-                        a contract basis.</Typography>
+                    <Typography variant="p" component="div" >{content.text}</Typography>
                     <Typography variant="p" component="div"><Link title="Contact us" to="/contact">Contact us</Link></Typography>
                 </CardContent>
             </Card>
     )
 }
+
+export default Intro

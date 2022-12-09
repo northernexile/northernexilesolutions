@@ -6,7 +6,7 @@ use App\Http\Requests\Page\PageDeleteRequest;
 use App\Http\Requests\Page\PageListRequest;
 use App\Http\Requests\Page\PageSaveRequest;
 use App\Http\Requests\Page\PageSearchRequest;
-use App\Http\Requests\Page\ViewPageRequest;
+use App\Http\Requests\Page\PageViewRequest;
 use App\Http\Traits\JsonResponseTrait;
 use App\Services\Page\PageDeleteService;
 use App\Services\Page\PageSaveService;
@@ -14,6 +14,7 @@ use App\Services\Page\PageListService;
 use App\Services\Page\PageSearchService;
 use App\Services\Page\PageViewService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -47,13 +48,12 @@ class PageController extends Controller
     }
 
     /**
-     * @param ViewPageRequest $request
+     * @param Request $request
      * @param PageViewService $service
      * @return JsonResponse
      */
-    public function show(
-        int $id,
-        ViewPageRequest $request,
+    public function view(
+        Request $request,
         PageViewService $service
     ): JsonResponse
     {
@@ -61,14 +61,13 @@ class PageController extends Controller
 
         try {
 
+            $page = $service->setIdentity($request->route()->parameter('id'))->get();
+
             $response = $this->success(
                 'Page found',
                 200,
                 [
-                    'page'=>$service
-                        ->setIdentity($request->route()->parameter('id'))
-                        ->setWithContent(true)
-                        ->get(),
+                    'page'=> $page,
                 ]
             );
         } catch (\Throwable $throwable) {

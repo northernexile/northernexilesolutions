@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Requests\Page;
+namespace App\Http\Requests\Content;
 
 use App\Http\Requests\AbstractFormRequest;
-use App\Http\Requests\ApiFormRequestInterface;
 
-class ViewPageRequest extends AbstractFormRequest
+class ContentDeleteRequest extends AbstractFormRequest
 {
     /**
      * @return string[]
      */
-    public function rules() :array
+    public function rules(): array
     {
         return [
             'id'=>'integer|required'

@@ -10,6 +10,10 @@ const get = (id: any) => {
     return http.get<IContentData>(`/content/${id}`);
 };
 
+const search = (term: any) => {
+    return http.get<Array<IContentData>>('/content/search/${term}');
+};
+
 const create = (data: IContentData) => {
     return http.post<IContentData>("/content", data);
 };
@@ -29,6 +33,7 @@ const removeAll = () => {
 const ContentService = {
     getAll,
     get,
+    search,
     create,
     update,
     remove,

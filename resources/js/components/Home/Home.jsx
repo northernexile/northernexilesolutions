@@ -1,11 +1,29 @@
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Grid} from "@mui/material";
 import Intro from './Intro'
 import Technologies from "./Technologies";
 import Sectors from "./Sectors";
+import PageService from "../../services/PageService";
 
-export default function Home() {
+
+const Home = React.FC = () => {
+    const [page, setPage] = useState([]);
+
+    useEffect(() => {
+        retrievePage()
+    }, []);
+
+    const retrievePage = () => {
+        PageService.get(1).then((response) => {
+            setPage(response.data.data.page);
+            console.log(response.data.data.page);
+        }).catch((e) => {
+            console.log('error')
+            console.log(e);
+        })
+    }
+
     return (
         <>
             <Grid
@@ -23,4 +41,6 @@ export default function Home() {
             </Grid>
         </>
     )
-}
+};
+
+export default Home;

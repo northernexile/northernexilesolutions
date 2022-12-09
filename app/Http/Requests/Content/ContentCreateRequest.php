@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Page;
+namespace App\Http\Requests\Content;
 
 use App\Http\Requests\AbstractFormRequest;
 
-class PageSaveRequest extends AbstractFormRequest
+class ContentCreateRequest extends AbstractFormRequest
 {
     /**
      * @return string[]
@@ -14,7 +14,7 @@ class PageSaveRequest extends AbstractFormRequest
         return [
           'id'=>'integer|sometimes',
           'name'=>'string|required',
-          'slug'=>'string|required'
+          'text'=>'string|required'
         ];
     }
 }
