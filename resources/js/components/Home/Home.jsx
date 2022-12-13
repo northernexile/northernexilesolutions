@@ -17,9 +17,7 @@ const Home = React.FC = () => {
     const retrievePage = () => {
         PageService.get(1).then((response) => {
             setPage(response.data.data.page);
-            console.log(response.data.data.page);
         }).catch((e) => {
-            console.log('error')
             console.log(e);
         })
     }

@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react"
-import {Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent, CardHeader, Paper} from "@mui/material";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 import SkillService from "../../services/SkillService";
 import getBrandIcon from "../../services/icons/icons";
+import Carousel,{CarouselItem} from "../UI/Carousel/Carousel";
 
 const Technologies = React.FC = () => {
     const [skills, setSkills] = useState([]);
@@ -14,11 +15,8 @@ const Technologies = React.FC = () => {
 
     const retrieveSkills = () => {
         SkillService.getAll().then((response) => {
-            console.log('alpha')
             setSkills(response.data.data.skills);
-            console.log(response.data.data.skills);
         }).catch((e) => {
-            console.log('error')
             console.log(e);
         })
     }
@@ -34,15 +32,20 @@ const Technologies = React.FC = () => {
         >
             <CardHeader title={'Technologies'}/>
             <CardContent>
-                <ul>
+                <Carousel>
                     {skills &&
                         skills.map((skill, index) => (
-                            <li key={skill.name}>
-                                <FontAwesomeIcon icon={getBrandIcon(skill.icon)} />
-                                <span>{skill.name}</span>
-                            </li>
+                            <CarouselItem key={skill.name}>
+                                <FontAwesomeIcon
+                                    title={skill.name}
+                                    className={'tech-icon'}
+                                    icon={getBrandIcon(skill.icon)}
+                                    size="4x" fixedWidth
+                                    color={'secondary'}
+                                />
+                            </CarouselItem>
                         ))}
-                </ul>
+                </Carousel>
             </CardContent>
         </Card>
     )

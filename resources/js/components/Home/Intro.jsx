@@ -15,10 +15,8 @@ const Intro = React.FC = () => {
     const retrieveContent = () => {
         ContentService.get(1).then((response) => {
             setContent(response.data.data.content);
-            console.log(response.data.data.content);
         }).catch((e) => {
             console.log('error')
-            console.log(e);
         })
     }
 
