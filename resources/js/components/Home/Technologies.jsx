@@ -18,7 +18,25 @@ import {
     faPython
 } from '@fortawesome/free-brands-svg-icons'
 import SkillService from "../../services/SkillService";
+import {faCode} from "@fortawesome/free-solid-svg-icons";
 
+const icons = [
+    {name:'faLaravel',icon:faLaravel},
+    {name:'faBootstrap',icon:faBootstrap},
+    {name:'faPhp',icon:faPhp},
+    {name:'faSymfony',icon:faSymfony},
+    {name:'faMagento',icon:faMagento},
+    {name:'faLess',icon:faLess},
+    {name:'faHtml5',icon:faHtml5},
+    {name:'faShopify',icon:faShopify},
+    {name:'faVuejs',icon:faVuejs},
+    {name:'faReact',icon:faReact},
+    {name:'faAws',icon:faAws},
+    {name:'faWordpress',icon:faWordpress},
+    {name:'faAngular',icon:faAngular},
+    {name:'faPython',icon:faPython},
+    {name: 'faCode',icon: faCode}
+]
 
 const Technologies = React.FC = () => {
     const [skills, setSkills] = useState([]);
@@ -38,6 +56,18 @@ const Technologies = React.FC = () => {
         })
     }
 
+    const getBrandIcon = (brand) => {
+        let icon = icons.filter( (ico) => {
+            return ico.name === brand
+        });
+
+        if(icon.length === 0){
+            return faCode
+        }
+
+        return icon[0].icon;
+    }
+
     return (
 
         <Card elevation={2}
@@ -49,16 +79,16 @@ const Technologies = React.FC = () => {
         >
             <CardHeader title={'Technologies'}/>
             <CardContent>
-                <FontAwesomeIcon icon={faLaravel}/>
+                <ul>
+                    {skills &&
+                        skills.map((skill, index) => (
+                            <li key={skill.name}>
+                                <FontAwesomeIcon icon={getBrandIcon(skill.icon)} />
+                                <span>{skill.name}</span>
+                            </li>
+                        ))}
+                </ul>
             </CardContent>
-            <ul>
-                {skills &&
-                    skills.map((skill, index) => (
-                        <li key={skill.name}>
-                            {skill.name}
-                        </li>
-                    ))}
-            </ul>
         </Card>
     )
 };
