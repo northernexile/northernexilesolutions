@@ -27,3 +27,4 @@ Route::prefix('profile')->group(function () {
 include 'api/pages.php';
 include 'api/skills.php';
 include 'api/content.php';
+include 'api/companyInformation.php';

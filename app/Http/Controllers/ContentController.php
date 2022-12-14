@@ -16,7 +16,6 @@ use App\Services\Content\ContentSaveService;
 use App\Services\Content\ContentSearchService;
 use App\Services\Content\ContentViewService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Js;
 
 class ContentController extends Controller
 {

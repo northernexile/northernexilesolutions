@@ -5,3 +5,34 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+//color
+$primary: #0a5425;
+$primary-light: rgb(59,118,80);
+$primary-dark: rgb(59,118,80);
+$primary-contrast: #fff;
+$secondary: #da1b07;
+$secondary-light: rgb(225,72,56);
+$secondary-dark: rgb(152,18,4);
+
+$error-main: #f44336;
+$error-light: #e57373;
+$error-dark: #d32f2f;
+$error-contrast: #fff;
+
+$warning-main: #ff9800;
+$warning-light: #ffb74d;
+$warning-dark: #f57c00;
+$warning-contrast: rgba(0,0,0,0.87);
+
+$info-main: #2196f3;
+$info-light: #64b5f6;
+$info-dark: #1976d2;
+$info-contrast: #fff;
+
+$success-main: #4caf50;
+$success-light: #81c784;
+$success-dark: #388e3c;
+$success-contrast: rgba(0,0,0,0.87);
+
+$divider: rgba(0,0,0,0.12)
