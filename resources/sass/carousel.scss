@@ -9,6 +9,20 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        height: 200px;
+        height: 80px;
+        color: red;
+        .legend{
+            display: flex;
+            align-items: end;
+            justify-content: flex-end;
+        }
+    }
+
+    .indicators{
+        display: flex;
+        justify-content: center;
+        > button {
+            margin: 5px;
+        }
     }
 }

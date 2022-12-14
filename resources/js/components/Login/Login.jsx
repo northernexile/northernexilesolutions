@@ -1,9 +1,13 @@
 
 import React from "react";
-import {Grid} from "@mui/material";
+import LoginForm from "./LoginForm";
 
-export default function Login() {
+const Login = () => {
     return (
-        <Grid item xs={8}>Login</Grid>
+        LoginForm()
     )
 }
+
+export default Login
+
+

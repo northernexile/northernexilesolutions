@@ -36,6 +36,7 @@ const Technologies = React.FC = () => {
                     {skills &&
                         skills.map((skill, index) => (
                             <CarouselItem key={skill.name}>
+                                <div>
                                 <FontAwesomeIcon
                                     title={skill.name}
                                     className={'tech-icon'}
@@ -43,6 +44,8 @@ const Technologies = React.FC = () => {
                                     size="4x" fixedWidth
                                     color={'secondary'}
                                 />
+                                    <div className="legend">{skill.name}</div>
+                                </div>
                             </CarouselItem>
                         ))}
                 </Carousel>
