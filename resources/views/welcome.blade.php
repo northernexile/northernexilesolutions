@@ -22,7 +22,7 @@
         </style>
     </head>
     <body class="antialiased">
-            <div id="app">
+            <div id="root">
 
             </div>
 
