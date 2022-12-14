@@ -29,10 +29,10 @@ const Home = React.FC = () => {
 
                 justifyContent="center"
                 container item xs={12}>
-                <Grid item xs={7}>
+                <Grid item xs={12} md={6}>
                     <Intro />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={12} md={4}>
                     <Technologies />
                     <Sectors />
                 </Grid>

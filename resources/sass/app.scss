@@ -5,3 +5,15 @@
 @import 'variables';
 
 @import "carousel";
+
+.title-bar{
+    background-color: $primary-light;
+    color: $primary-contrast;
+    svg{
+        border-radius: 50%;
+        background-color: $primary-dark;
+        min-width: 20px;
+        min-height: 20px;
+        padding: 8px;
+    }
+}

@@ -25,12 +25,22 @@ const Technologies = React.FC = () => {
 
         <Card elevation={2}
               style={{
-                  padding: 8,
-                  marginTop: 8,
-                  marginBottom: 8
+                  paddingTop: 8,
+                  paddingLeft:0,
+                  paddingRight:0,
+                  paddingBottom:8,
+                  margin:8
               }}
         >
-            <CardHeader title={'Technologies'}/>
+            <CardHeader
+                className="title-bar"
+                title={'Technologies'}
+                action={
+                    <div>
+                        <FontAwesomeIcon icon={getBrandIcon('faDesktop')} />
+                    </div>
+                }
+            />
             <CardContent>
                 <Carousel>
                     {skills &&

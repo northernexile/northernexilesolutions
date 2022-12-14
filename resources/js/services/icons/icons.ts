@@ -14,7 +14,7 @@ import {
     faAngular,
     faPython
 } from '@fortawesome/free-brands-svg-icons'
-import {faCode} from "@fortawesome/free-solid-svg-icons";
+import {faCode,faInfo,faIndustry,faDesktop} from "@fortawesome/free-solid-svg-icons";
 
 const icons = [
     {name:'faLaravel',icon:faLaravel},
@@ -31,7 +31,10 @@ const icons = [
     {name:'faWordpress',icon:faWordpress},
     {name:'faAngular',icon:faAngular},
     {name:'faPython',icon:faPython},
-    {name: 'faCode',icon: faCode}
+    {name: 'faCode',icon: faCode},
+    {name: 'faInfo',icon:faInfo},
+    {name: 'faIndustry',icon:faIndustry},
+    {name: 'faDesktop',icon:faDesktop},
 ]
 
 const getBrandIcon = (brand) => {
