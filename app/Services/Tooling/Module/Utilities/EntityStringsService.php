@@ -40,7 +40,7 @@ class EntityStringsService
     /**
      * @return string
      */
-    public function getModuleNameSingular() :string
+    private function getModuleNameSingular() :string
     {
         return Str::ucfirst(Str::singular($this->identifier));
     }
@@ -96,7 +96,7 @@ class EntityStringsService
     /**
      * @return string
      */
-    public function getControllerNamespace() :string
+    private function getControllerNamespace() :string
     {
         return 'App\Http\Controllers\'';
     }
@@ -107,22 +107,6 @@ class EntityStringsService
     public function getControllerFilePath() :string
     {
         return 'app/Http/Controllers/';
-    }
-
-    /**
-     * @return string
-     */
-    public function getRequestsNamespace() :string
-    {
-        return 'App\Http\Requests\'';
-    }
-
-    /**
-     * @return string
-     */
-    public function getServicesNamespace() :string
-    {
-        return 'App\Services\'';
     }
 
     /**
@@ -142,19 +126,10 @@ class EntityStringsService
     }
 
     /**
-     * @param string $module
-     * @return string
-     */
-    public function getRequestNamespace(string $module) :string
-    {
-        return $this->getRequestsNamespace().$this->getModuleDirectoryName().'/';
-    }
-
-    /**
      * @param string $request
      * @return string
      */
-    public function getRequestFileName(string $request) :string
+    private function getRequestFileName(string $request) :string
     {
         return $this->getModuleDirectoryName().$request.'Request';
     }
@@ -163,7 +138,7 @@ class EntityStringsService
      * @param string $request
      * @return string
      */
-    public function getServiceFileName(string $request) :string
+    private function getServiceFileName(string $request) :string
     {
         return $this->getModuleDirectoryName().$request.'Service';
     }
@@ -267,14 +242,6 @@ class EntityStringsService
     /**
      * @return string
      */
-    public function getUpdateServiceFileName() :string
-    {
-        return $this->getServiceFileName('Update');
-    }
-
-    /**
-     * @return string
-     */
     public function getSearchServiceFileName() :string
     {
         return $this->getServiceFileName('Search');
@@ -288,11 +255,18 @@ class EntityStringsService
         return 'app/Http/Requests/';
     }
 
+    /**
+     * @return string
+     */
     public function getFullControllerNamespacePath() :string
     {
         return $this->getControllerNamespace().$this->getControllerName();
     }
 
+    /**
+     * @param string $file
+     * @return string
+     */
     public function apply(string $file) :string
     {
         $output = $file;
