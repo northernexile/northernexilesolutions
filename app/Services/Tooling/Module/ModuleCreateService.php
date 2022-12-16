@@ -26,6 +26,9 @@ class ModuleCreateService implements ModuleCreateInterface
     /** @var string  */
     protected string $moduleName = '';
 
+    /** @var array|string[]  */
+    protected array $columns = ['id'];
+
     /**
      * @param ControllerCreateService $controllerCreateService
      * @param RequestsCreateService $requestsCreateService
@@ -46,6 +49,29 @@ class ModuleCreateService implements ModuleCreateInterface
         $this->servicesCreateService = $servicesCreateService;
         $this->routesCreateService = $routesCreateService;
         $this->modelCreateService = $modelCreateService;
+    }
+
+    /**
+     * @param array $columns
+     * @return ModuleCreateInterface
+     */
+    public function setColumns(array $columns = []) :ModuleCreateInterface
+    {
+        $this->columns = $columns;
+        return $this;
+    }
+
+    /**
+     * @param string $column
+     * @return ModuleCreateInterface
+     */
+    public function addColumn(string $column): ModuleCreateInterface
+    {
+        if(!in_array($column,$this->columns)){
+            $this->columns[] = $column;
+        }
+
+        return $this;
     }
 
     /**
