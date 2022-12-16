@@ -12,6 +12,8 @@ class TemplateReadService
     private string $routesTemplate = 'app/Templates/Routes/route.tpl';
     /** @var string  */
     private string $requestTemplatesPath = 'app/Templates/Http/Requests/';
+    /** @var string  */
+    private string $servicesTemplatesPath = 'app/Templates/Services';
 
     public const CREATE = 'Create';
     public const DELETE_ALL = 'DeleteAll';
@@ -20,6 +22,7 @@ class TemplateReadService
     public const SEARCH = 'Search';
     public const UPDATE = 'Update';
     public const VIEW = 'View';
+    public const SAVE = 'Save';
 
     /**
      * @var array|string[]
@@ -31,6 +34,18 @@ class TemplateReadService
         self::LIST,
         self::SEARCH,
         self::UPDATE,
+        self::VIEW
+    ];
+
+    /**
+     * @var array|string[]
+     */
+    private array $servicesTemplates = [
+        self::SAVE,
+        self::DELETE_ALL,
+        self::DELETE,
+        self::LIST,
+        self::SEARCH,
         self::VIEW
     ];
 
@@ -68,6 +83,20 @@ class TemplateReadService
         $path = $this->requestTemplatesPath;
         foreach ($this->requestTemplates as $requestTemplate){
             $config[$requestTemplate] = $this->getFile($path.$requestTemplate.'Request.tpl');
+        }
+
+        return $config;
+    }
+
+    /**
+     * @return array
+     */
+    public function getServicesTemplates() :array
+    {
+        $config = [];
+        $path = $this->servicesTemplatesPath;
+        foreach ($this->servicesTemplates as $serviceTemplate){
+            $config[$serviceTemplate] = $this->getFile($path.'/'.$serviceTemplate.'Service.tpl');
         }
 
         return $config;

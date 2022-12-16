@@ -20,6 +20,8 @@ class ControllerCreateService extends AbstractModuleCreationService
         if($exists) {
             throw new \Exception('Controller '.$this->entityStringsService->getControllerName().' already exists');
         }
+
+        return true;
     }
 
     /**

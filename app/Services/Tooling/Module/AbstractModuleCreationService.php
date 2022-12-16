@@ -2,7 +2,7 @@
 
 namespace App\Services\Tooling\Module;
 
-class AbstractModuleCreationService implements ObjectCreationInterface
+abstract class AbstractModuleCreationService implements ObjectCreationInterface
 {
     /** @var string  */
     protected string $moduleName = '';

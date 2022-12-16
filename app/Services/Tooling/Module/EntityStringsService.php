@@ -267,6 +267,22 @@ class EntityStringsService
     /**
      * @return string
      */
+    public function getUpdateServiceFileName() :string
+    {
+        return $this->getServiceFileName('Update');
+    }
+
+    /**
+     * @return string
+     */
+    public function getSearchServiceFileName() :string
+    {
+        return $this->getServiceFileName('Search');
+    }
+
+    /**
+     * @return string
+     */
     public function getRequestsFilePath() :string
     {
         return 'app/Http/Requests/';
