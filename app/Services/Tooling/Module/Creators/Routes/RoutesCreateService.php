@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services\Tooling\Module;
+namespace App\Services\Tooling\Module\Creators\Routes;
 
+use App\Services\Tooling\Module\Creators\AbstractModuleCreationService;
 use Illuminate\Support\Facades\File;
 
 class RoutesCreateService extends AbstractModuleCreationService

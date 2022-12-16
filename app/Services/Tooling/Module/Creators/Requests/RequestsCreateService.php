@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Services\Tooling\Module;
+namespace App\Services\Tooling\Module\Creators\Requests;
 
+use App\Services\Tooling\Module\Creators\AbstractModuleCreationService;
+use App\Services\Tooling\Module\Template\Read\TemplateReadService;
 use Illuminate\Support\Facades\File;
 
 class RequestsCreateService extends AbstractModuleCreationService

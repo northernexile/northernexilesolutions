@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Services\Tooling\Module;
+namespace App\Services\Tooling\Module\Creators\Controller;
+
+use App\Services\Tooling\Module\Creators\AbstractModuleCreationService;
 
 class ControllerCreateService extends AbstractModuleCreationService
 {

@@ -1,6 +1,10 @@
 <?php
 
-namespace App\Services\Tooling\Module;
+namespace App\Services\Tooling\Module\Creators;
+
+use App\Services\Tooling\Module\Template\Read\TemplateReadService;
+use App\Services\Tooling\Module\Template\Write\TemplateWriteService;
+use App\Services\Tooling\Module\Utilities\EntityStringsService;
 
 abstract class AbstractModuleCreationService implements ObjectCreationInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Tooling\Module;
+namespace App\Services\Tooling\Module\Creators;
 
 interface ObjectCreationInterface
 {

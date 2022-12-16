@@ -3,12 +3,16 @@
 namespace App\Services\Tooling\Module;
 
 
+use App\Services\Tooling\Module\Creators\Controller\ControllerCreateService;
+use App\Services\Tooling\Module\Creators\Requests\RequestsCreateService;
+use App\Services\Tooling\Module\Creators\Routes\RoutesCreateService;
+use App\Services\Tooling\Module\Creators\Services\ServicesCreateService;
+use App\Services\Tooling\Module\Creators\Model\ModelCreateService;
+
 use Exception;
 
 class ModuleCreateService implements ModuleCreateInterface
 {
-    /** @var bool  */
-    protected bool $created = false;
     /** @var ControllerCreateService $controllerCreateService */
     protected ControllerCreateService $controllerCreateService;
     /** @var RequestsCreateService  */
@@ -17,6 +21,8 @@ class ModuleCreateService implements ModuleCreateInterface
     protected ServicesCreateService $servicesCreateService;
     /** @var RoutesCreateService  */
     protected RoutesCreateService $routesCreateService;
+    /** @var ModelCreateService  */
+    protected ModelCreateService $modelCreateService;
     /** @var string  */
     protected string $moduleName = '';
 
@@ -25,18 +31,21 @@ class ModuleCreateService implements ModuleCreateInterface
      * @param RequestsCreateService $requestsCreateService
      * @param ServicesCreateService $servicesCreateService
      * @param RoutesCreateService $routesCreateService
+     * @param ModelCreateService $modelCreateService
      */
     public function __construct(
         ControllerCreateService $controllerCreateService,
         RequestsCreateService $requestsCreateService,
         ServicesCreateService $servicesCreateService,
-        RoutesCreateService $routesCreateService
+        RoutesCreateService $routesCreateService,
+        ModelCreateService $modelCreateService
     )
     {
         $this->controllerCreateService = $controllerCreateService;
         $this->requestsCreateService = $requestsCreateService;
         $this->servicesCreateService = $servicesCreateService;
         $this->routesCreateService = $routesCreateService;
+        $this->modelCreateService = $modelCreateService;
     }
 
     /**
@@ -47,56 +56,111 @@ class ModuleCreateService implements ModuleCreateInterface
     public function create(string $moduleName): bool
     {
         $this->moduleName = $moduleName;
-        $validated = $this->validate();
-        $requestsService = null;
-        $servicesService = null;
-        $routesService = null;
+        $this->createController()
+            ->createRequests()
+            ->createServices()
+            ->createRoutes()
+            ->createModel();
 
-        if($validated){
-            $createdController = $this->controllerCreateService->setModuleName($this->moduleName)->create();
-            $this->created = $createdController;
 
-            if($this->created){
-                $requestsService = $this->requestsCreateService->setModuleName($this->moduleName);
-                $this->created = $requestsService->exists();
-            }
-
-            if($this->created){
-                $this->created = $requestsService->create();
-            }
-
-            if($this->created){
-                $servicesService = $this->servicesCreateService->setModuleName($this->moduleName);
-                $this->created = $servicesService->exists();
-            }
-
-            if($this->created){
-                $this->created = $servicesService->create();
-            }
-
-            if($this->created){
-                $routesService = $this->routesCreateService->setModuleName($this->moduleName);
-                $this->created = $routesService->exists();
-            }
-
-            if($this->created){
-                $this->created = $routesService->create();
-            }
-        }
-
-        return $this->created;
+        return true;
     }
 
     /**
-     * @return bool
+     * @return $this
      * @throws Exception
      */
-    private function validate() :bool
+    private function createController() :self
     {
-        return (
-            $this->controllerCreateService
-            ->setModuleName($this->moduleName)
-            ->exists()
-        );
+        $created = $this->controllerCreateService->setModuleName($this->moduleName)->exists();
+
+        if(!$created) {
+            $created = $this->controllerCreateService->setModuleName($this->moduleName)->create();
+        }
+
+        if(!$created){
+            throw new \Exception('Controller could not be created');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @throws Exception
+     */
+    private function createRequests() :self
+    {
+        $requestsService = $this->requestsCreateService->setModuleName($this->moduleName);
+        $created = $requestsService->exists();
+
+        if(!$created){
+            $created = $requestsService->create();
+        }
+
+        if(!$created) {
+            throw new \Exception('Could not create module requests suite');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @throws Exception
+     */
+    private function createServices() :self
+    {
+        $servicesService = $this->servicesCreateService->setModuleName($this->moduleName);
+        $created = $servicesService->exists();
+
+        if(!$created){
+            $created = $servicesService->create();
+        }
+
+        if(!$created) {
+            throw new \Exception('Could not create module services suite');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @throws Exception
+     */
+    private function createRoutes() :self
+    {
+        $routesService = $this->routesCreateService->setModuleName($this->moduleName);
+        $created = $routesService->exists();
+        if(!$created){
+            $created = $routesService->create();
+        }
+
+        if(!$created){
+            throw new \Exception('Could not create module route');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @throws Exception
+     */
+    private function createModel() :self
+    {
+        $modelService = $this->modelCreateService->setModuleName($this->moduleName);
+        $created = $modelService->exists();
+
+        if(!$created){
+            $created = $modelService->create();
+        }
+
+        if(!$created){
+            throw new \Exception('Could not create module model');
+        }
+
+        return $this;
     }
 }
