@@ -1,35 +1,27 @@
 name: Deploy
 
+# Trigger the workflow on push and
+# pull request events on the production branch
 on:
   push:
-    branches: [ production ]
+    branches:
+      - production
+  pull_request:
+    branches:
+      - production
 
+# Authenticate to the server via ssh
+# and run our deployment script
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
         with:
-          node-version: 16
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-          tools: composer:v2
-          coverage: none
-
-      - name: Require Vapor CLI
-        run: composer global require laravel/vapor-cli
-
-      - name: Install Project Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      - name: Deploy Environment
-        run: vapor deploy ${{ github.ref_name }} --commit="${{ github.event.head_commit.id }}" --message="${{ github.event.head_commit.message }}"
-        env:
-          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: "cd /var/www/html/northernexilesolutions && ./.scripts/deploy.sh"
