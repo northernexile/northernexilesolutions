@@ -289,4 +289,25 @@ class EntityStringsService
 
         return $output;
     }
+
+    /**
+     * @return string
+     */
+    public function getModelName() :string
+    {
+        return Str::ucfirst(Str::camel(Str::singular($this->identifier)));
+    }
+
+    public function getModelNamespace() :string
+    {
+        return 'App\Http\Models\'';
+    }
+
+    /**
+     * @return string
+     */
+    public function getModelFilePath() :string
+    {
+        return 'app/Http/Models/';
+    }
 }

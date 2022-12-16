@@ -3,6 +3,8 @@
 namespace App\Services\Tooling\Module\Creators\Model;
 
 use App\Services\Tooling\Module\Creators\AbstractModuleCreationService;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class ModelCreateService extends AbstractModuleCreationService
 {
@@ -12,14 +14,25 @@ class ModelCreateService extends AbstractModuleCreationService
      */
     public function exists(): bool
     {
-        return false;
+        $entityStrings = $this->entityStringsService->setIdentifier($this->moduleName);
+        $model = $entityStrings->getModelName();
+        $namespace = $entityStrings->getModelNamespace();
+        return class_exists($namespace.$model);
     }
 
     /**
      * @return bool
+     * @throws \Exception
      */
     public function create(): bool
     {
-        return false;
+        $modelTemplate = $this->templateReadService->getModelTemplate();
+        $template = $this->entityStringsService->setIdentifier($this->moduleName)->apply($modelTemplate);
+
+        return $this->templateWriteService
+            ->setFileName($this->entityStringsService->getModelName().'.php')
+            ->setPath($this->entityStringsService->getModelFilePath())
+            ->setContent($template)
+            ->write();
     }
 }
