@@ -18,8 +18,19 @@ class RoutesCreateService extends AbstractModuleCreationService
         return File::exists($routeFile);
     }
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     public function create(): bool
     {
-        // TODO: Implement create() method.
+        $routesTemplate = $this->templateReadService->getRoutesTemplate();
+        $template = $this->entityStringsService->setIdentifier($this->moduleName)->apply($routesTemplate);
+
+        return $this->templateWriteService
+            ->setFileName($this->entityStringsService->getModuleNameLowercase().'.php')
+            ->setPath($this->entityStringsService->getRoutesFolder())
+            ->setContent($template)
+            ->write();
     }
 }

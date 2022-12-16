@@ -8,6 +8,8 @@ class TemplateReadService
 {
     /** @var string  */
     private string $controllerTemplate = 'app/Templates/Http/Controllers/ControllerModule.tpl';
+    /** @var string */
+    private string $routesTemplate = 'app/Templates/Routes/route.tpl';
     /** @var string  */
     private string $requestTemplatesPath = 'app/Templates/Http/Requests/';
 
@@ -38,6 +40,14 @@ class TemplateReadService
     public function getControllerTemplate() :string
     {
         return $this->getFile($this->controllerTemplate);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoutesTemplate() :string
+    {
+        return $this->getFile($this->routesTemplate);
     }
 
     /**

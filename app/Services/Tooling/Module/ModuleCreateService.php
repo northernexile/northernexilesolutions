@@ -15,6 +15,8 @@ class ModuleCreateService implements ModuleCreateInterface
     protected RequestsCreateService $requestsCreateService;
     /** @var ServicesCreateService  */
     protected ServicesCreateService $servicesCreateService;
+    /** @var RoutesCreateService  */
+    protected RoutesCreateService $routesCreateService;
     /** @var string  */
     protected string $moduleName = '';
 
@@ -22,16 +24,19 @@ class ModuleCreateService implements ModuleCreateInterface
      * @param ControllerCreateService $controllerCreateService
      * @param RequestsCreateService $requestsCreateService
      * @param ServicesCreateService $servicesCreateService
+     * @param RoutesCreateService $routesCreateService
      */
     public function __construct(
         ControllerCreateService $controllerCreateService,
         RequestsCreateService $requestsCreateService,
-        ServicesCreateService $servicesCreateService
+        ServicesCreateService $servicesCreateService,
+        RoutesCreateService $routesCreateService
     )
     {
         $this->controllerCreateService = $controllerCreateService;
         $this->requestsCreateService = $requestsCreateService;
         $this->servicesCreateService = $servicesCreateService;
+        $this->routesCreateService = $routesCreateService;
     }
 
     /**
@@ -45,6 +50,7 @@ class ModuleCreateService implements ModuleCreateInterface
         $validated = $this->validate();
         $requestsService = null;
         $servicesService = null;
+        $routesService = null;
 
         if($validated){
             $createdController = $this->controllerCreateService->setModuleName($this->moduleName)->create();
@@ -66,6 +72,15 @@ class ModuleCreateService implements ModuleCreateInterface
 
             if($this->created){
                 $this->created = $servicesService->create();
+            }
+
+            if($this->created){
+                $routesService = $this->routesCreateService->setModuleName($this->moduleName);
+                $this->created = $routesService->exists();
+            }
+
+            if($this->created){
+                $this->created = $routesService->create();
             }
         }
 
