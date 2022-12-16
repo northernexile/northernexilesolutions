@@ -2,48 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]DeleteRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]ListRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]CreateRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]SearchRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]UpdateRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]ViewRequest;
+use App\Http\Requests\Tag\TagDeleteRequest;
+use App\Http\Requests\Tag\TagListRequest;
+use App\Http\Requests\Tag\TagCreateRequest;
+use App\Http\Requests\Tag\TagSearchRequest;
+use App\Http\Requests\Tag\TagUpdateRequest;
+use App\Http\Requests\Tag\TagViewRequest;
 use App\Http\Traits\JsonResponseTrait;
-use App\Services\[ModuleSingular]\[ModuleSingular]DeleteAllService;
-use App\Services\[ModuleSingular]\[ModuleSingular]DeleteService;
-use App\Services\[ModuleSingular]\[ModuleSingular]ListService;
-use App\Services\[ModuleSingular]\[ModuleSingular]SaveService;
-use App\Services\[ModuleSingular]\[ModuleSingular]SearchService;
-use App\Services\[ModuleSingular]\[ModuleSingular]ViewService;
+use App\Services\Tag\TagDeleteAllService;
+use App\Services\Tag\TagDeleteService;
+use App\Services\Tag\TagListService;
+use App\Services\Tag\TagSaveService;
+use App\Services\Tag\TagSearchService;
+use App\Services\Tag\TagViewService;
 use Illuminate\Http\JsonResponse;
 
-class [ModuleSingular]Controller extends Controller
+class TagController extends Controller
 {
     use JsonResponseTrait;
 
         /**
-     * @param [ModuleSingular]ListRequest $request
-     * @param [ModuleSingular]ListService $service
+     * @param TagListRequest $request
+     * @param TagListService $service
      * @return JsonResponse
      */
     public function index(
-        [ModuleSingular]ListRequest $request,
-        [ModuleSingular]ListService $service
+        TagListRequest $request,
+        TagListService $service
     ) :JsonResponse
     {
         $response =null;
 
         try {
             $response = $this->success(
-                'Listing [ModulePlural]',
+                'Listing Tags',
                 200,
                 [
-                    '[ModulePlural]'=>$[ModuleSingularLowercase]ListService->getList(),
+                    'Tags'=>$tagListService->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list [ModuleSingular]',
+                'Could not list Tag',
                 422,
                 [
                     'message'=>$throwable->getMessage()
@@ -55,24 +55,24 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]ViewRequest $request
-     * @param [ModuleSingular]ViewService $service
+     * @param TagViewRequest $request
+     * @param TagViewService $service
      * @return JsonResponse
      */
     public function show(
-        [ModuleSingular]ViewRequest $request,
-        [ModuleSingular]ViewService $service
+        TagViewRequest $request,
+        TagViewService $service
     ) :JsonResponse
     {
         $response =null;
 
         try {
-            $[ModuleSingularLowercase] = $service->setIdentity($request->route()->parameter('id'))->get();
+            $tag = $service->setIdentity($request->route()->parameter('id'))->get();
 
-            $response = $this->success('[ModuleSingular] found',200,['[ModuleSingular]'=>$[ModuleSingularLowercase]]);
+            $response = $this->success('Tag found',200,['Tag'=>$tag]);
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list [ModuleSingularLowercase]',
+                'Could not list tag',
                 422,
                 [
                     'message'=>$throwable->getMessage()
@@ -84,26 +84,26 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]CreateRequest $request
-     * @param [ModuleSingular]SaveService $service
+     * @param TagCreateRequest $request
+     * @param TagSaveService $service
      * @return JsonResponse
      */
     public function create(
-        [ModuleSingular]CreateRequest $request,
-        [ModuleSingular]SaveService   $service
+        TagCreateRequest $request,
+        TagSaveService   $service
     ) :JsonResponse {
         try {
             $saved = $service->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not save [ModuleSingular]');
+                throw new \Exception('Could not save Tag');
             }
 
             $response = $this->success(
-                '[ModuleSingular] Saved',
+                'Tag Saved',
                 200,
                 [
-                    '[ModuleSingularLowercase]'=>$service->getEntity(false)
+                    'tag'=>$service->getEntity(false)
                 ]
             );
         } catch (\Throwable $throwable) {
@@ -121,13 +121,13 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]UpdateRequest $request
-     * @param [ModuleSingular]SaveService $service
+     * @param TagUpdateRequest $request
+     * @param TagSaveService $service
      * @return JsonResponse
      */
     public function update(
-        [ModuleSingular]UpdateRequest $request,
-        [ModuleSingular]SaveService   $service
+        TagUpdateRequest $request,
+        TagSaveService   $service
     ) :JsonResponse {
         try {
             $saved = $service
@@ -135,19 +135,19 @@ class [ModuleSingular]Controller extends Controller
                 ->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not update [ModuleSingular]');
+                throw new \Exception('Could not update Tag');
             }
 
             $response = $this->success(
-                '[ModuleSingular] Updated',
+                'Tag Updated',
                 200,
                 [
-                    '[ModuleSingularLowercase]'=>$service->getEntity(false)
+                    'tag'=>$service->getEntity(false)
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Error updating [ModuleSingularLowercase].',
+                'Error updating tag.',
                 422,
                 [
                     'message'=>$throwable->getMessage(),
@@ -160,13 +160,13 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]DeleteRequest $request
-     * @param [ModuleSingular]DeleteService $service
+     * @param TagDeleteRequest $request
+     * @param TagDeleteService $service
      * @return JsonResponse
      */
     public function delete(
-        [ModuleSingular]DeleteRequest $request,
-        [ModuleSingular]DeleteService $service
+        TagDeleteRequest $request,
+        TagDeleteService $service
     ) :JsonResponse
     {
         $response = null;
@@ -177,7 +177,7 @@ class [ModuleSingular]Controller extends Controller
                 throw new \Exception('Could not delete record');
             }
 
-            $response = $this->success('[ModuleSingular] deleted',200,['message'=>'deleted','[ModuleSingularLowercase]'=>$request->all()]);
+            $response = $this->success('Tag deleted',200,['message'=>'deleted','tag'=>$request->all()]);
         } catch (\Throwable $throwable) {
             $response = $this->failure('Content delete failed',422,['message'=>$throwable->getMessage()]);
         } finally {
@@ -186,13 +186,13 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]DeleteRequest $request
-     * @param [ModuleSingular]DeleteAllService $service
+     * @param TagDeleteRequest $request
+     * @param TagDeleteAllService $service
      * @return JsonResponse
      */
     public function deleteAll(
-        [ModuleSingular]DeleteRequest $request,
-        [ModuleSingular]DeleteAllService $service
+        TagDeleteRequest $request,
+        TagDeleteAllService $service
     ) :JsonResponse
     {
         $response = null;
@@ -201,10 +201,10 @@ class [ModuleSingular]Controller extends Controller
             $deleted = $service->truncate();
 
             if(!$deleted){
-                throw new \Exception('Could not delete all [ModuleSingular]');
+                throw new \Exception('Could not delete all Tag');
             }
             $response = $this->success(
-              '[ModuleSingular] deleted',
+              'Tag deleted',
               200,
               []
             );
@@ -216,13 +216,13 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]SearchRequest $request
-     * @param [ModuleSingular]SearchService $service
+     * @param TagSearchRequest $request
+     * @param TagSearchService $service
      * @return JsonResponse
      */
     public function search(
-        [ModuleSingular]SearchRequest $request,
-        [ModuleSingular]SearchService $service
+        TagSearchRequest $request,
+        TagSearchService $service
     ) :JsonResponse
     {
         $response = null;
@@ -232,10 +232,10 @@ class [ModuleSingular]Controller extends Controller
             $content = $service->setTerm($term)->search();
 
             $response = $this->success(
-                $[ModuleSingularLowercase]->count().' [ModuleSingular] found',
+                $tag->count().' Tag found',
                 200,
                 [
-                    '[ModuleSingularLowercase]' =>  $[ModuleSingularLowercase]
+                    'tag' =>  $tag
                 ]
             );
         } catch (\Throwable $throwable) {
