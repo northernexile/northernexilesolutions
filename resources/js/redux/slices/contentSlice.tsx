@@ -4,7 +4,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {Content} from "../types/types";
 
 const initialState: InitialState = {
-    content: []
+    content: [],
+    active: {
+        id:'',
+        name:'',
+        text:''
+    }
 };
 
 export const contentSlice = createSlice({
@@ -14,6 +19,9 @@ export const contentSlice = createSlice({
         setContent: (state,action: PayloadAction<Array<Content>>) => {
             state.content = action.payload
         },
+        setActiveContent: (state,action: PayloadAction<Content>) => {
+            state.active = action.payload
+        }
     },
 });
 

@@ -30,10 +30,18 @@ class SectorController extends Controller
         $response = null;
 
         try {
+            $sectors = $service->getList();
 
+            $response = $this->success(
+              'Sector list retrieved',
+              200,
+              [
+                  'sectors'=>$sectors
+              ]
+            );
         } catch(\Throwable $throwable) {
             $response = $this->failure(
-                'Cannot list [ModuleHumanReadable]',
+                'Cannot list sectors',
                 422,
                 [
                     'message' => $throwable->getMessage()
@@ -57,10 +65,12 @@ class SectorController extends Controller
         $response = null;
 
         try {
+            $sector = $service->setIdentity($request->route('id'))->get();
 
+            $response = $this->success('Sector retrieved',200,['sector'=>$sector]);
         } catch(\Throwable $throwable) {
             $response = $this->failure(
-                'Cannot view [ModuleHumanReadable]',
+                'Cannot view sectors',
                 422,
                 [
                     'message' => $throwable->getMessage()
@@ -84,10 +94,22 @@ class SectorController extends Controller
         $response = null;
 
         try {
+            $saved = $service->setProperties($request->all())->save();
 
+            if(!$saved){
+                throw new \Exception('Sector not created');
+            }
+
+            $response = $this->success(
+                'Sector created',
+                200,
+                [
+                    'sector'=>$service->getSavedEntity()
+                ]
+            );
         } catch(\Throwable $throwable) {
             $response = $this->failure(
-                'Cannot create [ModuleHumanReadable]',
+                'Cannot create sector',
                 422,
                 [
                     'message' => $throwable->getMessage()
@@ -110,21 +132,22 @@ class SectorController extends Controller
         try {
             $saved = $service
                 ->setIdentity($request->route()->parameter('id'))
-                ->setProperties($request->all())->save();
+                ->setProperties($request->all())
+                ->save();
             if(!$saved) {
-                throw new \Exception('Could not update [ModuleHumanReadable]');
+                throw new \Exception('Could not update sector');
             }
 
             $response = $this->success(
-                'Content Updated',
+                'Sector Updated',
                 200,
                 [
-                    'sector'=>$service->getEntity(false)
+                    'sector'=>$service->getSavedEntity()
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Error updating [ModuleHumanReadable].',
+                'Error updating sector.',
                 422,
                 [
                     'message'=>$throwable->getMessage(),
@@ -154,7 +177,7 @@ class SectorController extends Controller
                 throw new \Exception('Could not delete record');
             }
 
-            $response = $this->success('[ModuleHumanReadable] deleted',200,['message'=>'deleted','Sector'=>$request->all()]);
+            $response = $this->success('Sector deleted',200,['message'=>'deleted','Sector'=>$request->all()]);
         } catch (\Throwable $throwable) {
             $response = $this->failure('Sector delete failed',422,['message'=>$throwable->getMessage()]);
         } finally {
@@ -178,10 +201,10 @@ class SectorController extends Controller
             $deleted = $service->truncate();
 
             if (!$deleted) {
-                throw new \Exception('Could not delete all [ModuleHumanReadable]');
+                throw new \Exception('Could not delete all sectors');
             }
             $response = $this->success(
-                '[ModuleHumanReadable] deleted',
+                'sectors deleted',
                 200,
                 []
             );

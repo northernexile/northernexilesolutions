@@ -1,8 +1,9 @@
 
-import {Content, Technology} from "./types";
+import {Content} from "./types";
 
 interface InitialState  {
-    content:Content[]
+    content:Content[],
+    active:Content
 }
 
 const SetContentAction = 'Content'

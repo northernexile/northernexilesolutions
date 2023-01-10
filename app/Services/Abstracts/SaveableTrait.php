@@ -6,6 +6,8 @@ trait SaveableTrait
 {
     /** @var array  */
     protected array $properties = [];
+
+    protected $entity;
     /**
      * @return bool
      */
@@ -18,7 +20,13 @@ trait SaveableTrait
         }
 
         $entity->save();
+        $this->entity = $entity;
 
         return true;
+    }
+
+    public function getSavedEntity()
+    {
+        return $this->entity;
     }
 }
