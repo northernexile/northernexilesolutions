@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ContentSeeder::class,
             SkillTypeSeeder::class,
             SkillSeeder::class,
+            SectorSeeder::class,
             UserSkillSeeder::class
         ]);
     }
