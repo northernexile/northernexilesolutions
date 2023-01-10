@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Sector;
 
-class SectorUpdateRequest
+use App\Http\Requests\AbstractFormRequest;
+
+class SectorUpdateRequest extends AbstractFormRequest
 {
     /**
      * @return string[]

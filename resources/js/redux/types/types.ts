@@ -11,3 +11,15 @@ export type Content = {
     name:string,
     text:string
 }
+
+export type Page = {
+    id:any,
+    name:string,
+    slug:string
+}
+
+export type Sector = {
+    id:any
+    name:string,
+    icon:string
+}

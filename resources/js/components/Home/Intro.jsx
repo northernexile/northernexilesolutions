@@ -1,28 +1,25 @@
 
 import {Card, CardContent, CardHeader} from "@mui/material";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
-import ContentService from "../../services/ContentService";
 import getBrandIcon from "../../services/icons/icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import {ContactMail} from "@mui/icons-material";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks"
+import {getContent} from "../../redux/actions/contentActions";
 
-const Intro = React.FC = () => {
-    const [content, setContent] = useState([]);
+const Intro = () => {
+    const dispatch = useAppDispatch()
+    const content = useAppSelector(state => state.content.active)
 
     useEffect(() => {
         retrieveContent()
     }, []);
 
     const retrieveContent = () => {
-        ContentService.get(1).then((response) => {
-            setContent(response.data.data.content);
-        }).catch((e) => {
-            console.log('error')
-        })
+        dispatch(getContent(1))
     }
 
     return (
@@ -41,8 +38,7 @@ const Intro = React.FC = () => {
                             <FontAwesomeIcon icon={getBrandIcon('faInfo')} />
                         </div>
                     }
-                    title="About us
-                "/>
+                    title="About us"/>
                 <CardContent>
                     <Typography variant="p" component="div" style={{
                         marginBottom:8

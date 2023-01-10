@@ -1,25 +1,22 @@
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Grid} from "@mui/material";
 import Intro from './Intro'
 import Technologies from "./Technologies";
 import Sectors from "./Sectors";
-import PageService from "../../services/PageService";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks"
+import {getPage} from "../../redux/actions/pageActions";
 
-
-const Home = React.FC = () => {
-    const [page, setPage] = useState([]);
+const Home = () => {
+    const dispatch = useAppDispatch()
+    const page = useAppSelector(state => state.pages.active)
 
     useEffect(() => {
-        retrievePage()
+        retrievePage(1)
     }, []);
 
-    const retrievePage = () => {
-        PageService.get(1).then((response) => {
-            setPage(response.data.data.page);
-        }).catch((e) => {
-            console.log(e);
-        })
+    const retrievePage = (id) => {
+        dispatch(getPage(id))
     }
 
     return (

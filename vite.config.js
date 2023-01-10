@@ -13,4 +13,12 @@ export default ({ command }) => ({
     plugins: [
         reactRefresh(),
     ],
+    server: {
+        hmr: {
+            host: 'northernexilesolutions.local',
+        },
+        watch: {
+            usePolling: true
+        }
+    }
 });
