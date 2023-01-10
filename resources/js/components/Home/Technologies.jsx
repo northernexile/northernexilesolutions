@@ -1,25 +1,17 @@
 import React, {useEffect, useState} from "react"
 import {Card, CardContent, CardHeader, Paper} from "@mui/material";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-
-import SkillService from "../../services/SkillService";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import getBrandIcon from "../../services/icons/icons";
 import Carousel,{CarouselItem} from "../UI/Carousel/Carousel";
+import {getAllTechnologies} from "../../redux/actions/technologyActions";
 
-const Technologies = React.FC = () => {
-    const [skills, setSkills] = useState([]);
-
+const Technologies = () => {
+    const dispatch = useAppDispatch()
+    const skills = useAppSelector(state => state.technology.technologies)
     useEffect(() => {
-        retrieveSkills()
+        dispatch(getAllTechnologies())
     }, []);
-
-    const retrieveSkills = () => {
-        SkillService.getAll().then((response) => {
-            setSkills(response.data.data.skills);
-        }).catch((e) => {
-            console.log(e);
-        })
-    }
 
     return (
 
@@ -64,4 +56,4 @@ const Technologies = React.FC = () => {
     )
 };
 
-export default Technologies;
+export default Technologies

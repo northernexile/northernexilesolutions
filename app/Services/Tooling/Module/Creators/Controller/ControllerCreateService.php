@@ -17,13 +17,7 @@ class ControllerCreateService extends AbstractModuleCreationService
             ->getFullControllerNamespacePath();
 
 
-        $exists =  (class_exists($controllerFQN));
-
-        if($exists) {
-            throw new \Exception('Controller '.$this->entityStringsService->getControllerName().' already exists');
-        }
-
-        return true;
+        return (class_exists($controllerFQN));
     }
 
     /**

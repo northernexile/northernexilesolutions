@@ -88,7 +88,6 @@ class ModuleCreateService implements ModuleCreateInterface
             ->createRoutes()
             ->createModel();
 
-
         return true;
     }
 
