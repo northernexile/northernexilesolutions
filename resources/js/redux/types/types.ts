@@ -23,3 +23,8 @@ export type Sector = {
     name:string,
     icon:string
 }
+
+export type Company = {
+    vatNumber:string,
+    companiesHouseNumber:string
+}

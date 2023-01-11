@@ -4,6 +4,7 @@ import {technologySlice} from './slices/technologySlice'
 import {contentSlice} from './slices/contentSlice'
 import {pageSlice} from './slices/pageSlice'
 import {sectorSlice} from './slices/sectorSlice'
+import {companySlice} from './slices/companySlice'
 
 const store=configureStore(
     {
@@ -11,7 +12,8 @@ const store=configureStore(
             technology:technologySlice.reducer,
             content:contentSlice.reducer,
             pages:pageSlice.reducer,
-            sectors:sectorSlice.reducer
+            sectors:sectorSlice.reducer,
+            company:companySlice.reducer
         }
     }
 )
