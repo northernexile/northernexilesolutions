@@ -15,7 +15,7 @@ export const companySlice = createSlice({
     name: SetCompanyAction,
     initialState: initialState,
     reducers: {
-        setContent: (state,action: PayloadAction<Company>) => {
+        setCompany: (state,action: PayloadAction<Company>) => {
             state.company = action.payload
         },
     },
