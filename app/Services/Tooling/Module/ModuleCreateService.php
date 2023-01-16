@@ -118,10 +118,7 @@ class ModuleCreateService implements ModuleCreateInterface
     {
         $requestsService = $this->requestsCreateService->setModuleName($this->moduleName);
         $created = $requestsService->exists();
-
-        if(!$created){
-            $created = $requestsService->create();
-        }
+        $created = $requestsService->create();
 
         if(!$created) {
             throw new \Exception('Could not create module requests suite');
@@ -138,10 +135,8 @@ class ModuleCreateService implements ModuleCreateInterface
     {
         $servicesService = $this->servicesCreateService->setModuleName($this->moduleName);
         $created = $servicesService->exists();
+        $created = $servicesService->create();
 
-        if(!$created){
-            $created = $servicesService->create();
-        }
 
         if(!$created) {
             throw new \Exception('Could not create module services suite');
