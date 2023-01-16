@@ -10,9 +10,7 @@ class [ModuleSingular]UpdateRequest
     public function rules(): array
     {
         return [
-            'id'=>'integer|required',
-            'name'=>'string|required',
-            'text'=>'string|required'
+            [Columns]
         ];
     }
 }
