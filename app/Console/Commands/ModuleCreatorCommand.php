@@ -92,7 +92,7 @@ class ModuleCreatorCommand extends Command
         try {
             $name = $this->argument('name');
             $this->processColumns();
-            $created = $service->create($name);
+            $created = $service->setColumns($this->columns ?? collect())->create($name);
             if(!$created){
                 throw new \Exception('Error creating module: '.$name);
             }

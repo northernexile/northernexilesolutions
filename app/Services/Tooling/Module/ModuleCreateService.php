@@ -10,6 +10,7 @@ use App\Services\Tooling\Module\Creators\Services\ServicesCreateService;
 use App\Services\Tooling\Module\Creators\Model\ModelCreateService;
 
 use Exception;
+use Illuminate\Support\Collection;
 
 class ModuleCreateService implements ModuleCreateInterface
 {
@@ -25,9 +26,10 @@ class ModuleCreateService implements ModuleCreateInterface
     protected ModelCreateService $modelCreateService;
     /** @var string  */
     protected string $moduleName = '';
-
-    /** @var array|string[]  */
-    protected array $columns = ['id'];
+    /**
+     * @var Collection
+     */
+    protected Collection $columns;
 
     /**
      * @param ControllerCreateService $controllerCreateService
@@ -52,10 +54,10 @@ class ModuleCreateService implements ModuleCreateInterface
     }
 
     /**
-     * @param array $columns
+     * @param Collection $columns
      * @return ModuleCreateInterface
      */
-    public function setColumns(array $columns = []) :ModuleCreateInterface
+    public function setColumns(Collection $columns) :ModuleCreateInterface
     {
         $this->columns = $columns;
         return $this;

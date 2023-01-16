@@ -2,6 +2,8 @@
 
 namespace App\Services\Tooling\Module;
 
+use Illuminate\Support\Collection;
+
 interface ModuleCreateInterface
 {
     /**
@@ -11,10 +13,10 @@ interface ModuleCreateInterface
     public function create(string $moduleName) :bool;
 
     /**
-     * @param array $columns
+     * @param Collection $columns
      * @return ModuleCreateInterface
      */
-    public function setColumns(array $columns=[]) :ModuleCreateInterface;
+    public function setColumns(Collection $columns) :ModuleCreateInterface;
 
     /**
      * @param string $column
