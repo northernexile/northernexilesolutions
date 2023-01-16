@@ -5,6 +5,7 @@ namespace App\Services\Tooling\Module\Creators\Requests;
 use App\Services\Tooling\Module\Creators\AbstractModuleCreationService;
 use App\Services\Tooling\Module\Template\Read\TemplateReadService;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class RequestsCreateService extends AbstractModuleCreationService
 {
@@ -46,6 +47,12 @@ class RequestsCreateService extends AbstractModuleCreationService
             $itemTemplate = $request['template'];
             $fileName = $request['fileName'];
             $content = $entityStrings->apply($itemTemplate);
+            $content =
+                Str::replace(
+                    '[Columns]',
+                    $this->columnsToTextService->setColumns($this->columns)->getForRequests(),
+                    $content
+                );
             $written =$this->templateWriteService
                 ->setContent($content)
                 ->setFileName($fileName.'.php')

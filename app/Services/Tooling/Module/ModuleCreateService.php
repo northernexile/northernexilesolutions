@@ -64,19 +64,6 @@ class ModuleCreateService implements ModuleCreateInterface
     }
 
     /**
-     * @param string $column
-     * @return ModuleCreateInterface
-     */
-    public function addColumn(string $column): ModuleCreateInterface
-    {
-        if(!in_array($column,$this->columns)){
-            $this->columns[] = $column;
-        }
-
-        return $this;
-    }
-
-    /**
      * @param string $moduleName
      * @return bool
      * @throws Exception
@@ -118,7 +105,9 @@ class ModuleCreateService implements ModuleCreateInterface
      */
     private function createRequests() :self
     {
-        $requestsService = $this->requestsCreateService->setModuleName($this->moduleName);
+        $requestsService = $this->requestsCreateService
+            ->setColumns($this->columns)
+            ->setModuleName($this->moduleName);
         $created = $requestsService->exists();
         $created = $requestsService->create();
 
@@ -135,7 +124,9 @@ class ModuleCreateService implements ModuleCreateInterface
      */
     private function createServices() :self
     {
-        $servicesService = $this->servicesCreateService->setModuleName($this->moduleName);
+        $servicesService = $this->servicesCreateService
+            ->setColumns($this->columns)
+            ->setModuleName($this->moduleName);
         $created = $servicesService->exists();
         $created = $servicesService->create();
 
@@ -172,7 +163,9 @@ class ModuleCreateService implements ModuleCreateInterface
      */
     private function createModel() :self
     {
-        $modelService = $this->modelCreateService->setModuleName($this->moduleName);
+        $modelService = $this->modelCreateService
+            ->setColumns($this->columns)
+            ->setModuleName($this->moduleName);
         $created = $modelService->exists();
 
         if(!$created){
