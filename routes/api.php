@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +28,4 @@ include 'api/skills.php';
 include 'api/content.php';
 include 'api/companyInformation.php';
 include 'api/sectors.php';
+include 'api/service.php';
