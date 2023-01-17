@@ -1,0 +1,13 @@
+
+ul.service-list{
+    list-style-type: none;
+    padding: 4px;
+    li{
+        display: block;
+        text-align: center;
+        border-bottom:solid 10px $primary-contrast;
+        padding:24px 0;
+        background-color: $primary-light;
+        color: $primary-contrast;
+    }
+}

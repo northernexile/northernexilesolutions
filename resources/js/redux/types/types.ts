@@ -34,3 +34,8 @@ export type TagCloud = {
     value:string,
     count:any
 }
+
+export type Service = {
+    id:any,
+    name:string
+}

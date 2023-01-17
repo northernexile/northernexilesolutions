@@ -38,7 +38,7 @@ class ServiceController extends Controller
                 'Listing Services',
                 200,
                 [
-                    'Services'=>$serviceListService->getList(),
+                    'Services'=>$service->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {
