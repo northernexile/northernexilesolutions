@@ -11,7 +11,7 @@ class ServiceListService
      * @param array $columns
      * @return Collection
      */
-    public function getList(array $columns=['id','name','text']) :Collection
+    public function getList(array $columns=['id','name']) :Collection
     {
         return Service::get($columns);
     }

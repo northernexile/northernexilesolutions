@@ -5,6 +5,7 @@ import Intro from './Intro'
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks"
 import {getPage} from "../../redux/actions/pageActions";
 import WordCloud from "./WordCloud";
+import Services from "./Services";
 
 const Home = () => {
     const dispatch = useAppDispatch()
@@ -27,7 +28,10 @@ const Home = () => {
                 <Grid className="intro-card" style={{ backgroundImage: "url(/images/YatRock.jpg)" }} item xs={12} md={12}>
                     <Intro />
                 </Grid>
-                <Grid item xs={12} md={12}>
+                <Grid item xs={12} md={4}>
+                    <Services />
+                </Grid>
+                <Grid item xs={12} md={8}>
                     <WordCloud />
                 </Grid>
             </Grid>

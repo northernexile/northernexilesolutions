@@ -1,6 +1,6 @@
 
 
-import companySlice from "../slices/serviceSlice";
+import serviceSlice from "../slices/serviceSlice";
 import {AnyAction} from "redux";
 import {ThunkAction} from "@reduxjs/toolkit";
 import {RootState} from "../index";
