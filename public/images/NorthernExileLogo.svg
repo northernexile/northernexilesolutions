@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="97.314781mm"
+   height="22.684713mm"
+   viewBox="0 0 97.314781 22.684713"
+   version="1.1"
+   id="svg1336"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01, custom)"
+   sodipodi:docname="NorthernExileLogo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1338"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2"
+     inkscape:cx="216.75"
+     inkscape:cy="32.75"
+     inkscape:window-width="1526"
+     inkscape:window-height="836"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1333" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-6.0893952,-69.702049)"
+     style="display:inline">
+    <g
+       inkscape:groupmode="layer"
+       id="layer2"
+       inkscape:label="WhiteBg"
+       style="display:inline">
+      <rect
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.765;stroke-opacity:1"
+         id="rect7552"
+         width="94.530144"
+         height="19.950718"
+         x="7.5347853"
+         y="71.115913"
+         transform="translate(0)" />
+    </g>
+    <g
+       id="g4579"
+       style="display:inline">
+      <rect
+         style="fill:#000000;stroke:none;stroke-width:2.76176"
+         id="rect1392"
+         width="87.826614"
+         height="25.486607"
+         x="24.381681"
+         y="66.968422"
+         transform="matrix(0.62844452,0,0,0.51954864,-4.9785836,39.683309)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.6255px;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3.58225"
+         x="26.817806"
+         y="92.557213"
+         id="text1396"
+         transform="matrix(0.69364646,0,0,0.47071169,-4.9785836,39.683309)"><tspan
+           sodipodi:role="line"
+           id="tspan1394"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.6255px;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3.58225"
+           x="26.817806"
+           y="92.557213">Northern</tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.6255px;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3.58225"
+           x="26.817806"
+           y="110.83909"
+           id="tspan1398" /></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.23183px;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.26116;stroke-opacity:1"
+         x="59.985424"
+         y="93.93087"
+         id="text3728"
+         transform="scale(1.1184762,0.89407356)"><tspan
+           sodipodi:role="line"
+           id="tspan3726"
+           style="stroke-width:2.26116"
+           x="59.985424"
+           y="93.93087">Exile</tspan></text>
+      <rect
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.765;stroke-opacity:1"
+         id="rect3782"
+         width="94.549782"
+         height="19.919714"
+         x="7.4718952"
+         y="71.084549" />
+    </g>
+  </g>
+</svg>
