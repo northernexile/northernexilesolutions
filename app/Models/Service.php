@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property string $name
- * @property string $text
+ * @property string|null $icon
  */
 class Service extends Model
 {
@@ -17,7 +17,7 @@ class Service extends Model
     /**
      * @var string
      */
-    public $table = 'service';
+    public $table = 'services';
 
     /**
      * @var bool
@@ -35,6 +35,7 @@ class Service extends Model
      * @var string[]
      */
     protected $fillable = [
-        'text'
+        'name',
+        'icon'
     ];
 }
