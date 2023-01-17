@@ -29,7 +29,24 @@ class ColumnsToTextService
                 /** @var DataMember $dataMember */
                 $dataMember = $column;
 
-                $lines[] = "'{$dataMember->getName()}' => '{($dataMember->nullable) ? 'required':'sometimes'}'";
+                $lines[] = "'{$dataMember->getName()}' => '{($dataMember->nullable) ? 'required':'sometimes'}',";
+            }
+        }
+
+        return implode("\r\n",$lines);
+    }
+
+    public function getForModels() :string
+    {
+        $text = '';
+        $lines = [];
+
+        if($this->columns->isNotEmpty()){
+            foreach ($this->columns as $column){
+                /** @var DataMember $dataMember */
+                $dataMember = $column;
+
+                $lines[] = ";";
             }
         }
 
