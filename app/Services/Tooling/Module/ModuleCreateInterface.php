@@ -17,10 +17,4 @@ interface ModuleCreateInterface
      * @return ModuleCreateInterface
      */
     public function setColumns(Collection $columns) :ModuleCreateInterface;
-
-    /**
-     * @param string $column
-     * @return ModuleCreateInterface
-     */
-    public function addColumn(string $column) :ModuleCreateInterface;
 }

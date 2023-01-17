@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
- * @property string $name
- * @property string $text
+[Properties]
  */
 class [ModuleSingular] extends Model
 {
@@ -35,6 +33,6 @@ class [ModuleSingular] extends Model
      * @var string[]
      */
     protected $fillable = [
-        'text'
+        [Fillable]
     ];
 }

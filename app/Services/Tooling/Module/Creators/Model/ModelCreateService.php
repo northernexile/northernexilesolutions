@@ -27,9 +27,15 @@ class ModelCreateService extends AbstractModuleCreationService
     {
         $modelTemplate = $this->templateReadService->getModelTemplate();
         $template = $this->entityStringsService->setIdentifier($this->moduleName)->apply($modelTemplate);
+        $columns = $this->columnsToTextService->setColumns($this->columns)->getForModels();
         $template = Str::replace(
-            '[Columns]',
-            $this->columnsToTextService->setColumns($this->columns)->getForModels(),
+            '[Properties]',
+            $columns['properties'],
+            $template
+        );
+        $template = Str::replace(
+            '[Fillable]',
+            $columns['fillable'],
             $template
         );
 

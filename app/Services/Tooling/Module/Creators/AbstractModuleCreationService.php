@@ -80,5 +80,7 @@ abstract class AbstractModuleCreationService implements ObjectCreationInterface
         }
 
         $this->columns = $columns;
+
+        return $this;
     }
 }

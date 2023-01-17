@@ -3,6 +3,7 @@
 namespace App\Services\Tooling\Module\Utilities;
 
 use App\Services\Tooling\Module\DataMembers\DataMember;
+use App\Services\Tooling\Module\DataMembers\DataTypes;
 use Illuminate\Support\Collection;
 
 class ColumnsToTextService
@@ -28,28 +29,59 @@ class ColumnsToTextService
             foreach ($this->columns as $column){
                 /** @var DataMember $dataMember */
                 $dataMember = $column;
-
-                $lines[] = "'{$dataMember->getName()}' => '{($dataMember->nullable) ? 'required':'sometimes'}',";
+                $required = $dataMember->isNullable() ? 'sometimes' : 'required';
+                $lines[] = "'{$dataMember->getName()}' => '{$required}'";
             }
         }
 
         return implode("\r\n",$lines);
     }
 
-    public function getForModels() :string
+    /**
+     * @return array|string[]
+     * @throws \Exception
+     */
+    public function getForModels() :array
     {
-        $text = '';
-        $lines = [];
+        $properties = [];
+        $fillable = [];
 
         if($this->columns->isNotEmpty()){
             foreach ($this->columns as $column){
                 /** @var DataMember $dataMember */
                 $dataMember = $column;
-
-                $lines[] = ";";
+                switch ($dataMember->getType()){
+                    case DataTypes::ID:
+                    case DataTypes::BIGINT:
+                        $type = 'int';
+                        break;
+                    case DataTypes::STRING:
+                    case DataTypes::TEXT:
+                        $type = 'string';
+                        break;
+                    case DataTypes::BOOLEAN:
+                        $type = 'bool';
+                        break;
+                    case DataTypes::DECIMAL:
+                        $type = 'float';
+                        break;
+                    case DataTypes::DATETIME:
+                    case DataTypes::DATE:
+                        $type = 'Carbon';
+                        break;
+                    default:
+                        throw new \Exception('Unknown/disallowed column type');
+                }
+                $properties[] = "* @property ".$type.($dataMember->isNullable() ? "|null" : "")." $".$dataMember->getName();
+                if($dataMember->getName() !== 'id'){
+                    $fillable[] = $dataMember->getName();
+                }
             }
         }
 
-        return implode("\r\n",$lines);
+        return [
+            'properties'=>implode("\r\n",$properties),
+            'fillable'=>implode(",\r\n",$fillable)
+        ];
     }
 }
