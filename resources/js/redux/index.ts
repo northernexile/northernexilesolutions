@@ -6,6 +6,7 @@ import {pageSlice} from './slices/pageSlice'
 import {sectorSlice} from './slices/sectorSlice'
 import {companySlice} from './slices/companySlice'
 import {tagCloudSlice} from "./slices/tagCloudSlice";
+import {serviceSlice} from  "./slices/serviceSlice";
 
 const store=configureStore(
     {
@@ -15,7 +16,8 @@ const store=configureStore(
             pages:pageSlice.reducer,
             sectors:sectorSlice.reducer,
             company:companySlice.reducer,
-            cloud:tagCloudSlice.reducer
+            cloud:tagCloudSlice.reducer,
+            services:serviceSlice.reducer
         }
     }
 )
