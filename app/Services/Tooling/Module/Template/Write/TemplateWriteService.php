@@ -4,6 +4,7 @@ namespace App\Services\Tooling\Module\Template\Write;
 
 use Illuminate\Support\Facades\File;
 
+
 class TemplateWriteService
 {
     /** @var string  */

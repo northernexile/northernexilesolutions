@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 
 class ModelCreateService extends AbstractModuleCreationService
 {
-
     /**
      * @return bool
      */
@@ -28,6 +27,17 @@ class ModelCreateService extends AbstractModuleCreationService
     {
         $modelTemplate = $this->templateReadService->getModelTemplate();
         $template = $this->entityStringsService->setIdentifier($this->moduleName)->apply($modelTemplate);
+        $columns = $this->columnsToTextService->setColumns($this->columns)->getForModels();
+        $template = Str::replace(
+            '[Properties]',
+            $columns['properties'],
+            $template
+        );
+        $template = Str::replace(
+            '[Fillable]',
+            $columns['fillable'],
+            $template
+        );
 
         return $this->templateWriteService
             ->setFileName($this->entityStringsService->getModelName().'.php')

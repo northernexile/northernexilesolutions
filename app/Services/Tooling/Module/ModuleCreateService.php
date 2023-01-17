@@ -10,6 +10,7 @@ use App\Services\Tooling\Module\Creators\Services\ServicesCreateService;
 use App\Services\Tooling\Module\Creators\Model\ModelCreateService;
 
 use Exception;
+use Illuminate\Support\Collection;
 
 class ModuleCreateService implements ModuleCreateInterface
 {
@@ -25,9 +26,10 @@ class ModuleCreateService implements ModuleCreateInterface
     protected ModelCreateService $modelCreateService;
     /** @var string  */
     protected string $moduleName = '';
-
-    /** @var array|string[]  */
-    protected array $columns = ['id'];
+    /**
+     * @var Collection
+     */
+    protected Collection $columns;
 
     /**
      * @param ControllerCreateService $controllerCreateService
@@ -52,25 +54,12 @@ class ModuleCreateService implements ModuleCreateInterface
     }
 
     /**
-     * @param array $columns
+     * @param Collection $columns
      * @return ModuleCreateInterface
      */
-    public function setColumns(array $columns = []) :ModuleCreateInterface
+    public function setColumns(Collection $columns) :ModuleCreateInterface
     {
         $this->columns = $columns;
-        return $this;
-    }
-
-    /**
-     * @param string $column
-     * @return ModuleCreateInterface
-     */
-    public function addColumn(string $column): ModuleCreateInterface
-    {
-        if(!in_array($column,$this->columns)){
-            $this->columns[] = $column;
-        }
-
         return $this;
     }
 
@@ -116,12 +105,11 @@ class ModuleCreateService implements ModuleCreateInterface
      */
     private function createRequests() :self
     {
-        $requestsService = $this->requestsCreateService->setModuleName($this->moduleName);
+        $requestsService = $this->requestsCreateService
+            ->setColumns($this->columns)
+            ->setModuleName($this->moduleName);
         $created = $requestsService->exists();
-
-        if(!$created){
-            $created = $requestsService->create();
-        }
+        $created = $requestsService->create();
 
         if(!$created) {
             throw new \Exception('Could not create module requests suite');
@@ -136,12 +124,12 @@ class ModuleCreateService implements ModuleCreateInterface
      */
     private function createServices() :self
     {
-        $servicesService = $this->servicesCreateService->setModuleName($this->moduleName);
+        $servicesService = $this->servicesCreateService
+            ->setColumns($this->columns)
+            ->setModuleName($this->moduleName);
         $created = $servicesService->exists();
+        $created = $servicesService->create();
 
-        if(!$created){
-            $created = $servicesService->create();
-        }
 
         if(!$created) {
             throw new \Exception('Could not create module services suite');
@@ -175,7 +163,9 @@ class ModuleCreateService implements ModuleCreateInterface
      */
     private function createModel() :self
     {
-        $modelService = $this->modelCreateService->setModuleName($this->moduleName);
+        $modelService = $this->modelCreateService
+            ->setColumns($this->columns)
+            ->setModuleName($this->moduleName);
         $created = $modelService->exists();
 
         if(!$created){

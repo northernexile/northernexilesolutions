@@ -12,9 +12,7 @@ class [ModuleSingular]CreateRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-          'id'=>'integer|sometimes',
-          'name'=>'string|required',
-          'text'=>'string|required'
+          [Columns]
         ];
     }
 }

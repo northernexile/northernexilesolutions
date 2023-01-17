@@ -300,7 +300,7 @@ class EntityStringsService
 
     public function getModelNamespace() :string
     {
-        return 'App\Http\Models\'';
+        return 'App\Models\'';
     }
 
     /**
@@ -308,6 +308,6 @@ class EntityStringsService
      */
     public function getModelFilePath() :string
     {
-        return 'app/Http/Models/';
+        return 'app/Models/';
     }
 }

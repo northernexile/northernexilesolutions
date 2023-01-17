@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\[ModuleSingular];
+namespace App\Http\Requests\Service;
 
 use App\Http\Requests\AbstractFormRequest;
 
-class [ModuleSingular]SearchRequest extends AbstractFormRequest
+class ServiceListRequest extends AbstractFormRequest
 {
     /**
      * @return string[]
@@ -12,7 +12,6 @@ class [ModuleSingular]SearchRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'term'=>'required'
         ];
     }
 }

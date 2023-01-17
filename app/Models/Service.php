@@ -6,16 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
-[Properties]
+ * @property int $id
+ * @property string $name
+ * @property string $text
  */
-class [ModuleSingular] extends Model
+class Service extends Model
 {
     use HasFactory;
 
     /**
      * @var string
      */
-    public $table = '[ModuleSingularLowercase]';
+    public $table = 'service';
 
     /**
      * @var bool
@@ -33,6 +35,6 @@ class [ModuleSingular] extends Model
      * @var string[]
      */
     protected $fillable = [
-        [Fillable]
+        'text'
     ];
 }
