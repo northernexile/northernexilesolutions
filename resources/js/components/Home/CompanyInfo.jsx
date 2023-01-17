@@ -14,6 +14,11 @@ const CompanyInfo = () => {
         dispatch(get())
     },[])
 
+    const getDate = () => {
+        let date = new Date
+        return date.getFullYear()
+    }
+
     return (
         <Card className="company-info"
             style={{
@@ -34,6 +39,11 @@ const CompanyInfo = () => {
                 <Typography align="center" variant="p" component="div" style={{
                     marginBottom:4
                 }}>VAT Registered: {company.vatNumber}</Typography>
+                <Typography align={`center`} variant={`p`} component={`div`} style={{
+                    marginBottom:4
+                }}>
+                    Copyright Northern Exile Solutions Ltd {getDate()}
+                </Typography>
             </CardContent>
         </Card>
     )
