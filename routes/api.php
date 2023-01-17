@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagCloudController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class,'index']);
+});
+
+Route::prefix('cloud')->group(function (){
+   Route::get('/',[TagCloudController::class,'index']);
 });
 
 include 'api/pages.php';

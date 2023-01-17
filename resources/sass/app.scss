@@ -5,6 +5,17 @@
 @import 'variables';
 
 @import "carousel";
+@import "cloud";
+
+body{
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to bottom, rgba(10, 84, 37, 1) 0%, rgba(255, 255, 255, 0) 100%) no-repeat fixed;
+}
+
+.company-info{
+    font-size: 0.8rem;
+}
 
 .title-bar{
     background-color: $primary-light;
@@ -16,4 +27,9 @@
         min-height: 20px;
         padding: 8px;
     }
+}
+
+.intro-card{
+    background-size: cover;
+    background-position: center -40px;
 }

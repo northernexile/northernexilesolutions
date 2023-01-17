@@ -17,7 +17,7 @@ const Technologies = () => {
 
         <Card elevation={2}
               style={{
-                  paddingTop: 8,
+                  paddingTop: 0,
                   paddingLeft:0,
                   paddingRight:0,
                   paddingBottom:8,

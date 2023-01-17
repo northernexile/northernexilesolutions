@@ -2,10 +2,9 @@
 import React, {useEffect} from "react";
 import {Grid} from "@mui/material";
 import Intro from './Intro'
-import Technologies from "./Technologies";
-import Sectors from "./Sectors";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks"
 import {getPage} from "../../redux/actions/pageActions";
+import WordCloud from "./WordCloud";
 
 const Home = () => {
     const dispatch = useAppDispatch()
@@ -26,12 +25,11 @@ const Home = () => {
 
                 justifyContent="center"
                 container item xs={12}>
-                <Grid item xs={12} md={6}>
+                <Grid className="intro-card" style={{ backgroundImage: "url(/images/YatRock.jpg)" }} item xs={12} md={12}>
                     <Intro />
                 </Grid>
-                <Grid item xs={12} md={4}>
-                    <Technologies />
-                    <Sectors />
+                <Grid item xs={12} md={12}>
+                    <WordCloud />
                 </Grid>
             </Grid>
         </>
