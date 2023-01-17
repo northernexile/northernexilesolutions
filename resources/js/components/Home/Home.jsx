@@ -25,7 +25,7 @@ const Home = () => {
                 spacing={2}
                 justifyContent="center"
                 container item xs={12}>
-                <Grid className="intro-card" style={{ backgroundImage: "url(/images/YatRock.jpg)" }} item xs={12} md={12}>
+                <Grid className="intro-card" style={{ marginTop:50, backgroundImage: "url(/images/YatRock.jpg)" }} item xs={12} md={12}>
                     <Intro />
                 </Grid>
                 <Grid item xs={12} md={4}>

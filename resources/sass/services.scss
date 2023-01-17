@@ -9,5 +9,8 @@ ul.service-list{
         padding:24px 0;
         background-color: $primary-light;
         color: $primary-contrast;
+        :last-child{
+            border-bottom: none;
+        }
     }
 }
