@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import {Grid, TextField} from "@mui/material";
+import React, {useState} from "react";
+import {Card, CardContent, CardHeader, Grid, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 
 const defaults = {
-    email:'',
-    password:''
+    email: '',
+    password: ''
 }
 
 const LoginForm = () => {
     const [formValues, setFormValues] = useState(defaults);
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormValues({
             ...formValues,
             [name]: value,
@@ -24,33 +24,50 @@ const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <Grid container alignItems="center" justify="center" direction="column">
-                <Grid item>
-                    <TextField
-                        id="email-input"
-                        name="email"
-                        label="Email address"
-                        type="email"
-                        value={formValues.name}
-                        onChange={handleInputChange}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="password-input"
-                        name="password"
-                        label="Password"
-                        type="password"
-                        value={formValues.password}
-                        onChange={handleInputChange}
-                    />
-                </Grid>
-                <Button variant="contained" color="primary" type="submit">
-                    Login
-                </Button>
-            </Grid>
-        </form>
+        <Grid item xs={8}>
+            <Card elevation={2}
+                  style={{
+                      paddingTop: 0,
+                      paddingLeft: 0,
+                      paddingRight: 0,
+                      paddingBottom: 8,
+                      margin: 8,
+                      marginBottom: 32,
+                      backgroundColor: 'rgba(255,255,255,0.8)'
+                  }}
+            >
+                <CardHeader className={`title-bar`} title={`Get In Touch`}/>
+                <CardContent>
+                    <form onSubmit={handleSubmit}>
+                        <div className={`form-row`}>
+                            <TextField
+                                fullWidth
+                                id="email-input"
+                                name="email"
+                                label="Email address"
+                                type="email"
+                                value={formValues.name}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className={`form-row`}>
+                            <TextField
+                                fullWidth
+                                id="password-input"
+                                name="password"
+                                label="Password"
+                                type="password"
+                                value={formValues.password}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className={`form-row`}>
+                            <Button variant="contained" color="primary" type="submit">Login</Button>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 
