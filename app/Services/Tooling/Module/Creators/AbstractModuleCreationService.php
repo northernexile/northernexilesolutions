@@ -70,7 +70,7 @@ abstract class AbstractModuleCreationService implements ObjectCreationInterface
 
     public function setColumns(Collection $columns) :ObjectCreationInterface
     {
-        if($columns->isEmpty() || !$columns->has('id')){
+        if($columns->isEmpty() || !$this->hasIdInCollection($columns)){
             $item = (new DataMember())
                 ->setType(DataTypes::ID)
                 ->setName('id')
@@ -82,5 +82,14 @@ abstract class AbstractModuleCreationService implements ObjectCreationInterface
         $this->columns = $columns;
 
         return $this;
+    }
+
+    protected function hasIdInCollection(Collection $collection) :bool
+    {
+        $idElement = $collection->filter(function (DataMember $col){
+           return $col->getName() == 'id';
+        });
+
+        return $idElement->isNotEmpty();
     }
 }
