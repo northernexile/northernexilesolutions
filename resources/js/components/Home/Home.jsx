@@ -20,9 +20,8 @@ const Home = () => {
 
     return (
         <>
-            <Grid
+            <Grid style={{marginTop:8}}
                 spacing={2}
-
                 justifyContent="center"
                 container item xs={12}>
                 <Grid className="intro-card" style={{ backgroundImage: "url(/images/YatRock.jpg)" }} item xs={12} md={12}>
