@@ -1,5 +1,7 @@
+
 .carousel {
     overflow: hidden;
+    max-width: 120px;
     .inner{
         white-space: nowrap;
         transition: 0.3s;
@@ -9,12 +11,14 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        height: 80px;
-        color: red;
+        height: 120px;
+        width: 120px;
+        color: $secondary;
         .legend{
             display: flex;
-            align-items: end;
-            justify-content: flex-end;
+            align-items: center;
+            justify-content: center;
+            max-width: 120px;
         }
     }
 

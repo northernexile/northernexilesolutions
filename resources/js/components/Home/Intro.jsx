@@ -25,11 +25,13 @@ const Intro = () => {
     return (
             <Card elevation={2}
                    style={{
-                       paddingTop: 8,
+                       paddingTop: 0,
                        paddingLeft:0,
                        paddingRight:0,
                        paddingBottom:8,
-                       margin:8
+                       margin:8,
+                       marginBottom:32,
+                       backgroundColor:'rgba(255,255,255,0.8)'
                    }}
             >
                 <CardHeader className="title-bar"

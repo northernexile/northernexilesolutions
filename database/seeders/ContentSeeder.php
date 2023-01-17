@@ -15,7 +15,7 @@ class ContentSeeder extends Seeder
      */
     private array $config = [
         'home'=>[
-            'home.introduction' => 'We are Software Developers based in The Forest of Dean & provide web development solutions primarily on a contract basis.'
+            'home.introduction' => 'Based in The Forest of Dean, we provide web development solutions, primarily on a contract basis.'
         ]
     ];
     /**

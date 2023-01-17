@@ -28,3 +28,9 @@ export type Company = {
     vatNumber:string,
     companiesHouseNumber:string
 }
+
+export type TagCloud = {
+    id:any,
+    value:string,
+    count:any
+}
