@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             SkillTypeSeeder::class,
             SkillSeeder::class,
             SectorSeeder::class,
-            UserSkillSeeder::class
+            UserSkillSeeder::class,
+            ServiceSeeder::class
         ]);
     }
 }
