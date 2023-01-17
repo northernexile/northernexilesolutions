@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 
 export default function Contact() {
     return (
-        <Grid item xs={8}>
+        <Grid item xs={12}>
             <Card elevation={2}
                   style={{
                       paddingTop: 0,
