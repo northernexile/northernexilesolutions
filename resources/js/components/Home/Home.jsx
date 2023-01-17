@@ -20,7 +20,7 @@ const Home = () => {
 
     return (
         <>
-            <Grid style={{marginTop:8}}
+            <Grid style={{marginTop:0}}
                 spacing={2}
                 justifyContent="center"
                 container item xs={12}>
