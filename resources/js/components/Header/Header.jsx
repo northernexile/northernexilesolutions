@@ -29,9 +29,11 @@ export default function ButtonAppBar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <img src={`/images/NorthernExileLogo.svg`} className={`site-logo`} title={`Northern Exile Solutions Ltd`} />
-                    </Typography>
+                    <Link to={`/`} title={`Home`}>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            <img src={`/images/NorthernExileLogo.svg`} className={`site-logo`} title={`Northern Exile Solutions Ltd`} />
+                        </Typography>
+                    </Link>
                     <Drawer open={isDrawerOpen} onClose={()=>setIsDrawerOpen(false)}
                     >
                         <List>
