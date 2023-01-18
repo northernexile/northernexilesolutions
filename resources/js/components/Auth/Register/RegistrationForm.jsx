@@ -3,11 +3,13 @@ import {Card, CardContent, CardHeader, Grid, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 
 const defaults = {
+    name:'',
     email: '',
-    password: ''
+    password: '',
+    repeat:''
 }
 
-const LoginForm = () => {
+const RegistrationForm = () => {
     const [formValues, setFormValues] = useState(defaults);
 
     const handleInputChange = (e) => {
@@ -36,7 +38,7 @@ const LoginForm = () => {
                       backgroundColor: 'rgba(255,255,255,0.8)'
                   }}
             >
-                <CardHeader className={`title-bar`} title={`Get In Touch`}/>
+                <CardHeader className={`title-bar`} title={`Register`}/>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
                         <div className={`form-row`}>
@@ -71,4 +73,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default RegistrationForm
