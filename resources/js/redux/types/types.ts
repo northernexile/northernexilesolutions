@@ -39,3 +39,9 @@ export type Service = {
     id:any,
     name:string
 }
+
+export type Registration = {
+    name:string,
+    email:string,
+    password:string
+}

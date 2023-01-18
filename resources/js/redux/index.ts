@@ -7,6 +7,7 @@ import {sectorSlice} from './slices/sectorSlice'
 import {companySlice} from './slices/companySlice'
 import {tagCloudSlice} from "./slices/tagCloudSlice";
 import {serviceSlice} from  "./slices/serviceSlice";
+import authReducer from "./slices/authSlice"
 
 const store=configureStore(
     {
@@ -17,7 +18,8 @@ const store=configureStore(
             sectors:sectorSlice.reducer,
             company:companySlice.reducer,
             cloud:tagCloudSlice.reducer,
-            services:serviceSlice.reducer
+            services:serviceSlice.reducer,
+            auth:authReducer
         }
     }
 )
