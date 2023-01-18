@@ -44,11 +44,22 @@ const RegistrationForm = () => {
                         <div className={`form-row`}>
                             <TextField
                                 fullWidth
+                                id="name-input"
+                                name="name"
+                                label="Name"
+                                type="text"
+                                value={formValues.name}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className={`form-row`}>
+                            <TextField
+                                fullWidth
                                 id="email-input"
                                 name="email"
                                 label="Email address"
                                 type="email"
-                                value={formValues.name}
+                                value={formValues.email}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -60,6 +71,17 @@ const RegistrationForm = () => {
                                 label="Password"
                                 type="password"
                                 value={formValues.password}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className={`form-row`}>
+                            <TextField
+                                fullWidth
+                                id="password-input-repeat"
+                                name="password"
+                                label="Confirm Password"
+                                type="password"
+                                value={formValues.repeat}
                                 onChange={handleInputChange}
                             />
                         </div>
