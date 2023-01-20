@@ -7,7 +7,12 @@ export const registerUser = createAsyncThunk(
     'auth/register',
     async (registration:Registration, {rejectWithValue}) => {
         try {
-            await RegistrationService.register(registration.name,registration.password,registration.email)
+            await RegistrationService.register(
+                registration.name,
+                registration.email,
+                registration.password,
+                registration.confirmed
+            )
         } catch (error) {
 
         }

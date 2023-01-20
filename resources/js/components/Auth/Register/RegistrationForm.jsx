@@ -1,34 +1,41 @@
-import React,{useState} from "react";
-import {Card, CardContent, CardHeader, Grid, TextField} from "@mui/material";
+import React, {useEffect} from "react";
+import {Card, CardContent, CardHeader, CircularProgress, Grid, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useAppDispatch,useAppSelector} from "../../../redux/hooks/hooks";
-
-const defaults = {
-    name:'',
-    email: '',
-    password: '',
-    repeat:''
-}
+import {useForm} from 'react-hook-form'
+import {registerUser} from "../../../redux/actions/auth/authActions";
+import {useNavigate} from "react-router-dom";
 
 const RegistrationForm = () => {
-    const [formValues, setFormValues] = useState(defaults);
     const { loading, userInfo, error, success } = useAppSelector(
         (state) => state.auth
     )
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
-    const handleInputChange = (e) => {
-        const {name, value} = e.target;
-        setFormValues({
-            ...formValues,
-            [name]: value,
-        });
-    };
+    useEffect(() => {
+        // redirect user to login page if registration was successful
+        if (success) navigate('/login')
+        // redirect authenticated user to profile screen
+        //if (userInfo) navigate('/user-profile')
+    }, [navigate, userInfo, success])
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(formValues);
-    };
+    const {register,handleSubmit} = useForm()
+    const submitForm = (data) => {
+        if(data.password !== data.repeat){
+            console.log('password mismatch')
+        }
+
+        data.email = data.email.toLowerCase()
+
+        const registration = {
+            name:data.name,
+            email:data.email,
+            password:data.password,
+            confirmed:data.repeat
+        }
+        dispatch(registerUser(registration))
+    }
 
     return (
         <Grid item xs={8}>
@@ -45,7 +52,7 @@ const RegistrationForm = () => {
             >
                 <CardHeader className={`title-bar`} title={`Register`}/>
                 <CardContent>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(submitForm)}>
                         <div className={`form-row`}>
                             <TextField
                                 fullWidth
@@ -53,8 +60,8 @@ const RegistrationForm = () => {
                                 name="name"
                                 label="Name"
                                 type="text"
-                                value={formValues.name}
-                                onChange={handleInputChange}
+                                {...register('name')}
+                                required
                             />
                         </div>
                         <div className={`form-row`}>
@@ -64,8 +71,8 @@ const RegistrationForm = () => {
                                 name="email"
                                 label="Email address"
                                 type="email"
-                                value={formValues.email}
-                                onChange={handleInputChange}
+                                {...register('email')}
+                                required
                             />
                         </div>
                         <div className={`form-row`}>
@@ -75,23 +82,25 @@ const RegistrationForm = () => {
                                 name="password"
                                 label="Password"
                                 type="password"
-                                value={formValues.password}
-                                onChange={handleInputChange}
+                                {...register('password')}
+                                required
                             />
                         </div>
                         <div className={`form-row`}>
                             <TextField
                                 fullWidth
                                 id="password-input-repeat"
-                                name="password"
+                                name="repeat"
                                 label="Confirm Password"
                                 type="password"
-                                value={formValues.repeat}
-                                onChange={handleInputChange}
+                                {...register('repeat')}
+                                required
                             />
                         </div>
                         <div className={`form-row`}>
-                            <Button variant="contained" color="primary" type="submit">Register</Button>
+                            <Button disabled={loading} variant="contained" color="primary" type="submit">
+                                {loading ? <CircularProgress />: 'Register'}
+                            </Button>
                         </div>
                     </form>
                 </CardContent>

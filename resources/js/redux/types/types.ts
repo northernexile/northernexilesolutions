@@ -43,5 +43,6 @@ export type Service = {
 export type Registration = {
     name:string,
     email:string,
-    password:string
+    password:string,
+    confirmed:string
 }
