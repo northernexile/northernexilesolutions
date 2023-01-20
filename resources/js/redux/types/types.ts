@@ -46,3 +46,8 @@ export type Registration = {
     password:string,
     confirmed:string
 }
+
+export type Login = {
+    email:string,
+    password:string
+}

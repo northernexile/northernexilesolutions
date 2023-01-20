@@ -26,7 +26,13 @@ class RegistrationController extends RegisterController
 
             $createdUser = User::find($user->id);
 
-            $response = $this->success('User created',201,['user'=>$createdUser]);
+            $response = $this->success(
+                'User created',
+                201,
+                [
+                    'authentication'=>$createdUser
+                ]
+            );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
               'Failed registration',
