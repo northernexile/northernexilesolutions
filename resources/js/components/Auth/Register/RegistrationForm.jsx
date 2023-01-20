@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React,{useState} from "react";
 import {Card, CardContent, CardHeader, Grid, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
+import {useAppDispatch,useAppSelector} from "../../../redux/hooks/hooks";
 
 const defaults = {
     name:'',
@@ -11,6 +12,10 @@ const defaults = {
 
 const RegistrationForm = () => {
     const [formValues, setFormValues] = useState(defaults);
+    const { loading, userInfo, error, success } = useAppSelector(
+        (state) => state.auth
+    )
+    const dispatch = useAppDispatch()
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -86,7 +91,7 @@ const RegistrationForm = () => {
                             />
                         </div>
                         <div className={`form-row`}>
-                            <Button variant="contained" color="primary" type="submit">Login</Button>
+                            <Button variant="contained" color="primary" type="submit">Register</Button>
                         </div>
                     </form>
                 </CardContent>
