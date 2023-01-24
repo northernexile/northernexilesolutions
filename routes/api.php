@@ -31,6 +31,7 @@ Route::prefix('cloud')->group(function (){
    Route::get('/',[TagCloudController::class,'index']);
 });
 
+include 'api/contact.php';
 include 'api/auth.php';
 include 'api/pages.php';
 include 'api/skills.php';

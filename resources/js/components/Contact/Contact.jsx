@@ -37,7 +37,7 @@ export default function Contact() {
                     <form onSubmit={handleSubmit(submitForm)}>
                         <div className={`form-row`}>
                             <TextField
-                                name={`name`}
+                                name={`text`}
                                 className={`form-input form-input-text`}
                                 fullWidth
                                 label={`Name`}
@@ -61,7 +61,7 @@ export default function Contact() {
                                 multiline
                                 rows={6}
                                 label={`Message`}
-                                {...register('message')}
+                                {...register('text')}
                             />
                         </div>
                         <div className={`form-row`}>
