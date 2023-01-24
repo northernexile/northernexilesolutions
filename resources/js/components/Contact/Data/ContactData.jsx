@@ -1,11 +1,15 @@
 
-import React from "react"
+import React, {useEffect} from "react"
 import MUIDataTable from "mui-datatables"
 import Button from "@mui/material/Button";
 import {EditAttributes} from "@mui/icons-material";
 import {Link} from "react-router-dom";
+import {useAppDispatch,useAppSelector} from "../../../redux/hooks/hooks";
+import {getAllContacts} from "../../../redux/actions/contactActions";
 
 const ContactData = () => {
+
+    const dispatch = useAppDispatch()
 
     const columns = [
         {
@@ -42,9 +46,11 @@ const ContactData = () => {
         }
     ];
 
-    const contacts = [
-        {id:1,name:'Allen Hardy',email:'foo@bar.com'}
-    ];
+    const contacts = useAppSelector(state => state.contact.contacts)
+
+    useEffect(() => {
+        dispatch(getAllContacts())
+    },[])
 
     const data = contacts.map((contact) => {
         return {
@@ -52,7 +58,7 @@ const ContactData = () => {
             name:contact.name,
             email:contact.email,
             action:<Link to={`/dashboard/contact/edit/${contact.id}`}>
-                <Button variant={`contained`} endIcon={<EditAttributes />} title={"Edit"} >Edit</Button>
+                <Button variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
             </Link>
         }
     })

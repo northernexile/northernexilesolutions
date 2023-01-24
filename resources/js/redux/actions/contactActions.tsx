@@ -14,3 +14,10 @@ export const addContact = (contact:Contact):ThunkAction<void, RootState, unknown
         dispatch(contactActions.setContact(response))
     }
 }
+
+export const getAllContacts = ():ThunkAction<void, RootState, unknown, AnyAction>=> {
+    return async (dispatch,getState) :Promise<void>=>{
+        const response:Contact[] = await ContactService.getAll()
+        dispatch(contactActions.setContacts(response))
+    }
+}
