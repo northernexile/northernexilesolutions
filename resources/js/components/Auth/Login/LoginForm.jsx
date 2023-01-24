@@ -1,27 +1,33 @@
-import React, {useState} from "react";
-import {Card, CardContent, CardHeader, Grid, TextField} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {Card, CardContent, CardHeader, CircularProgress, Grid, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
-
-const defaults = {
-    email: '',
-    password: ''
-}
+import {Link, useNavigate} from "react-router-dom";
+import {useForm} from 'react-hook-form'
+import {useAppDispatch,useAppSelector} from "../../../redux/hooks/hooks";
+import {userLogin} from "../../../redux/actions/auth/authActions";
 
 const LoginForm = () => {
-    const [formValues, setFormValues] = useState(defaults);
 
-    const handleInputChange = (e) => {
-        const {name, value} = e.target;
-        setFormValues({
-            ...formValues,
-            [name]: value,
-        });
-    };
+    const { loading,userInfo, error } = useAppSelector((state) => state.auth || {})
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const { register, handleSubmit } = useForm()
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(formValues);
-    };
+    const submitForm = (data) => {
+
+        let login = {
+            email:data.email,
+            password:data.password
+        }
+
+        dispatch(userLogin(login))
+    }
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate('/')
+        }
+    }, [navigate, userInfo])
 
     return (
         <Grid item xs={8}>
@@ -36,9 +42,9 @@ const LoginForm = () => {
                       backgroundColor: 'rgba(255,255,255,0.8)'
                   }}
             >
-                <CardHeader className={`title-bar`} title={`Get In Touch`}/>
+                <CardHeader className={`title-bar`} title={`Login`}/>
                 <CardContent>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(submitForm)}>
                         <div className={`form-row`}>
                             <TextField
                                 fullWidth
@@ -46,8 +52,7 @@ const LoginForm = () => {
                                 name="email"
                                 label="Email address"
                                 type="email"
-                                value={formValues.name}
-                                onChange={handleInputChange}
+                                {...register('email')}
                             />
                         </div>
                         <div className={`form-row`}>
@@ -57,12 +62,16 @@ const LoginForm = () => {
                                 name="password"
                                 label="Password"
                                 type="password"
-                                value={formValues.password}
-                                onChange={handleInputChange}
+                                {...register('password')}
                             />
                         </div>
                         <div className={`form-row`}>
-                            <Button variant="contained" color="primary" type="submit">Login</Button>
+                            <Button variant="contained" color="primary" type="submit">
+                                {loading ? <CircularProgress /> : 'Login'}
+                            </Button>
+                        </div>
+                        <div className={`form-row`}>
+                            <Link to={`/register`}>Register</Link>
                         </div>
                     </form>
                 </CardContent>

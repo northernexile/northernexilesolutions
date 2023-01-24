@@ -9,11 +9,36 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import {Link} from "react-router-dom";
 import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import {useState} from 'react';
-import {ContactMail, Home, LoginRounded, Person} from "@mui/icons-material";
+import {useEffect, useState} from 'react';
+import {ContactMail, Home, LoginRounded, Person,LogoutRounded} from "@mui/icons-material";
+import {useAppDispatch,useAppSelector} from "../../redux/hooks/hooks";
+import {useGetUserDetailsQuery} from "../../redux/services/authService";
+import {setCredentials,logout} from "../../redux/slices/authSlice";
+
 
 export default function ButtonAppBar() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const dispatch = useAppDispatch();
+    let { userInfo,isLoggedIn } = useAppSelector((state) => state.auth)
+
+    const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
+        pollingInterval: 90000,
+    })
+
+    const out = () => {
+        dispatch(logout())
+    }
+
+    const infoSection = () => {
+        if(!userInfo){
+            return <Button color="inherit"><Link title={`Login`} to={`login`}><LoginRounded /></Link></Button>
+        } else {
+            return <Button color={`inherit`} onClick={() => out() }><LogoutRounded /></Button>
+        }
+    }
+    useEffect(() => {
+        if (data) dispatch(setCredentials(data))
+    }, [data, dispatch])
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -58,7 +83,7 @@ export default function ButtonAppBar() {
                             </ListItemButton>
                         </List>
                     </Drawer>
-                    <Button color="inherit"><Link title={`Login`} to={`login`}><LoginRounded /></Link></Button>
+                    {infoSection()}
                 </Toolbar>
             </AppBar>
         </Box>
