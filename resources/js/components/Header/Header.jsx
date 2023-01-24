@@ -10,18 +10,18 @@ import Drawer from '@mui/material/Drawer';
 import {Link} from "react-router-dom";
 import {Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {useEffect, useState} from 'react';
-import {ContactMail, Home, LoginRounded, Person, LogoutRounded, Dashboard} from "@mui/icons-material";
-import {useAppDispatch,useAppSelector} from "../../redux/hooks/hooks";
+import {ContactMail, Home, LoginRounded, Person, LogoutRounded, Dashboard, Mail} from "@mui/icons-material";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {useGetUserDetailsQuery} from "../../redux/services/authService";
-import {setCredentials,logout} from "../../redux/slices/authSlice";
+import {setCredentials, logout} from "../../redux/slices/authSlice";
 
 
 export default function ButtonAppBar() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const dispatch = useAppDispatch();
-    let { userInfo,isLoggedIn } = useAppSelector((state) => state.auth)
+    let {userInfo, isLoggedIn} = useAppSelector((state) => state.auth)
 
-    const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
+    const {data, isFetching} = useGetUserDetailsQuery('userDetails', {
         pollingInterval: 90000,
     })
 
@@ -30,21 +30,29 @@ export default function ButtonAppBar() {
     }
 
     const infoSection = () => {
-        if(!userInfo){
-            return <Button color="inherit"><Link title={`Login`} to={`login`}><LoginRounded /></Link></Button>
+        if (!userInfo) {
+            return <Button color="inherit"><Link title={`Login`} to={`login`}><LoginRounded/></Link></Button>
         } else {
-            return <Button color={`inherit`} onClick={() => out() }><LogoutRounded /></Button>
+            return <Button color={`inherit`} onClick={() => out()}><LogoutRounded/></Button>
         }
     }
 
     const adminLinks = () => {
-        if(userInfo){
-            return <ListItemButton>
-                <ListItemIcon>
-                    <Dashboard />
-                </ListItemIcon>
-                <Link to={'/dashboard'}><ListItemText primary="Dashboard" /></Link>
-            </ListItemButton>
+        if (userInfo) {
+            return <>
+                <ListItemButton>
+                    <ListItemIcon>
+                        <Dashboard/>
+                    </ListItemIcon>
+                    <Link to={'/dashboard'}><ListItemText primary="Dashboard"/></Link>
+                </ListItemButton>
+                <ListItemButton>
+                    <ListItemIcon>
+                        <Mail />
+                    </ListItemIcon>
+                    <Link to={'/dashboard/messages'}><ListItemText primary="Messages" /> </Link>
+                </ListItemButton>
+            </>
         }
 
         return ''
@@ -55,7 +63,7 @@ export default function ButtonAppBar() {
     }, [data, dispatch])
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{flexGrow: 1}}>
             <AppBar position="fixed">
                 <Toolbar>
                     <IconButton
@@ -63,37 +71,38 @@ export default function ButtonAppBar() {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
+                        sx={{mr: 2}}
                         onClick={() => setIsDrawerOpen(true)}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         <Link to={`/`} title={`Home`}>
-                            <img src={`/images/NorthernExileLogo.svg`} className={`site-logo`} title={`Northern Exile Solutions Ltd`} />
+                            <img src={`/images/NorthernExileLogo.svg`} className={`site-logo`}
+                                 title={`Northern Exile Solutions Ltd`}/>
                         </Link>
                     </Typography>
 
-                    <Drawer open={isDrawerOpen} onClose={()=>setIsDrawerOpen(false)}
+                    <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}
                     >
                         <List>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <Home />
+                                    <Home/>
                                 </ListItemIcon>
-                                <Link to={'/'}><ListItemText primary="Home" /></Link>
+                                <Link to={'/'}><ListItemText primary="Home"/></Link>
                             </ListItemButton>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <Person />
+                                    <Person/>
                                 </ListItemIcon>
-                                <Link to={'/resume'}><ListItemText primary="Profile" /></Link>
+                                <Link to={'/resume'}><ListItemText primary="Profile"/></Link>
                             </ListItemButton>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <ContactMail />
+                                    <ContactMail/>
                                 </ListItemIcon>
-                                <Link to={'/contact'}><ListItemText primary="Contact" /></Link>
+                                <Link to={'/contact'}><ListItemText primary="Contact"/></Link>
                             </ListItemButton>
                             <Divider/>
                             {adminLinks()}

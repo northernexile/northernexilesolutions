@@ -1,11 +1,11 @@
 
 import InitialState,{SetContactAction} from "../types/contact";
 import {createSlice,PayloadAction} from "@reduxjs/toolkit";
-import {Contact, Content} from "../types/types";
-import {SetContentAction} from "../types/content";
+import {Contact} from "../types/types";
 
 const initialState: InitialState = {
-    contact:{name:'',email:'',text:''}
+    contact:{name:'',email:'',text:''},
+    contacts:[]
 }
 
 export const contactSlice = createSlice({
@@ -15,6 +15,9 @@ export const contactSlice = createSlice({
         setContact: (state,action: PayloadAction<Contact>) => {
             state.contact = action.payload
         },
+        setContacts: (state,action:PayloadAction<Array<Contact>>) => {
+            state.contacts = action.payload
+        }
     },
 });
 

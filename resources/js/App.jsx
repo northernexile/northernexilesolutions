@@ -21,6 +21,7 @@ import store from "./redux/index"
 import Register from "./components/Auth/Register/Register";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./components/Dashboard/Dashboard"
+import Messages from "./components/Dashboard/Messages/Messages";
 
 
 const router = createBrowserRouter([
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
             {
                 index:true,
                 element: <Dashboard />
+            },
+            {
+                path:"messages",
+                element: <Messages />
             }
         ]
     }
