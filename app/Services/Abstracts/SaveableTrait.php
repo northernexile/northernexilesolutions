@@ -21,6 +21,7 @@ trait SaveableTrait
 
         $entity->save();
         $this->entity = $entity;
+        $this->setIdentity($entity->id);
 
         return true;
     }
