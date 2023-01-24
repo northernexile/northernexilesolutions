@@ -9,11 +9,28 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import {Link} from "react-router-dom";
 import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ContactMail, Home, LoginRounded, Person} from "@mui/icons-material";
+import {useAppDispatch,useAppSelector} from "../../redux/hooks/hooks";
+import {useGetUserDetailsQuery} from "../../redux/services/authService";
+import {setCredentials} from "../../redux/slices/authSlice";
 
 export default function ButtonAppBar() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const dispatch = useAppDispatch();
+    const { userInfo } = useAppSelector((state) => state.auth)
+
+    console.log(userInfo)
+
+    const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
+        pollingInterval: 9000,
+    })
+
+    useEffect(() => {
+        if (data) dispatch(setCredentials(data))
+    }, [data, dispatch])
+
+    console.log(data)
 
     return (
         <Box sx={{ flexGrow: 1 }}>

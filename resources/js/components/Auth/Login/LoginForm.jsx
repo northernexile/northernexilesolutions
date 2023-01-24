@@ -25,6 +25,7 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (userInfo) {
+            navigate('/')
         }
     }, [navigate, userInfo])
 

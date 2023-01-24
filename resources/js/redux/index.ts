@@ -8,6 +8,7 @@ import {companySlice} from './slices/companySlice'
 import {tagCloudSlice} from "./slices/tagCloudSlice";
 import {serviceSlice} from  "./slices/serviceSlice";
 import authReducer from "./slices/authSlice"
+import {authApi} from "./services/authService";
 
 const store=configureStore(
     {
@@ -19,8 +20,11 @@ const store=configureStore(
             company:companySlice.reducer,
             cloud:tagCloudSlice.reducer,
             services:serviceSlice.reducer,
-            auth:authReducer
-        }
+            auth:authReducer,
+            [authApi.reducerPath]:authApi.reducer
+        },
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware().concat(authApi.middleware),
     }
 )
 
