@@ -22,6 +22,7 @@ import Register from "./components/Auth/Register/Register";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./components/Dashboard/Dashboard"
 import Messages from "./components/Dashboard/Messages/Messages";
+import ContactEdit from "./components/Contact/Data/ContactEdit";
 
 
 const router = createBrowserRouter([
@@ -70,7 +71,13 @@ const router = createBrowserRouter([
             },
             {
                 path:"messages",
-                element: <Messages />
+                element: <Messages />,
+                children:[
+                    {
+                        path:':id',
+                        element:<ContactEdit />
+                    }
+                ]
             }
         ]
     }

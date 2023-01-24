@@ -75,7 +75,7 @@ const ContactData = () => {
             email:contact.email,
             created_at:'',
             action:<Link to={`/dashboard/contact/edit/${contact.id}`}>
-                <Button onClick={setContact(contact.id)} variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
+                <Button variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
             </Link>
         }
     })
