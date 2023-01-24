@@ -9,9 +9,12 @@ export const authApi = createApi({
             if (token) {
                 // include token in req header
                 headers.set('authorization', `Bearer ${token}`)
+                headers.set('accept',"application/json")
                 return headers
+            } else {
+                headers.set('accept',"application/json")
             }
-        },
+        }
     }),
     endpoints: (builder) => ({
         getUserDetails: builder.query({

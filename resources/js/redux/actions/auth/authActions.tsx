@@ -28,6 +28,9 @@ export const userLogin = createAsyncThunk(
                 login.password
             )
 
+            // @ts-ignore
+            localStorage.setItem('userToken',result.token)
+
             return result
 
         } catch (error) {

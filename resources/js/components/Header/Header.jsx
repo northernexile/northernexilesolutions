@@ -20,17 +20,13 @@ export default function ButtonAppBar() {
     const dispatch = useAppDispatch();
     const { userInfo } = useAppSelector((state) => state.auth)
 
-    console.log(userInfo)
-
     const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
-        pollingInterval: 9000,
+        pollingInterval: 90000,
     })
 
     useEffect(() => {
         if (data) dispatch(setCredentials(data))
     }, [data, dispatch])
-
-    console.log(data)
 
     return (
         <Box sx={{ flexGrow: 1 }}>

@@ -2,14 +2,16 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {registerUser,userLogin} from "../actions/auth/authActions";
 
-const userToken = localStorage.getItem('userToken')
-    ? localStorage.getItem('userToken')
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
+const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken')
     : null
 
 const initialState = {
     loading: false,
     userInfo: null,
-    userToken:{},
+    userToken,
     error: null,
     success: false,
 }
