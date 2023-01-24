@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import {useAppDispatch,useAppSelector} from "../../../redux/hooks/hooks";
 import {useForm} from 'react-hook-form'
 import {registerUser} from "../../../redux/actions/auth/authActions";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const RegistrationForm = () => {
     const { loading, userInfo, error, success } = useAppSelector(
@@ -101,6 +101,9 @@ const RegistrationForm = () => {
                             <Button disabled={loading} variant="contained" color="primary" type="submit">
                                 {loading ? <CircularProgress />: 'Register'}
                             </Button>
+                        </div>
+                        <div className={`form-row`}>
+                            <Link to={`/login`}>Login</Link>
                         </div>
                     </form>
                 </CardContent>
