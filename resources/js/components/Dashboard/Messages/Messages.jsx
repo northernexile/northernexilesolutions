@@ -1,6 +1,7 @@
 
 import React from "react";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import ContactData from "../../Contact/Data/ContactData";
 
 export default function Messages() {
     return (
@@ -19,7 +20,7 @@ export default function Messages() {
             >
                 <CardHeader className={`title-bar`} title={`Messages`}/>
                 <CardContent>
-                    Messages
+                    <ContactData />
                 </CardContent>
             </Card>
         </Grid>
