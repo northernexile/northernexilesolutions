@@ -1,7 +1,19 @@
 
 import React from "react";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Mail} from "@mui/icons-material";
+import {Link} from "react-router-dom";
 export default function Dashboard() {
+
+    const sections = [
+        {
+            id:1,
+            name:'Messages',
+            icon:<Mail />,
+            route:'/dashboard/messages'
+        }
+    ];
+
     return (
         <Grid item xs={12}>
             <Card elevation={2}
@@ -17,8 +29,14 @@ export default function Dashboard() {
                   }}
             >
                 <CardHeader className={`title-bar`} title={`Dashboard`}/>
-                <CardContent>
-                    DASH
+                <CardContent style={{padding:20}}>
+                    <ul className={`service-list`}>
+                        {sections.map((section,index) => (
+                            <li key={`section-${section.id}`}>
+                                <Link to={section.route}>{section.icon} {section.name}</Link>
+                            </li>
+                        ))}
+                    </ul>
                 </CardContent>
             </Card>
         </Grid>

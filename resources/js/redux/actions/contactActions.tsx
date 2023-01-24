@@ -15,6 +15,19 @@ export const addContact = (contact:Contact):ThunkAction<void, RootState, unknown
     }
 }
 
+export const viewContact = (id:any):ThunkAction<void, RootState, unknown, AnyAction>=> {
+    return async (dispatch,getState) :Promise<void>=>{
+        const response:Contact = await ContactService.getById(id)
+        dispatch(contactActions.setContact(response))
+    }
+}
+
+export const deleteContact = (contact:Contact):ThunkAction<void, RootState, unknown, AnyAction>=>{
+    return async (dispatch,getState) :Promise<void>=>{
+        const response:boolean = await ContactService.delete(contact)
+    }
+}
+
 export const getAllContacts = ():ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async (dispatch,getState) :Promise<void>=>{
         const response:Contact[] = await ContactService.getAll()

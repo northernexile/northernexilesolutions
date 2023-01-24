@@ -11,6 +11,8 @@ const ContactData = () => {
 
     const dispatch = useAppDispatch()
 
+    const contact = {}
+
     const columns = [
         {
             name:'id',
@@ -37,6 +39,14 @@ const ContactData = () => {
             }
         },
         {
+            name:'created_at',
+            label:'Created',
+            options: {
+                filter: true,
+                sort: true
+            }
+        },
+        {
             name:'action',
             label: 'Action',
             options: {
@@ -45,6 +55,12 @@ const ContactData = () => {
             }
         }
     ];
+
+    const setContact = (id) => {
+        let contact = selectContact(id)
+        console.log(contact)
+        return contact
+    }
 
     const contacts = useAppSelector(state => state.contact.contacts)
 
@@ -57,11 +73,18 @@ const ContactData = () => {
             id:contact.id,
             name:contact.name,
             email:contact.email,
+            created_at:'',
             action:<Link to={`/dashboard/contact/edit/${contact.id}`}>
-                <Button variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
+                <Button onClick={setContact(contact.id)} variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
             </Link>
         }
     })
+
+    const selectContact = (id) => {
+        return contacts.find((obj) => {
+            return obj.id === id;
+        });
+    }
 
     const options = {
         filterType: 'checkbox',

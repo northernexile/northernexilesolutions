@@ -53,7 +53,9 @@ export type Login = {
 }
 
 export type Contact = {
+    id:any,
     name:string,
     email:string,
     text:string
+    created_at:string
 }
