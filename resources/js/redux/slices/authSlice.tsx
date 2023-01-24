@@ -20,6 +20,14 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        logout: (state) => {
+            // @ts-ignore
+            localStorage.removeItem('userToken') // delete token from storage
+            state.loading = false
+            state.userInfo = null
+            state.userToken = null
+            state.error = null
+        },
         setCredentials: (state, { payload }) => {
             state.userInfo = payload
         },
@@ -53,5 +61,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { setCredentials } = authSlice.actions
+export const { logout,setCredentials } = authSlice.actions
 export default authSlice.reducer
