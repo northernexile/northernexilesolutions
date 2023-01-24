@@ -8,9 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import {Link} from "react-router-dom";
-import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {useEffect, useState} from 'react';
-import {ContactMail, Home, LoginRounded, Person,LogoutRounded} from "@mui/icons-material";
+import {ContactMail, Home, LoginRounded, Person, LogoutRounded, Dashboard} from "@mui/icons-material";
 import {useAppDispatch,useAppSelector} from "../../redux/hooks/hooks";
 import {useGetUserDetailsQuery} from "../../redux/services/authService";
 import {setCredentials,logout} from "../../redux/slices/authSlice";
@@ -36,6 +36,20 @@ export default function ButtonAppBar() {
             return <Button color={`inherit`} onClick={() => out() }><LogoutRounded /></Button>
         }
     }
+
+    const adminLinks = () => {
+        if(userInfo){
+            return <ListItemButton>
+                <ListItemIcon>
+                    <Dashboard />
+                </ListItemIcon>
+                <Link to={'/dashboard'}><ListItemText primary="Dashboard" /></Link>
+            </ListItemButton>
+        }
+
+        return ''
+    }
+
     useEffect(() => {
         if (data) dispatch(setCredentials(data))
     }, [data, dispatch])
@@ -81,6 +95,8 @@ export default function ButtonAppBar() {
                                 </ListItemIcon>
                                 <Link to={'/contact'}><ListItemText primary="Contact" /></Link>
                             </ListItemButton>
+                            <Divider/>
+                            {adminLinks()}
                         </List>
                     </Drawer>
                     {infoSection()}
