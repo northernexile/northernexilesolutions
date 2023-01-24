@@ -9,12 +9,14 @@ import {tagCloudSlice} from "./slices/tagCloudSlice";
 import {serviceSlice} from  "./slices/serviceSlice";
 import authReducer from "./slices/authSlice"
 import {authApi} from "./services/authService";
+import contactSlice from "./slices/contactSlice";
 
 const store=configureStore(
     {
         reducer:{
             technology:technologySlice.reducer,
             content:contentSlice.reducer,
+            contact:contactSlice.reducer,
             pages:pageSlice.reducer,
             sectors:sectorSlice.reducer,
             company:companySlice.reducer,

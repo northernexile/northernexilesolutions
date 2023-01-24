@@ -51,3 +51,9 @@ export type Login = {
     email:string,
     password:string
 }
+
+export type Contact = {
+    name:string,
+    email:string,
+    text:string
+}

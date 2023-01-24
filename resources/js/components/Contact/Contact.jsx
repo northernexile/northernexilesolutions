@@ -2,8 +2,22 @@
 import React from "react";
 import {Card, CardContent, CardHeader, Grid, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
+import {useAppDispatch,useAppSelector} from "../../redux/hooks/hooks";
+import {useForm} from "react-hook-form";
+import {addContact} from "../../redux/actions/contactActions";
 
 export default function Contact() {
+
+    const dispatch = useAppDispatch();
+    const contact = useAppSelector(state => state.contact.contact)
+    const {register,handleSubmit} = useForm()
+
+    console.log(contact)
+
+    const submitForm = (data) => {
+        dispatch(addContact(data))
+    }
+
     return (
         <Grid item xs={12}>
             <Card elevation={2}
@@ -20,15 +34,35 @@ export default function Contact() {
             >
                 <CardHeader className={`title-bar`} title={`Get In Touch`}/>
                 <CardContent>
-                    <form>
+                    <form onSubmit={handleSubmit(submitForm)}>
                         <div className={`form-row`}>
-                            <TextField name={`name`} className={`form-input form-input-text`} fullWidth label={`Name`} />
+                            <TextField
+                                name={`name`}
+                                className={`form-input form-input-text`}
+                                fullWidth
+                                label={`Name`}
+                                {...register('name')}
+                            />
                         </div>
                         <div className={`form-row`}>
-                            <TextField name={`email`} className={`form-input form-input-text`} fullWidth label={`Email`} />
+                            <TextField
+                                name={`email`}
+                                className={`form-input form-input-text`}
+                                fullWidth
+                                label={`Email`}
+                                {...register('email')}
+                            />
                         </div>
                         <div className={`form-row`}>
-                            <TextField name={`message`} className={`form-input form-input-text`} fullWidth multiline rows={6} label={`Message`} />
+                            <TextField
+                                name={`message`}
+                                className={`form-input form-input-text`}
+                                fullWidth
+                                multiline
+                                rows={6}
+                                label={`Message`}
+                                {...register('message')}
+                            />
                         </div>
                         <div className={`form-row`}>
                             <Button variant={`contained`} type={`submit`}>Submit</Button>
