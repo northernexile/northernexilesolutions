@@ -22,6 +22,8 @@ import Register from "./components/Auth/Register/Register";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./components/Dashboard/Dashboard"
 import Messages from "./components/Dashboard/Messages/Messages";
+import ContactEdit from "./components/Contact/Data/ContactEdit";
+import MessageEdit from "./components/Dashboard/Messages/MessageEdit";
 
 
 const router = createBrowserRouter([
@@ -69,8 +71,12 @@ const router = createBrowserRouter([
                 element: <Dashboard />
             },
             {
-                path:"messages",
-                element: <Messages />
+                path:"/dashboard/messages",
+                element: <Messages />,
+            },
+            {
+                path: "/dashboard/messages/:id",
+                element: <MessageEdit />
             }
         ]
     }

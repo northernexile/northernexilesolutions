@@ -37,6 +37,14 @@ const ContactData = () => {
             }
         },
         {
+            name:'created_at',
+            label:'Created',
+            options: {
+                filter: true,
+                sort: true
+            }
+        },
+        {
             name:'action',
             label: 'Action',
             options: {
@@ -57,11 +65,18 @@ const ContactData = () => {
             id:contact.id,
             name:contact.name,
             email:contact.email,
-            action:<Link to={`/dashboard/contact/edit/${contact.id}`}>
+            created_at:'',
+            action:<Link to={`/dashboard/messages/${contact.id}`}>
                 <Button variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
             </Link>
         }
     })
+
+    const selectContact = (id) => {
+        return contacts.find((obj) => {
+            return obj.id === id;
+        });
+    }
 
     const options = {
         filterType: 'checkbox',

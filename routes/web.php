@@ -24,3 +24,11 @@ Route::get('/{path?}', function () {
 Route::get('/{path?}/{path2}', function () {
     return view('welcome');
 });
+
+Route::get('/{path?}/{path2}/{path3}', function () {
+    return view('welcome');
+});
+
+Route::get('/{path?}/{path2}/{path3}/{path4}', function () {
+    return view('welcome');
+});

@@ -4,7 +4,7 @@ import {createSlice,PayloadAction} from "@reduxjs/toolkit";
 import {Contact} from "../types/types";
 
 const initialState: InitialState = {
-    contact:{name:'',email:'',text:''},
+    contact:{id:'',name:'',email:'',text:'',created_at:''},
     contacts:[]
 }
 

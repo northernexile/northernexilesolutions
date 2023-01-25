@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Contact;
 
-class ContactUpdateRequest
+use App\Http\Requests\AbstractFormRequest;
+
+class ContactUpdateRequest extends AbstractFormRequest
 {
     /**
      * @return string[]

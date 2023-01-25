@@ -11,7 +11,7 @@ class ContactListService
      * @param array $columns
      * @return Collection
      */
-    public function getList(array $columns=['id','name','text','email']) :Collection
+    public function getList(array $columns=['id','name','text','email','created_at']) :Collection
     {
         return Contact::get($columns);
     }

@@ -14,6 +14,10 @@ body{
     background: linear-gradient(to bottom, rgba(10, 84, 37, 1) 0%, rgba(255, 255, 255, 0) 100%) no-repeat fixed;
 }
 
+.unlocked{
+    background-color: $primary-contrast;
+}
+
 .company-info{
     font-size: 0.8rem;
 }
