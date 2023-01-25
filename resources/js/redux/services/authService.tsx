@@ -5,6 +5,7 @@ export const authApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: '/api/',
         prepareHeaders: (headers, { getState }) => {
+            //@ts-ignore
             const token = getState().auth.userToken
             if (token) {
                 // include token in req header

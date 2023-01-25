@@ -20,7 +20,6 @@ const RegistrationForm = () => {
     const {register,handleSubmit} = useForm()
     const submitForm = (data) => {
         if(data.password !== data.repeat){
-            console.log('password mismatch')
         }
 
         data.email = data.email.toLowerCase()

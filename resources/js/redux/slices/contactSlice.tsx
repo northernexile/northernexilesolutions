@@ -18,7 +18,7 @@ export const contactSlice = createSlice({
         setContacts: (state,action:PayloadAction<Array<Contact>>) => {
             state.contacts = action.payload
         }
-    },
+    }
 });
 
 export default contactSlice

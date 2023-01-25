@@ -4,11 +4,9 @@ import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import ContactEdit from "../../Contact/Data/ContactEdit";
 import {Link, useParams} from "react-router-dom";
 import {cardStyle} from "../../../snippets/cardStyle";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import {ArrowBack} from "@mui/icons-material";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
+import ApiErrorDisplay from "../../../errors/ApiErrorDisplay";
 
 export default function MessageEdit() {
     let id = useParams()
@@ -30,6 +28,7 @@ export default function MessageEdit() {
                     }
                 />
                 <CardContent>
+                    <ApiErrorDisplay />
                     <ContactEdit id={id} />
                 </CardContent>
             </Card>

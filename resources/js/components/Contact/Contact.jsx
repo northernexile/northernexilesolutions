@@ -13,8 +13,6 @@ export default function Contact() {
     const contact = useAppSelector(state => state.contact.contact)
     const {register,handleSubmit} = useForm()
 
-    console.log(contact)
-
     const submitForm = (data) => {
         dispatch(addContact(data))
     }
@@ -63,8 +61,6 @@ export default function Contact() {
     const showForm = () => {
         return contact.name === '' && contact.email === '' && contact.text === ''
     }
-
-    console.log(contact)
 
     return (
         <Grid item xs={12}>

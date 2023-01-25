@@ -10,10 +10,12 @@ import {serviceSlice} from  "./slices/serviceSlice";
 import authReducer from "./slices/authSlice"
 import {authApi} from "./services/authService";
 import contactSlice from "./slices/contactSlice";
+import errorSlice from "./slices/errorSlice";
 
 const store=configureStore(
     {
         reducer:{
+            error:errorSlice.reducer,
             technology:technologySlice.reducer,
             content:contentSlice.reducer,
             contact:contactSlice.reducer,
