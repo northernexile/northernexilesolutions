@@ -9,7 +9,7 @@ Route::prefix('contact')->group(function ($request) use($sectionName){
 
 Route::post('/',[ContactController::class,'create'])->name($sectionName.'.save');
 
-    Route::middleware('auth:sanctum')->group(function () use ($sectionName){
+    Route::middleware(['auth:sanctum','owner'])->group(function () use ($sectionName){
         Route::get('/',[ContactController::class,'index'])->name($sectionName.'.index');
         Route::get('/{id}',[ContactController::class,'show'])->name($sectionName.'.show');
         Route::patch('/{id}',[ContactController::class,'update'])->name($sectionName.'.save');
