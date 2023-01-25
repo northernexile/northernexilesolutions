@@ -32,7 +32,7 @@ export const userLogin = createAsyncThunk(
             // @ts-ignore
             localStorage.setItem('userToken',result.token)
             // @ts-ignore
-            axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('userToken')}`;
+            axios.defaults.headers.common['Authorization'] = `Bearer ${result.token}`;
 
             return result
 
