@@ -3,6 +3,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {Login, Registration} from "../../types/types";
 import RegistrationService from "../../services/registrationService";
 import LoginService from "../../services/loginService";
+import axios from "axios";
 
 export const registerUser = createAsyncThunk(
     'auth/register',
@@ -30,6 +31,8 @@ export const userLogin = createAsyncThunk(
 
             // @ts-ignore
             localStorage.setItem('userToken',result.token)
+            // @ts-ignore
+            axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('userToken')}`;
 
             return result
 

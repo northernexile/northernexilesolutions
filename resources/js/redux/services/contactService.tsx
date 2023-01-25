@@ -8,6 +8,11 @@ export default {
         return response.data.data.contact;
     },
 
+    async update(id,name,email,text){
+        const response = await Api().patch(`contact/${id}`,{name:name,email:email,text:text})
+        return response.data.data.contact
+    },
+
     async getAll(){
         const response = await  Api().get('contact');
         return response.data.data.contacts
@@ -20,4 +25,7 @@ export default {
         const response = await Api().delete(`contact${contact.id}`)
         return response.data.success
     }
+
+
 }
+

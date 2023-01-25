@@ -129,6 +129,7 @@ class ContactController extends Controller
         ContactUpdateRequest $request,
         ContactSaveService   $service
     ) :JsonResponse {
+        $response = null;
         try {
             $saved = $service
                 ->setIdentity($request->route()->parameter('id'))

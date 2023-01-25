@@ -31,7 +31,7 @@ export default function ButtonAppBar() {
 
     const infoSection = () => {
         if (!userInfo) {
-            return <Button color="inherit"><Link title={`Login`} to={`login`}><LoginRounded/></Link></Button>
+            return <Button color="inherit"><Link title={`Login`} to={`/login`}><LoginRounded/></Link></Button>
         } else {
             return <Button color={`inherit`} onClick={() => out()}><LogoutRounded/></Button>
         }

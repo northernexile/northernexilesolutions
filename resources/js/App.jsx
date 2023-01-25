@@ -23,6 +23,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./components/Dashboard/Dashboard"
 import Messages from "./components/Dashboard/Messages/Messages";
 import ContactEdit from "./components/Contact/Data/ContactEdit";
+import MessageEdit from "./components/Dashboard/Messages/MessageEdit";
 
 
 const router = createBrowserRouter([
@@ -70,14 +71,12 @@ const router = createBrowserRouter([
                 element: <Dashboard />
             },
             {
-                path:"messages",
+                path:"/dashboard/messages",
                 element: <Messages />,
-                children:[
-                    {
-                        path:':id',
-                        element:<ContactEdit />
-                    }
-                ]
+            },
+            {
+                path: "/dashboard/messages/:id",
+                element: <MessageEdit />
             }
         ]
     }

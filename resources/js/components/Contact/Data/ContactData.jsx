@@ -11,8 +11,6 @@ const ContactData = () => {
 
     const dispatch = useAppDispatch()
 
-    const contact = {}
-
     const columns = [
         {
             name:'id',
@@ -56,12 +54,6 @@ const ContactData = () => {
         }
     ];
 
-    const setContact = (id) => {
-        let contact = selectContact(id)
-        console.log(contact)
-        return contact
-    }
-
     const contacts = useAppSelector(state => state.contact.contacts)
 
     useEffect(() => {
@@ -74,7 +66,7 @@ const ContactData = () => {
             name:contact.name,
             email:contact.email,
             created_at:'',
-            action:<Link to={`/dashboard/contact/edit/${contact.id}`}>
+            action:<Link to={`/dashboard/messages/${contact.id}`}>
                 <Button variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
             </Link>
         }
