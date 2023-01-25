@@ -59,3 +59,10 @@ export type Contact = {
     text:string
     created_at:string
 }
+
+export type ApiError = {
+    success?:boolean,
+    message?:string,
+    data?:[],
+    code?:bigint
+}

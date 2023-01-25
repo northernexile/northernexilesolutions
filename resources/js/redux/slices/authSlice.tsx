@@ -3,8 +3,6 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {registerUser,userLogin} from "../actions/auth/authActions";
 
 // @ts-ignore
-// @ts-ignore
-// @ts-ignore
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken')
     : null
 

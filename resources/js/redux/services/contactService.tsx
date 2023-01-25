@@ -14,12 +14,19 @@ export default {
     },
 
     async getAll(){
-        const response = await  Api().get('contact');
-        return response.data.data.contacts
+        return await Api().get('contact').then((response) => {
+            return response.data.data.contacts
+        }).catch((error)=>{
+            return error.response.data
+        });
     },
     async getById(id){
-        const response = await Api().get(`contact/${id}`)
-        return response.data.data.contact;
+        return await Api().get(`contact/${id}`).then((response)=>{
+            return response.data.data.contact;
+        }).catch((error) => {
+            return error.response.data
+        })
+
     },
     async delete(contact:Contact){
         const response = await Api().delete(`contact${contact.id}`)
