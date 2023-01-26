@@ -7,6 +7,7 @@ import ContactService from "../services/contactService";
 import contactSlice from "../slices/contactSlice";
 import errorSlice from "../slices/errorSlice";
 import isApiError from "../../snippets/isApiError";
+import {toast} from "react-toastify";
 
 export const contactActions = contactSlice.actions
 export const errorActions = errorSlice.actions
@@ -17,9 +18,10 @@ export const addContact = (contact:Contact):ThunkAction<void, RootState, unknown
         const response:Contact|ApiError = await ContactService.add(contact.name,contact.email,contact.text)
 
         if(!isApiError(response,201)) {
+            toast.success('Added contact')
             dispatch(contactActions.setContact(response))
         } else {
-            dispatch(errorActions.setError(response))
+            toast.error(response.message)
         }
     }
 }
@@ -29,11 +31,12 @@ export const viewContact = (id:any):ThunkAction<void, RootState, unknown, AnyAct
         const response:Contact|ApiError = await ContactService.getById(id)
 
         if(isApiError(response,200)) {
-            dispatch(errorActions.setError(response))
+            toast.error(response.message)
             return
         }
-        dispatch(contactActions.setContact(response))
 
+        toast.success('Contact loaded')
+        dispatch(contactActions.setContact(response))
     }
 }
 
@@ -41,9 +44,10 @@ export const updateContact = (contact:Contact):ThunkAction<void, RootState, unkn
     return async (dispatch,getState) :Promise<void>=>{
         const response:Contact|ApiError = await ContactService.update(contact.id,contact.name,contact.email,contact.text)
         if(!isApiError(response,200)) {
+            toast.success('Updated contact')
             dispatch(contactActions.setContact(response))
         } else{
-            dispatch(errorActions.setError(response))
+            toast.error(response.message)
         }
     }
 }
@@ -53,7 +57,7 @@ export const deleteContact = (contact:Contact):ThunkAction<void, RootState, unkn
         const response:boolean|ApiError = await ContactService.delete(contact)
 
         if(isApiError(response,200)){
-           dispatch(errorActions.setError(response))
+            toast.error(response.message)
         }
     }
 }
@@ -63,10 +67,11 @@ export const getAllContacts = ():ThunkAction<void, RootState, unknown, AnyAction
         const response:Contact[]|ApiError = await ContactService.getAll()
 
         if(isApiError(response,200)) {
-            dispatch(errorActions.setError(response))
+            toast.error(response.message)
             return
         }
 
+        toast.success('Loaded contacts')
         dispatch(contactActions.setContacts(response))
     }
 }
