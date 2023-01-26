@@ -1,56 +1,60 @@
-
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import MUIDataTable from "mui-datatables"
 import Button from "@mui/material/Button";
-import {EditAttributes} from "@mui/icons-material";
+import {Delete, EditAttributes} from "@mui/icons-material";
 import {Link} from "react-router-dom";
-import {useAppDispatch,useAppSelector} from "../../../redux/hooks/hooks";
-import {getAllContacts} from "../../../redux/actions/contactActions";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
+import {getAllContacts,deleteContact} from "../../../redux/actions/contactActions";
 import Dates from "../../../snippets/Dates";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const ContactData = () => {
-
+    const [open,setOpen] = useState(false)
     const dispatch = useAppDispatch()
 
     const columns = [
         {
-            name:'id',
-            label:'ID',
-            options:{
-                filter:true,
-                sort:true
-            }
-        },
-        {
-            name:'name',
-            label:'Name',
-            options: {
-                filter: true,
-                sort:true
-            }
-        },
-        {
-            name:'email',
-            label:'Email',
-            options: {
-                filter:true,
-                sort: true
-            }
-        },
-        {
-            name:'created_at',
-            label:'Created',
+            name: 'id',
+            label: 'ID',
             options: {
                 filter: true,
                 sort: true
             }
         },
         {
-            name:'action',
+            name: 'name',
+            label: 'Name',
+            options: {
+                filter: true,
+                sort: true
+            }
+        },
+        {
+            name: 'email',
+            label: 'Email',
+            options: {
+                filter: true,
+                sort: true
+            }
+        },
+        {
+            name: 'created_at',
+            label: 'Created',
+            options: {
+                filter: true,
+                sort: true
+            }
+        },
+        {
+            name: 'action',
             label: 'Action',
             options: {
                 filter: false,
-                sort:false
+                sort: false
             }
         }
     ];
@@ -59,37 +63,86 @@ const ContactData = () => {
 
     useEffect(() => {
         dispatch(getAllContacts())
-    },[])
+    }, [])
+
+    const handleOpen = (id) => {
+        setOpen(true)
+    }
+
+    const handleClose = (id) => {
+        setOpen(false)
+    }
+
+    const deleteContact = (id) => {
+        dispatch(() => {deleteContact(id)})
+    }
+
+    const findContact = (id) => {
+        return contacts.find((contact) => {return contact.id === id})
+    }
 
     const data = contacts.map((contact) => {
         return {
-            id:contact.id,
-            name:contact.name,
-            email:contact.email,
-            created_at:Dates(contact.created_at,'DD/MM/Y HH:mm:ss'),
-            action:<Link to={`/dashboard/messages/${contact.id}`}>
-                <Button variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
-            </Link>
+            id: contact.id,
+            name: contact.name,
+            email: contact.email,
+            created_at: Dates(contact.created_at, 'DD/MM/Y HH:mm:ss'),
+            action: <>
+                <Link to={`/dashboard/messages/${contact.id}`}>
+                    <Button style={{marginRight:4}} variant={`contained`} endIcon={<EditAttributes/>}
+                            title={`Edit contact record id:${contact.id}`}>Edit</Button>
+                </Link>
+                <Button onClick={() => {setOpen(true)}} variant={`contained`}
+                        endIcon={<Delete />}
+                        title={`Delete contact`}>Delete</Button>
+            </>
         }
     })
 
-    const selectContact = (id) => {
-        return contacts.find((obj) => {
-            return obj.id === id;
-        });
+    const dialog = (id) => {
+        return (
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle>
+                    {"Delete Message"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description"></DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => {handleClose}}>Cancel</Button>
+                    <Button onClick={() => {deleteContact(id)}} autoFocus>
+                        Yes
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        )
     }
 
     const options = {
         filterType: 'checkbox',
     };
 
+    const table = () => {
+        return (
+            <MUIDataTable
+                title={"Contact form submissions"}
+                data={data}
+                columns={columns}
+                options={options}
+            />
+        )
+    }
+
     return (
-        <MUIDataTable
-            title={"Contact form submissions"}
-            data={data}
-            columns={columns}
-            options={options}
-        />
+        <>
+            {table()}
+            {dialog()}
+        </>
     )
 }
 

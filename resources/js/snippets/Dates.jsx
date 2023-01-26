@@ -1,5 +1,5 @@
 
-import moment, { Moment } from "moment";
+import moment from "moment";
 
 
 export default function Dates(dateTime,format){
