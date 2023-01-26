@@ -3,7 +3,6 @@ import React from "react";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import ContactData from "../../Contact/Data/ContactData";
 import {cardStyle} from "../../../snippets/cardStyle";
-import ApiErrorDisplay from "../../../errors/ApiErrorDisplay";
 
 export default function Messages() {
     return (
@@ -13,7 +12,6 @@ export default function Messages() {
             >
                 <CardHeader className={`title-bar`} title={`Messages`}/>
                 <CardContent>
-                    <ApiErrorDisplay />
                     <ContactData />
                 </CardContent>
             </Card>

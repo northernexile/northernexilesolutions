@@ -6,7 +6,6 @@ import {Link, useParams} from "react-router-dom";
 import {cardStyle} from "../../../snippets/cardStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
-import ApiErrorDisplay from "../../../errors/ApiErrorDisplay";
 
 export default function MessageEdit() {
     let id = useParams()
@@ -28,7 +27,6 @@ export default function MessageEdit() {
                     }
                 />
                 <CardContent>
-                    <ApiErrorDisplay />
                     <ContactEdit id={id} />
                 </CardContent>
             </Card>

@@ -24,6 +24,7 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import Messages from "./components/Dashboard/Messages/Messages";
 import ContactEdit from "./components/Contact/Data/ContactEdit";
 import MessageEdit from "./components/Dashboard/Messages/MessageEdit";
+import {ToastContainer} from "react-toastify";
 
 
 const router = createBrowserRouter([
@@ -88,6 +89,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <ThemeProvider theme={appTheme}>
                 <RouterProvider router={router} />
             </ThemeProvider>
+            <ToastContainer />
         </Provider>
     </React.StrictMode>
 );
