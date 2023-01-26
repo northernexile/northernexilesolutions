@@ -6,6 +6,7 @@ import {EditAttributes} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import {useAppDispatch,useAppSelector} from "../../../redux/hooks/hooks";
 import {getAllContacts} from "../../../redux/actions/contactActions";
+import Dates from "../../../snippets/Dates";
 
 const ContactData = () => {
 
@@ -65,7 +66,7 @@ const ContactData = () => {
             id:contact.id,
             name:contact.name,
             email:contact.email,
-            created_at:'',
+            created_at:Dates(contact.created_at,'DD/MM/Y HH:mm:ss'),
             action:<Link to={`/dashboard/messages/${contact.id}`}>
                 <Button variant={`contained`} endIcon={<EditAttributes />} title={`Edit contact record id:${contact.id}`} >Edit</Button>
             </Link>
