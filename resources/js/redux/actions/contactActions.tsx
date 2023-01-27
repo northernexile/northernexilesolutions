@@ -58,7 +58,10 @@ export const deleteContact = (contact:Contact):ThunkAction<void, RootState, unkn
 
         if(isApiError(response,200)){
             toast.error(response.message)
+            return
         }
+
+        toast.success('Item deleted')
     }
 }
 

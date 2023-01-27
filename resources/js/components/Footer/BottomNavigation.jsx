@@ -26,13 +26,13 @@ export default function SiteBottomNavigation() {
                 />
                 <BottomNavigationAction
                     component={Link}
-                    to={"resume"}
+                    to={"/resume"}
                     label="Profile"
                     icon={<Person2 />}
                 />
                 <BottomNavigationAction
                     component={Link}
-                    to={"contact"}
+                    to={"/contact"}
                     label="Contact"
                     icon={<Contacts />}
                 />

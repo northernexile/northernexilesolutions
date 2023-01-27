@@ -48,14 +48,38 @@ export default function ButtonAppBar() {
                 </ListItemButton>
                 <ListItemButton>
                     <ListItemIcon>
-                        <Mail />
+                        <Mail/>
                     </ListItemIcon>
-                    <Link to={'/dashboard/messages'}><ListItemText primary="Messages" /> </Link>
+                    <Link to={'/dashboard/messages'}><ListItemText primary="Messages"/> </Link>
                 </ListItemButton>
             </>
         }
 
         return ''
+    }
+
+    const publicLinks = () => {
+        return <>
+            <ListItemButton>
+                <ListItemIcon>
+                    <Home/>
+                </ListItemIcon>
+                <Link to={'/'}><ListItemText primary="Home"/></Link>
+            </ListItemButton>
+            <ListItemButton>
+                <ListItemIcon>
+                    <Person/>
+                </ListItemIcon>
+                <Link to={'/resume'}><ListItemText primary="Profile"/></Link>
+            </ListItemButton>
+            <ListItemButton>
+                <ListItemIcon>
+                    <ContactMail/>
+                </ListItemIcon>
+                <Link to={'/contact'}><ListItemText primary="Contact"/></Link>
+            </ListItemButton>
+            <Divider/>
+        </>
     }
 
     useEffect(() => {
@@ -86,25 +110,7 @@ export default function ButtonAppBar() {
                     <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}
                     >
                         <List>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <Home/>
-                                </ListItemIcon>
-                                <Link to={'/'}><ListItemText primary="Home"/></Link>
-                            </ListItemButton>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <Person/>
-                                </ListItemIcon>
-                                <Link to={'/resume'}><ListItemText primary="Profile"/></Link>
-                            </ListItemButton>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ContactMail/>
-                                </ListItemIcon>
-                                <Link to={'/contact'}><ListItemText primary="Contact"/></Link>
-                            </ListItemButton>
-                            <Divider/>
+                            {publicLinks()}
                             {adminLinks()}
                         </List>
                     </Drawer>
