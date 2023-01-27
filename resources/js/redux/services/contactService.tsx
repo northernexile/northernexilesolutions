@@ -29,8 +29,12 @@ export default {
 
     },
     async delete(contact:Contact){
-        const response = await Api().delete(`contact${contact.id}`)
-        return response.data.success
+        return  await Api().delete(`contact/${contact.id}`)
+            .then((response) => {
+                return response.data.success
+            }).catch((error) => {
+                return error.response.data;
+            })
     }
 
 

@@ -11,9 +11,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Typography from "@mui/material/Typography";
 
 const ContactData = () => {
     const [open,setOpen] = useState(false)
+    const [contact,setContact] = useState({})
     const dispatch = useAppDispatch()
 
     const columns = [
@@ -67,14 +69,18 @@ const ContactData = () => {
 
     const handleOpen = (id) => {
         setOpen(true)
+        setContact(findContact(id))
     }
 
-    const handleClose = (id) => {
+    const handleClose = () => {
+        setContact({})
         setOpen(false)
     }
 
-    const deleteContact = (id) => {
-        dispatch(() => {deleteContact(id)})
+    const deleteObject = () => {
+        dispatch(deleteContact(contact))
+        setContact({})
+        setOpen(false)
     }
 
     const findContact = (id) => {
@@ -92,7 +98,7 @@ const ContactData = () => {
                     <Button style={{marginRight:4}} variant={`contained`} endIcon={<EditAttributes/>}
                             title={`Edit contact record id:${contact.id}`}>Edit</Button>
                 </Link>
-                <Button onClick={() => {setOpen(true)}} variant={`contained`}
+                <Button onClick={() => {handleOpen(contact.id)}} variant={`contained`}
                         endIcon={<Delete />}
                         title={`Delete contact`}>Delete</Button>
             </>
@@ -111,13 +117,17 @@ const ContactData = () => {
                     {"Delete Message"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description"></DialogContentText>
+                    <DialogContentText id="alert-dialog-description">
+                        <Typography variant="p" component="div">
+                            Really delete message {contact.id}?
+                        </Typography>
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => {handleClose}}>Cancel</Button>
-                    <Button onClick={() => {deleteContact(id)}} autoFocus>
+                    <Button variant={`contained`} color={`primary`} onClick={() => {deleteObject()}} autoFocus>
                         Yes
                     </Button>
+                    <Button variant={`contained`} color={`secondary`} onClick={() => {handleClose()}}>No</Button>
                 </DialogActions>
             </Dialog>
         )
