@@ -12,7 +12,7 @@ export const experienceActions = experienceSlice.actions
 
 export const addExperience = (experience:Experience):ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async(dispatch,getState) :Promise<void>=>{
-        const response:Contact|ApiError = await ContactService.add(experience)
+        const response:Experience|ApiError = await ExperienceService.add(experience)
 
         if(!isApiError(response,201)) {
             toast.success('Experience added.')
@@ -33,7 +33,7 @@ export const viewExperience = (id:any):ThunkAction<void, RootState, unknown, Any
         }
 
         toast.success('Experience loaded')
-        dispatch(contactActions.setExperience(response))
+        dispatch(experienceActions.setExperience(response))
     }
 }
 
@@ -42,7 +42,7 @@ export const updateExperience = (experience:Experience):ThunkAction<void, RootSt
         const response:Experience|ApiError = await ExperienceService.update(experience)
         if(!isApiError(response,200)) {
             toast.success('Updated experience')
-            dispatch(contactActions.setExperience(response))
+            dispatch(experienceActions.setExperience(response))
         } else{
             toast.error(response.message)
         }
@@ -51,7 +51,7 @@ export const updateExperience = (experience:Experience):ThunkAction<void, RootSt
 
 export const deleteExperience = (experience:Experience):ThunkAction<void, RootState, unknown, AnyAction>=>{
     return async (dispatch,getState) :Promise<void>=>{
-        const response:boolean|ApiError = await ExperienceService.delete(contact)
+        const response:boolean|ApiError = await ExperienceService.delete(experience)
 
         if(isApiError(response,200)){
             toast.error(response.message)
