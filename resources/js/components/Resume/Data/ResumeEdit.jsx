@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react"
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
-import {viewResumeItem} from "../../../redux/actions/resumeActions";
+import {viewExperience} from "../../../redux/actions/resumeActions";
 import {CircularProgress, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
 import {Cancel, Edit, Save} from "@mui/icons-material";
 import Box from "@mui/material/Box";
-import {updateResumeItem} from "../../../redux/actions/resumeActions";
+import {updateExperience} from "../../../redux/actions/resumeActions";
 
 const ResumeEdit = () => {
     const dispatch = useAppDispatch();
@@ -17,11 +17,11 @@ const ResumeEdit = () => {
     let {id} = useParams()
 
     useEffect(() => {
-        dispatch(viewResumeItem(id))
+        dispatch(viewExperience(id))
     }, [])
 
     const submitForm = (data) => {
-        dispatch(updateResumeItem(data))
+        dispatch(updateExperience(data))
     }
 
     const showForm = () => {

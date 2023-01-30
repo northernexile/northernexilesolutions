@@ -66,3 +66,11 @@ export type ApiError = {
     data?:[],
     code?:bigint
 }
+
+export type Experience = {
+    id?:any,
+    company?:string,
+    description?:string,
+    start?:string,
+    stop?:string
+}
