@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 const ContactData = () => {
     const [open,setOpen] = useState(false)
     const [contact,setContact] = useState({})
+    const contacts = useAppSelector(state => state.contact.contacts)
     const dispatch = useAppDispatch()
 
     const columns = [
@@ -61,7 +62,7 @@ const ContactData = () => {
         }
     ];
 
-    const contacts = useAppSelector(state => state.contact.contacts)
+
 
     useEffect(() => {
         dispatch(getAllContacts())
@@ -79,6 +80,7 @@ const ContactData = () => {
 
     const deleteObject = () => {
         dispatch(deleteContact(contact))
+            .then(()=>dispatch(getAllContacts()))
         setContact({})
         setOpen(false)
     }
@@ -87,7 +89,7 @@ const ContactData = () => {
         return contacts.find((contact) => {return contact.id === id})
     }
 
-    const data = contacts.map((contact) => {
+    let data = contacts.map((contact) => {
         return {
             id: contact.id,
             name: contact.name,

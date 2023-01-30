@@ -18,7 +18,7 @@ export const addContact = (contact:Contact):ThunkAction<void, RootState, unknown
         const response:Contact|ApiError = await ContactService.add(contact.name,contact.email,contact.text)
 
         if(!isApiError(response,201)) {
-            toast.success('Added contact')
+            toast.success('Message sent successfully.')
             dispatch(contactActions.setContact(response))
         } else {
             toast.error(response.message)

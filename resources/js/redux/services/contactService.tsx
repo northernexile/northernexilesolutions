@@ -36,7 +36,5 @@ export default {
                 return error.response.data;
             })
     }
-
-
 }
 
