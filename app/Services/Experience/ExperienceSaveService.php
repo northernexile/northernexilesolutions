@@ -6,10 +6,11 @@ use App\Models\Experience;
 use App\Services\Abstracts\AbstractSaveService;
 use App\Services\Abstracts\IdentifiableInterface;
 use App\Services\Abstracts\IdentifiableTrait;
+use App\Services\Abstracts\PropertiesInterface;
 use App\Services\Abstracts\PropertiesTrait;
 use App\Services\Abstracts\SaveableTrait;
 
-class ExperienceSaveService extends AbstractSaveService implements IdentifiableInterface
+class ExperienceSaveService extends AbstractSaveService implements IdentifiableInterface,PropertiesInterface
 {
     use IdentifiableTrait;
     use PropertiesTrait;
@@ -19,7 +20,7 @@ class ExperienceSaveService extends AbstractSaveService implements IdentifiableI
      * @param bool $create
      * @return Experience|null
      */
-    public function getEntity(bool $create = true) :?Content
+    public function getEntity(bool $create = true) :?Experience
     {
         if(!is_null($this->identity)){
             $result = Experience::findOrFail($this->identity);

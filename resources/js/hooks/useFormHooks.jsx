@@ -13,6 +13,12 @@ export const useFormHooks = () =>{
         </Box>
     }
 
+    const createButton = () => {
+        return <Box display={`stack`} justifyContent={`space-between`}>
+            <Button style={{marginRight: 2}} endIcon={<Save/>} variant={`contained`} type={`submit`}>Submit</Button>
+        </Box>
+    }
+
     const editButtons = () => {
         return <>
             <Button endIcon={<Edit/>} onClick={() => toggleEditable()} variant={`contained`}
@@ -36,6 +42,7 @@ export const useFormHooks = () =>{
 
     return {
         isReadOnly,
-        buttons
+        buttons,
+        createButton
     }
 }

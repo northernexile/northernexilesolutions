@@ -1,19 +1,27 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
-import {CircularProgress, TextField} from "@mui/material";
-import {useForm} from "react-hook-form";
+import {CircularProgress} from "@mui/material";
+import {FormProvider, useForm} from "react-hook-form";
 import {addExperience} from "../../../redux/actions/resumeActions";
 import {useFormHooks} from "../../../hooks/useFormHooks"
+import InputDate from "../../../controls/InputDate";
+import Input from "../../../controls/Input";
+import MultilineInput from "../../../controls/MultilineInput";
 
 const ResumeAdd = () => {
-    const { isReadOnly,
-        buttons
+    const {
+        createButton
     } = useFormHooks()
     const dispatch = useAppDispatch();
-    const {register,handleSubmit} = useForm()
-    const experience = useAppSelector(state => state.experience.experience)
+    const methods = useForm()
+    const experience = useAppSelector(state => state.experience)
+
+    useEffect(()=>{
+       console.log(experience);
+    },[])
 
     const submitForm = (data) => {
+        console.log(data)
         dispatch(addExperience(data))
     }
 
@@ -21,37 +29,29 @@ const ResumeAdd = () => {
         return true
     }
 
-    const formRow = (name, label, property, multiline) => {
-        return (
-            <div className={`form-row`}>
-                <TextField
-                    name={`text`}
-                    className={ isReadOnly() ? `form-input form-input-text locked` : `form-input form-input-text unlocked`}
-                    fullWidth
-                    label={label}
-                    {...register(name)}
-                    defaultValue={property}
-                    inputProps={
-                        {readOnly: isReadOnly()}
-                    }
-                    rows={(multiline) ? 6 : 1}
-                    multiline={!!multiline}
-                />
-            </div>
-        )
-    }
-
     const form = () => {
-        return <form onSubmit={handleSubmit(submitForm)}>
-            {formRow('company', 'Company', experience.company, false)}
-            {formRow('name', 'Name', experience.name, false)}
-            {formRow('description', 'Description', experience.description, true)}
-            {formRow('start', 'Start date', experience.start, false)}
-            {formRow('stop', 'End date', experience.stop, false)}
-            <div className={`form-row`}>
-                {buttons()}
-            </div>
-        </form>
+        return <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(submitForm)}>
+                <div className={`form-row`}>
+                    <Input name={`company`} label={`Company`} />
+                </div>
+                <div className={`form-row`}>
+                    <Input name={`title`} label={`Title`} />
+                </div>
+                <div className={`form-row`}>
+                    <MultilineInput name={`description`} label={`Description`} />
+                </div>
+                <div className={`form-row`}>
+                    <InputDate name={`start`} label={`Start`} />
+                </div>
+                <div className={`form-row`}>
+                    <InputDate name={`stop`} label={`Stop`} />
+                </div>
+                <div className={`form-row`}>
+                    {createButton()}
+                </div>
+            </form>
+        </FormProvider>
     }
 
     return (
