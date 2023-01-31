@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
 import {viewExperience} from "../../../redux/actions/resumeActions";
 import {CircularProgress, TextField} from "@mui/material";
-import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
-import {Cancel, Edit, Save} from "@mui/icons-material";
-import Box from "@mui/material/Box";
 import {updateExperience} from "../../../redux/actions/resumeActions";
+import {useFormHooks} from "../../../hooks/useFormHooks"
 
 const ResumeEdit = () => {
+    const { isReadOnly,
+        buttons
+    } = useFormHooks()
     const dispatch = useAppDispatch();
-    const {register, handleSubmit} = useForm()
+    const {register,handleSubmit} = useForm()
     const experience = useAppSelector(state => state.experience.experience)
-    const [editing, setEditing] = useState(false)
     let {id} = useParams()
 
     useEffect(() => {
@@ -28,31 +28,8 @@ const ResumeEdit = () => {
         return !(experience.id === '')
     }
 
-    const isReadOnly = () => {
-        return editing === false
-    }
-
-    const buttons = () => {
-        return isReadOnly() ? editButtons() : submitButtons()
-    }
-
-    const toggleEditable = () => {
-        setEditing(!editing)
-    }
-
-    const editButtons = () => {
-        return <>
-            <Button endIcon={<Edit/>} onClick={() => toggleEditable()} variant={`contained`}
-                    type={`button`}>Edit</Button>
-        </>
-    }
-
-    const submitButtons = () => {
-        return <Box display={`stack`} justifyContent={`space-between`}>
-            <Button style={{marginRight: 2}} endIcon={<Save/>} variant={`contained`} type={`submit`}>Submit</Button>
-            <Button endIcon={<Cancel/>} onClick={() => toggleEditable()} variant={`contained`}
-                    type={`button`}>Cancel</Button>
-        </Box>
+    const hiddenIdInput = (id) => {
+        return <input type={`hidden`} name={`id`} value={id} {...register('id')}/>
     }
 
     const formRow = (name, label, property, multiline) => {
@@ -73,11 +50,6 @@ const ResumeEdit = () => {
                 />
             </div>
         )
-    }
-
-
-    const hiddenIdInput = (id) => {
-        return <input type={`hidden`} name={`id`} value={id} {...register('id')}/>
     }
 
     const form = () => {

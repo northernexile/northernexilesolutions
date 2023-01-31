@@ -25,6 +25,7 @@ import Messages from "./components/Dashboard/Messages/Messages";
 import ContactEdit from "./components/Contact/Data/ContactEdit";
 import MessageEdit from "./components/Dashboard/Messages/MessageEdit";
 import {ToastContainer} from "react-toastify";
+import Experience from "./components/Dashboard/Experience/Experience";
 
 
 const router = createBrowserRouter([
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/messages/:id",
                 element: <MessageEdit />
+            },
+            {
+                path:"/dashboard/experience",
+                element: <Experience />
             }
         ]
     }

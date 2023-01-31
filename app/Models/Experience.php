@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
-* @property int $id
+ * @property int $id
+ * @property string $company
+ * @property string $title
+ * @property string $description
+ * @property Carbon $start
+ * @property Carbon|null $stop
  */
 class Experience extends Model
 {
@@ -15,7 +21,7 @@ class Experience extends Model
     /**
      * @var string
      */
-    public $table = 'experience';
+    public $table = 'experiences';
 
     /**
      * @var bool
@@ -26,6 +32,8 @@ class Experience extends Model
      * @var string[]
      */
     protected $dates = [
+        'start',
+        'stop',
         'created_at',
         'updated_at'
     ];
@@ -33,6 +41,10 @@ class Experience extends Model
      * @var string[]
      */
     protected $fillable = [
-        
+        'company',
+        'title',
+        'description',
+        'start',
+        'stop'
     ];
 }

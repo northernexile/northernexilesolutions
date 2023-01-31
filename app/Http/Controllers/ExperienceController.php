@@ -38,7 +38,7 @@ class ExperienceController extends Controller
                 'Listing Experiences',
                 200,
                 [
-                    'Experiences'=>$experienceListService->getList(),
+                    'Experiences'=>$service->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {

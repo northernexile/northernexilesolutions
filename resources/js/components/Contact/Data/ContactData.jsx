@@ -62,8 +62,6 @@ const ContactData = () => {
         }
     ];
 
-
-
     useEffect(() => {
         dispatch(getAllContacts())
     }, [])
@@ -107,7 +105,7 @@ const ContactData = () => {
         }
     })
 
-    const dialog = (id) => {
+    const dialog = () => {
         return (
             <Dialog
                 open={open}

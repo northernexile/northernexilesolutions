@@ -15,7 +15,7 @@ class ExperienceSearchService extends AbstractSearchByTerm
     {
         return Experience::where(function ($query){
             return $query->where('id','=',$this->term)
-                ->orWhere('name','like','%'.$this->term.'%');
+                ->orWhere('company','like','%'.$this->term.'%');
         })->get();
     }
 }

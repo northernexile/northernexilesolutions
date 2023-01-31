@@ -42,7 +42,7 @@ export const viewContact = (id:any):ThunkAction<void, RootState, unknown, AnyAct
 
 export const updateContact = (contact:Contact):ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async (dispatch,getState) :Promise<void>=>{
-        const response:Contact|ApiError = await ContactService.update(contact.id,contact.name,contact.email,contact.text)
+        const response:Contact|ApiError = await ContactService.update(contact)
         if(!isApiError(response,200)) {
             toast.success('Updated contact')
             dispatch(contactActions.setContact(response))

@@ -1,7 +1,7 @@
 
 import React from "react";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
-import {Mail} from "@mui/icons-material";
+import {History, Mail} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 export default function Dashboard() {
 
@@ -11,6 +11,12 @@ export default function Dashboard() {
             name:'Messages',
             icon:<Mail />,
             route:'/dashboard/messages'
+        },
+        {
+            id:2,
+            name:'Experience',
+            icon:<History />,
+            route:'/dashboard/experience'
         }
     ];
 

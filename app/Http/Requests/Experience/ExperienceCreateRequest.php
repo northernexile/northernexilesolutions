@@ -12,7 +12,11 @@ class ExperienceCreateRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-          'id' => 'required'
+            'company' => 'required|string',
+            'title'=>'required|string',
+            'description'=>'required|string',
+            'start'=>'required|date',
+            'stop'=>'sometimes|date',
         ];
     }
 }
