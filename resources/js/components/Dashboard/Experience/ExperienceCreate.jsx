@@ -5,6 +5,7 @@ import {cardStyle} from "../../../snippets/cardStyle";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
+import ResumeAdd from "../../Resume/Data/ResumeAdd";
 export default function ExperienceCreate() {
     return (
         <Grid item xs={12}>
@@ -23,7 +24,7 @@ export default function ExperienceCreate() {
                     }
                 />
                 <CardContent>
-
+                    <ResumeAdd />
                 </CardContent>
             </Card>
         </Grid>
