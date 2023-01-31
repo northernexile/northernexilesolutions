@@ -72,6 +72,6 @@ export const getAllExperience = ():ThunkAction<void, RootState, unknown, AnyActi
         }
 
         toast.success('Loaded experience')
-        dispatch(experienceActions.setExperience(response))
+        dispatch(experienceActions.setExperiences(response))
     }
 }

@@ -37,8 +37,8 @@ const ResumeData = () => {
             }
         },
         {
-            name: 'description',
-            label: 'Description',
+            name: 'title',
+            label: 'Title',
             options: {
                 filter: true,
                 sort: true
@@ -98,8 +98,10 @@ const ResumeData = () => {
     let data = experiences.map((experience) => {
         return {
             id: experience.id,
-            name: experience.name,
-            created_at: Dates(experience.created_at, 'DD/MM/Y HH:mm:ss'),
+            company:experience.company,
+            title: experience.title,
+            start: Dates(experience.start, 'DD/MM/Y'),
+            stop: Dates(experience.stop, 'DD/MM/Y'),
             action: <>
                 <Link to={`/dashboard/experience/${experience.id}`}>
                     <Button style={{marginRight:4}} variant={`contained`} endIcon={<EditAttributes/>}

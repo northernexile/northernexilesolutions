@@ -1,7 +1,6 @@
 
 import Api from '../api/api'
 import {Experience} from "../types/types";
-import experience from "../types/experience";
 
 export default {
     async add(experience){
@@ -28,7 +27,7 @@ export default {
 
     async getAll(){
         return await Api().get('experience').then((response) => {
-            return response.data.data.experience
+            return response.data.data.experiences
         }).catch((error)=>{
             return error.response.data
         });
