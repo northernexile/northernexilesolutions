@@ -70,6 +70,8 @@ export type ApiError = {
 export type Experience = {
     id?:any,
     company?:string,
+
+    title?:string
     description?:string,
     start?:string,
     stop?:string

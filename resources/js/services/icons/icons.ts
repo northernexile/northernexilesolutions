@@ -22,7 +22,7 @@ import {
     faPlane,
     faCoins,
     faGlobe,
-    faPalette, faCodeCompare, faSignHanging, faCalendarWeek,faArrowCircleLeft
+    faPalette, faCodeCompare, faSignHanging, faCalendarWeek, faArrowCircleLeft, faPlus
 } from "@fortawesome/free-solid-svg-icons";
 
 const icons = [
@@ -51,7 +51,8 @@ const icons = [
     {name: 'faCodeCompare',icon:faCodeCompare},
     {name: 'faSignHanging',icon:faSignHanging},
     {name: 'faCalendarWeek',icon:faCalendarWeek},
-    {name: 'faArrowCircleLeft',icon:faArrowCircleLeft}
+    {name: 'faArrowCircleLeft',icon:faArrowCircleLeft},
+    {name: 'faPlus',icon:faPlus}
 ]
 
 const getBrandIcon = (brand) => {

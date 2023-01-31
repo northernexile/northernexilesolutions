@@ -6,8 +6,8 @@ import experience from "../types/experience";
 export default {
     async add(experience){
         const response = await Api().post('experience',{
-            name:experience.name,
             company:experience.company,
+            title:experience.title,
             description:experience.description,
             start:experience.start,
             stop:experience.stop
@@ -17,7 +17,7 @@ export default {
 
     async update(experience){
         const response = await Api().patch(`experience/${experience.id}`,{
-            name:experience.name,
+            title:experience.title,
             company:experience.company,
             description:experience.description,
             start:experience.start,
