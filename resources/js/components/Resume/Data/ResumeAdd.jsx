@@ -7,22 +7,27 @@ import {useFormHooks} from "../../../hooks/useFormHooks"
 import FormRowInput from "../../../controls/rows/FormRowInput";
 import FormRowInputDate from "../../../controls/rows/FormRowInputDate";
 import FormRowMultilineInput from "../../../controls/rows/FormRowMultilineInput";
+import {useSelector} from "react-redux";
+import {selectExperience} from "../../../redux/slices/experienceSlice";
 
 
 const ResumeAdd = () => {
+
     const {
         createButton
     } = useFormHooks()
     const dispatch = useAppDispatch();
     const methods = useForm()
-    const experience = useAppSelector(state => state.experience)
+    const experience = useSelector(selectExperience);
 
     useEffect(()=>{
        console.log(experience);
     },[])
 
     const submitForm = (data) => {
-        dispatch(addExperience(data))
+        dispatch(addExperience(data)).then((response)=>{
+            console.log(experience)
+        })
     }
 
     const showForm = () => {
@@ -32,11 +37,11 @@ const ResumeAdd = () => {
     const form = () => {
         return <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(submitForm)}>
-                <FormRowInput name={`company`} label={`Company`} defaultValue={experience.company} value={experience.company} />
-                <FormRowInput name={`title`} label={`Title`} defaultValue={experience.title} value={experience.title} />
-                <FormRowMultilineInput name={`description`} label={`Description`} defaultValue={experience.description} value={experience.description} />
-                <FormRowInputDate name={`start`} label={`Start`} />
-                <FormRowInputDate name={`stop`} label={`Stop`} />
+                <FormRowInput name={`company`} label={`Company`} control={methods.control} />
+                <FormRowInput name={`title`} label={`Title`} control={methods.control} />
+                <FormRowMultilineInput name={`description`} label={`Description`} control={methods.control} />
+                <FormRowInputDate name={`start`} label={`Start`} control={methods.control} />
+                <FormRowInputDate name={`stop`} label={`Stop`} control={methods.control} />
                 <div className={`form-row`}>
                     {createButton()}
                 </div>
