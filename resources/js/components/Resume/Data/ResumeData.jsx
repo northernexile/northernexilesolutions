@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import {Delete, EditAttributes} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
-import {getAllContacts,deleteContact} from "../../../redux/actions/contactActions";
+import {getAllExperience,deleteExperience} from "../../../redux/actions/resumeActions";
 import Dates from "../../../snippets/Dates";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,10 +13,10 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 
-const ContactData = () => {
+const ResumeData = () => {
     const [open,setOpen] = useState(false)
-    const [contact,setContact] = useState({})
-    const contacts = useAppSelector(state => state.contact.contacts)
+    const [experience,setExperience] = useState({})
+    const experiences = useAppSelector(state => state.experience.history)
     const dispatch = useAppDispatch()
 
     const columns = [
@@ -29,24 +29,32 @@ const ContactData = () => {
             }
         },
         {
-            name: 'name',
-            label: 'Name',
+            name: 'company',
+            label: 'Company',
             options: {
                 filter: true,
                 sort: true
             }
         },
         {
-            name: 'email',
-            label: 'Email',
+            name: 'title',
+            label: 'Title',
             options: {
                 filter: true,
                 sort: true
             }
         },
         {
-            name: 'created_at',
-            label: 'Created',
+            name: 'start',
+            label: 'Start',
+            options: {
+                filter: true,
+                sort: true
+            }
+        },
+        {
+            name: 'stop',
+            label: 'Stop',
             options: {
                 filter: true,
                 sort: true
@@ -63,44 +71,45 @@ const ContactData = () => {
     ];
 
     useEffect(() => {
-        dispatch(getAllContacts())
+        dispatch(getAllExperience())
     }, [])
 
     const handleOpen = (id) => {
         setOpen(true)
-        setContact(findContact(id))
+        setExperience(findExperience(id))
     }
 
     const handleClose = () => {
-        setContact({})
+        setExperience({})
         setOpen(false)
     }
 
     const deleteObject = () => {
-        dispatch(deleteContact(contact))
-            .then(()=>dispatch(getAllContacts()))
-        setContact({})
+        dispatch(deleteExperience(experience))
+            .then(()=>dispatch(getAllExperience()))
+        setExperience({})
         setOpen(false)
     }
 
-    const findContact = (id) => {
-        return contacts.find((contact) => {return contact.id === id})
+    const findExperience = (id) => {
+        return experiences.find((experience) => {return experience.id === id})
     }
 
-    let data = contacts.map((contact) => {
+    let data = experiences.map((experience) => {
         return {
-            id: contact.id,
-            name: contact.name,
-            email: contact.email,
-            created_at: Dates(contact.created_at, 'DD/MM/Y HH:mm:ss'),
+            id: experience.id,
+            company:experience.company,
+            title: experience.title,
+            start: Dates(experience.start, 'DD/MM/Y'),
+            stop: Dates(experience.stop, 'DD/MM/Y'),
             action: <>
-                <Link to={`/dashboard/messages/${contact.id}`}>
+                <Link to={`/dashboard/experience/${experience.id}`}>
                     <Button style={{marginRight:4}} variant={`contained`} endIcon={<EditAttributes/>}
-                            title={`Edit contact record id:${contact.id}`}>Edit</Button>
+                            title={`Edit experience record id:${experience.id}`}>Edit</Button>
                 </Link>
-                <Button onClick={() => {handleOpen(contact.id)}} variant={`contained`}
+                <Button onClick={() => {handleOpen(experience.id)}} variant={`contained`}
                         endIcon={<Delete />}
-                        title={`Delete contact`}>Delete</Button>
+                        title={`Delete item`}>Delete</Button>
             </>
         }
     })
@@ -119,7 +128,7 @@ const ContactData = () => {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         <Typography variant="p" component="div">
-                            Really delete message {contact.id}?
+                            Really delete experience {experience.id}?
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -140,7 +149,7 @@ const ContactData = () => {
     const table = () => {
         return (
             <MUIDataTable
-                title={"Contact form submissions"}
+                title={"Experience"}
                 data={data}
                 columns={columns}
                 options={options}
@@ -156,4 +165,4 @@ const ContactData = () => {
     )
 }
 
-export default ContactData;
+export default ResumeData;

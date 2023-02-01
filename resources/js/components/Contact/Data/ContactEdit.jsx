@@ -1,19 +1,20 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
 import {viewContact} from "../../../redux/actions/contactActions";
 import {CircularProgress, TextField} from "@mui/material";
-import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
-import {Cancel, Edit, Save} from "@mui/icons-material";
-import Box from "@mui/material/Box";
 import {updateContact} from "../../../redux/actions/contactActions";
+import {useFormHooks} from "../../../hooks/useFormHooks";
 
 const ContactEdit = () => {
+    const {
+        buttons,
+        isReadOnly
+    } = useFormHooks()
     const dispatch = useAppDispatch();
-    const {register, handleSubmit} = useForm()
+    const {register,handleSubmit} = useForm()
     const contact = useAppSelector(state => state.contact.contact)
-    let [editing, setEditing] = useState(false)
     let {id} = useParams()
 
     useEffect(() => {
@@ -26,33 +27,6 @@ const ContactEdit = () => {
 
     const showForm = () => {
         return !(contact.id === '')
-    }
-
-    const isReadOnly = () => {
-        return editing === false
-    }
-
-    const buttons = () => {
-        return isReadOnly() ? editButtons() : submitButtons()
-    }
-
-    const toggleEditable = () => {
-        setEditing(!editing)
-    }
-
-    const editButtons = () => {
-        return <>
-            <Button endIcon={<Edit/>} onClick={() => toggleEditable()} variant={`contained`}
-                    type={`button`}>Edit</Button>
-        </>
-    }
-
-    const submitButtons = () => {
-        return <Box display={`stack`} justifyContent={`space-between`}>
-            <Button style={{marginRight: 2}} endIcon={<Save/>} variant={`contained`} type={`submit`}>Submit</Button>
-            <Button endIcon={<Cancel/>} onClick={() => toggleEditable()} variant={`contained`}
-                    type={`button`}>Cancel</Button>
-        </Box>
     }
 
     const formRow = (name, label, property, multiline) => {
@@ -74,7 +48,6 @@ const ContactEdit = () => {
             </div>
         )
     }
-
 
     const hiddenIdInput = (id) => {
         return <input type={`hidden`} name={`id`} value={id} {...register('id')}/>

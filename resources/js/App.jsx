@@ -22,9 +22,11 @@ import Register from "./components/Auth/Register/Register";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./components/Dashboard/Dashboard"
 import Messages from "./components/Dashboard/Messages/Messages";
-import ContactEdit from "./components/Contact/Data/ContactEdit";
 import MessageEdit from "./components/Dashboard/Messages/MessageEdit";
 import {ToastContainer} from "react-toastify";
+import Experience from "./components/Dashboard/Experience/Experience";
+import ExperienceCreate from "./components/Dashboard/Experience/ExperienceCreate";
+import ExperienceEdit from "./components/Dashboard/Experience/ExperienceEdit";
 
 
 const router = createBrowserRouter([
@@ -78,6 +80,18 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/messages/:id",
                 element: <MessageEdit />
+            },
+            {
+                path:"/dashboard/experience",
+                element: <Experience />
+            },
+            {
+                path:"/dashboard/experience/create",
+                element:<ExperienceCreate />
+            },
+            {
+                path: "/dashboard/experience/:id",
+                element: <ExperienceEdit />
             }
         ]
     }

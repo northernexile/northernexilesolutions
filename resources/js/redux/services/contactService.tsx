@@ -8,8 +8,11 @@ export default {
         return response.data.data.contact;
     },
 
-    async update(id,name,email,text){
-        const response = await Api().patch(`contact/${id}`,{name:name,email:email,text:text})
+    async update(contact){
+        const response = await Api().patch(
+            `contact/${contact.id}`,
+            {name:contact.name,email:contact.email,text:contact.text}
+        )
         return response.data.data.contact
     },
 
@@ -36,7 +39,5 @@ export default {
                 return error.response.data;
             })
     }
-
-
 }
 
