@@ -1,69 +1,80 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import {useParams} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
-import {viewExperience} from "../../../redux/actions/resumeActions";
-import {CircularProgress, TextField} from "@mui/material";
-import {useForm} from "react-hook-form";
-import {updateExperience} from "../../../redux/actions/resumeActions";
+import {useAppDispatch} from "../../../redux/hooks/hooks";
+import {updateExperience, viewExperience} from "../../../redux/actions/resumeActions";
+import {CircularProgress} from "@mui/material";
+import {FormProvider, useForm} from "react-hook-form";
 import {useFormHooks} from "../../../hooks/useFormHooks"
+import {useSelector} from "react-redux";
+import {selectExperience} from "../../../redux/slices/experienceSlice";
+import FormRowInput from "../../../controls/rows/FormRowInput";
+import FormRowMultilineInput from "../../../controls/rows/FormRowMultilineInput";
+import FormRowInputDate from "../../../controls/rows/FormRowInputDate";
+import Identity from "../../../controls/Identity";
+
 
 const ResumeEdit = () => {
-    const { isReadOnly,
-        buttons
+    const {
+        createButton
     } = useFormHooks()
     const dispatch = useAppDispatch();
-    const {register,handleSubmit} = useForm()
-    const experience = useAppSelector(state => state.experience.experience)
+    let experience = useSelector(selectExperience)
     let {id} = useParams()
+    const [state, setState] = useState({
+        id: null,
+        title: 'Foo',
+        company:'',
+        description:'',
+        start:null,
+        stop: null,
+    });
+    const methods = useForm({defaultValues:experience});
+    const { handleSubmit, reset, control, setValue, watch,register } = methods;
+
 
     useEffect(() => {
-        dispatch(viewExperience(id))
+        dispatch(viewExperience(id)).then((data) => {
+            setState({
+                requested: true,
+            })
+        })
     }, [])
+
 
     const submitForm = (data) => {
         dispatch(updateExperience(data))
     }
 
+    const {requested} = state
+
     const showForm = () => {
-        return !(experience.id === '')
-    }
+        if(requested && experience.id !==null){
+            setValue('id',experience.id)
+            setValue('title',experience.title);
+            setValue('company',experience.company);
+            setValue('description',experience.description);
+            setValue('start',experience.start);
+            setValue('stop',experience.stop);
+            return true
+        }
 
-    const hiddenIdInput = (id) => {
-        return <input type={`hidden`} name={`id`} value={id} {...register('id')}/>
-    }
-
-    const formRow = (name, label, property, multiline) => {
-        return (
-            <div className={`form-row`}>
-                <TextField
-                    name={`text`}
-                    className={ isReadOnly() ? `form-input form-input-text locked` : `form-input form-input-text unlocked`}
-                    fullWidth
-                    label={label}
-                    {...register(name)}
-                    defaultValue={property}
-                    inputProps={
-                        {readOnly: isReadOnly()}
-                    }
-                    rows={(multiline) ? 6 : 1}
-                    multiline={!!multiline}
-                />
-            </div>
-        )
+        return false
     }
 
     const form = () => {
-        return <form onSubmit={handleSubmit(submitForm)}>
-            {hiddenIdInput(experience.id)}
-            {formRow('company', 'Company', experience.company, false)}
-            {formRow('name', 'Name', experience.name, false)}
-            {formRow('description', 'Description', experience.description, true)}
-            {formRow('start', 'Start date', experience.start, false)}
-            {formRow('stop', 'End date', experience.stop, false)}
-            <div className={`form-row`}>
-                {buttons()}
-            </div>
-        </form>
+        return <FormProvider {...form}>
+                <form onSubmit={handleSubmit(submitForm)}>
+                    <Identity name={`id`} control={control} />
+                    <FormRowInput name={`company`} label={`Company`} control={control} />
+                    <FormRowInput name={`title`} label={`Title`} control={control} />
+                    <FormRowMultilineInput name={`description`} label={`Description`} control={control} />
+                    <FormRowInputDate name={`start`} label={`Start`} control={control} />
+                    <FormRowInputDate name={`stop`} label={`Stop`} control={control} />
+                    <div className={`form-row`}>
+                        {createButton()}
+                    </div>
+                </form>
+            </FormProvider>
     }
 
     return (

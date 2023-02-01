@@ -6,6 +6,7 @@ import {Link, useParams} from "react-router-dom";
 import {cardStyle} from "../../../snippets/cardStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
+import ResumeEdit from "../../Resume/Data/ResumeEdit";
 
 export default function ExperienceEdit() {
     let id = useParams()
@@ -27,6 +28,7 @@ export default function ExperienceEdit() {
                     }
                 />
                 <CardContent>
+                    <ResumeEdit id={id} />
                 </CardContent>
             </Card>
         </Grid>

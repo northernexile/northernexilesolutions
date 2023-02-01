@@ -4,9 +4,10 @@ import {CircularProgress} from "@mui/material";
 import {FormProvider, useForm} from "react-hook-form";
 import {addExperience} from "../../../redux/actions/resumeActions";
 import {useFormHooks} from "../../../hooks/useFormHooks"
-import InputDate from "../../../controls/InputDate";
-import Input from "../../../controls/Input";
-import MultilineInput from "../../../controls/MultilineInput";
+import FormRowInput from "../../../controls/rows/FormRowInput";
+import FormRowInputDate from "../../../controls/rows/FormRowInputDate";
+import FormRowMultilineInput from "../../../controls/rows/FormRowMultilineInput";
+
 
 const ResumeAdd = () => {
     const {
@@ -21,7 +22,6 @@ const ResumeAdd = () => {
     },[])
 
     const submitForm = (data) => {
-        console.log(data)
         dispatch(addExperience(data))
     }
 
@@ -32,21 +32,11 @@ const ResumeAdd = () => {
     const form = () => {
         return <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(submitForm)}>
-                <div className={`form-row`}>
-                    <Input name={`company`} label={`Company`} />
-                </div>
-                <div className={`form-row`}>
-                    <Input name={`title`} label={`Title`} />
-                </div>
-                <div className={`form-row`}>
-                    <MultilineInput name={`description`} label={`Description`} />
-                </div>
-                <div className={`form-row`}>
-                    <InputDate name={`start`} label={`Start`} />
-                </div>
-                <div className={`form-row`}>
-                    <InputDate name={`stop`} label={`Stop`} />
-                </div>
+                <FormRowInput name={`company`} label={`Company`} defaultValue={experience.company} value={experience.company} />
+                <FormRowInput name={`title`} label={`Title`} defaultValue={experience.title} value={experience.title} />
+                <FormRowMultilineInput name={`description`} label={`Description`} defaultValue={experience.description} value={experience.description} />
+                <FormRowInputDate name={`start`} label={`Start`} />
+                <FormRowInputDate name={`stop`} label={`Stop`} />
                 <div className={`form-row`}>
                     {createButton()}
                 </div>

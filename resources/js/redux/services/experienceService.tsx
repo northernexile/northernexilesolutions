@@ -15,14 +15,17 @@ export default {
     },
 
     async update(experience){
-        const response = await Api().patch(`experience/${experience.id}`,{
+        return await Api().patch(`experience/${experience.id}`,{
             title:experience.title,
             company:experience.company,
             description:experience.description,
             start:experience.start,
             stop:experience.stop
+        }).then((response) => {
+            return response.data.data.experience
+        }).catch((error) => {
+            return error.response.data
         })
-        return response.data.data.contact
     },
 
     async getAll(){

@@ -11,7 +11,7 @@ Route::get('/',[ExperienceController::class,'index'])
 Route::get('/{id}',[ExperienceController::class,'show'])
     ->name($sectionName.'.show')
     ->middleware(['auth:sanctum']);
-Route::put('/{id}',[ExperienceController::class,'update'])
+Route::patch('/{id}',[ExperienceController::class,'update'])
     ->middleware(['auth:sanctum'])
     ->name($sectionName.'.save');
 Route::post('/',[ExperienceController::class,'create'])
