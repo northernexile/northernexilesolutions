@@ -13,9 +13,30 @@ export const SectorActions = sectorSlice.actions
 
 export const getAllSectors = ():ThunkAction<void, RootState, unknown, AnyAction>=>{
     return async(dispatch,getState) :Promise<void>=>{
-        const response:Sector[] = await SectorService.getAllSectors()
+        const response:Sector[]|ApiError = await SectorService.getAllSectors()
+
+        if(isApiError(response,200)){
+            toast.error(response.message);
+            return
+        }
+
+        toast.success('Sectors loaded')
         dispatch(SectorActions.setSectors(response))
 
+    }
+}
+
+export const addSector = (sector:Sector):ThunkAction<void, RootState, unknown, AnyAction>=>{
+    return async(dispatch,getState) :Promise<void>=>{
+        const response:Sector|ApiError = await SectorService.add(sector.name)
+
+        if(isApiError(response,201)){
+            toast.error(response.message)
+            return
+        }
+
+        SectorActions.setActiveSector(response)
+        toast.error('Sector added')
     }
 }
 

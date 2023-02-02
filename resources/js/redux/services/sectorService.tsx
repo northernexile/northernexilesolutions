@@ -4,16 +4,23 @@ import {Sector} from "../types/types";
 
 export default {
     async add(name){
-        const response = await Api().post('sectors',{name:name})
-        return response.data.data.sector;
+        return await Api().post('sectors',{name:name})
+            .then((response) => {
+                return response.data.data.sector;
+            }).catch((error) => {
+                return error.response.data
+            })
     },
 
     async update(sector){
-        const response = await Api().patch(
+        return  await Api().patch(
             `sectors/${sector.id}`,
             {name:sector.name}
-        )
-        return response.data.data.sector
+        ).then((response) => {
+            return response.data.data.sector
+        }).catch((error) => {
+            return error.response.data
+        })
     },
 
     async getAllSectors(){
