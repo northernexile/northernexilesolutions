@@ -3,8 +3,12 @@ import Api from '../api/api'
 import {Technology} from "../types/types";
 
 export default {
-    async add(name){
-        return  await Api().post('skills',{name:name})
+    async add(name,skillTypeId,description){
+        return  await Api().post('skills',{
+            name:name,
+            skill_type_id:skillTypeId,
+            description:description
+        })
             .then((response)=>{return response.data.data.skill})
             .catch((error)=>{error.response.data})
     },

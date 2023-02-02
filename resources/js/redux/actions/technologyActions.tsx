@@ -22,7 +22,11 @@ export const getAllTechnologies =():ThunkAction<void, RootState, unknown, AnyAct
 
 export const addTechnology = (technology:Technology):ThunkAction<void, RootState, unknown, AnyAction>=>{
     return async(dispatch,getState) :Promise<void>=>{
-        const response:Technology|ApiError = await TechnologyService.add(technology.name)
+        const response:Technology|ApiError = await TechnologyService.add(
+            technology.name,
+            technology.skillTypeId,
+            technology.description
+        )
 
         if(isApiError(response,201)){
             toast.error(response.message)
@@ -30,7 +34,7 @@ export const addTechnology = (technology:Technology):ThunkAction<void, RootState
         }
 
         SectorActions.setActiveSector(response)
-        toast.error('Technology added')
+        toast.success('Technology added')
     }
 }
 

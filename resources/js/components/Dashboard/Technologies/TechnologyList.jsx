@@ -8,6 +8,8 @@ import FormRowInput from "../../../controls/rows/FormRowInput";
 import {useFormHooks} from "../../../hooks/useFormHooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
+import FormRowDropdown from "../../../controls/rows/FormRowDropdown";
+import FormRowMultilineInput from "../../../controls/rows/FormRowMultilineInput";
 
 const TechnologyList = () => {
     const {createButton} = useFormHooks()
@@ -18,8 +20,6 @@ const TechnologyList = () => {
     useEffect(() => {
         handleLoad()
     }, []);
-
-    console.log(technologyTypes);
 
     const handleLoad = () => {
         dispatch(getAllTechnologies())
@@ -33,7 +33,14 @@ const TechnologyList = () => {
     }
 
     const handleCreate = (technology) => {
-        dispatch(addTechnology(technology))
+        let payload = {
+            id:null,
+            name:technology.name,
+            skillTypeId:technology.skill_type_id,
+            icon:'',
+            description:technology.description
+        }
+        dispatch(addTechnology(payload))
             .then(() => dispatch(getAllTechnologies()))
     }
 
@@ -45,6 +52,14 @@ const TechnologyList = () => {
         return <FormProvider {...form}>
             <form onSubmit={handleSubmit(submitForm)}>
                 <FormRowInput name={`name`} label={`Technology name`} control={control} />
+                <FormRowMultilineInput name={`description`} label={`Description`} control={control} />
+                <FormRowDropdown
+                    name={`skill_type_id`}
+                    label={`Type`}
+                    control={control}
+                    options={technologyTypes}
+                    placeholder={`Please select`}
+                />
                 <div className={`form-row`}>
                     {createButton()}
                 </div>

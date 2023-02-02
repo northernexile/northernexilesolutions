@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Technology\CreateTechnologyRequest;
 use App\Http\Traits\JsonResponseTrait;
 use App\Models\Skill;
+use App\Services\Skills\SkillsCreateService;
 use App\Services\Skills\SkillsListService;
 use App\Services\Skills\SkillsSearchService;
 use Illuminate\Http\JsonResponse;
@@ -41,6 +43,33 @@ class SkillsController extends Controller
             $response = $this->success('Skill found',200,['skill'=>$skill]);
         } catch (\Throwable $throwable) {
             $response = $this->failure('Could not find skill',422,['message'=>$throwable->getMessage()]);
+        } finally {
+            return $response;
+        }
+    }
+
+    public function create(
+        CreateTechnologyRequest $request,
+        SkillsCreateService $service
+    ) :JsonResponse
+    {
+        $response = null;
+        try {
+            $saved = $service->setProperties($request->all())->save();
+
+            if(!$saved) {
+                throw new \Exception('Could not save Technology');
+            }
+
+            $response = $this->success(
+                'Technology Saved',
+                200,
+                [
+                    'skill'=>$service->getEntity(false)
+                ]
+            );
+        } catch (\Throwable $throwable) {
+            $response = $this->failure('Could not create skill',422,['message'=>$throwable->getMessage()]);
         } finally {
             return $response;
         }

@@ -13,5 +13,6 @@ Route::prefix('skills')->group(function (){
 
     Route::get('/',[SkillsController::class,'index'])->name('skill.index');
     Route::get('/{id}',[SkillsController::class,'show'])->name('skill.show');
+    Route::post('/',[SkillsController::class,'create'])->name('skill.create');
     Route::get('/search/{term}',[SkillsController::class,'search'])->name('skill.search');
 });
