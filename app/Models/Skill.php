@@ -29,11 +29,6 @@ class Skill extends Model
         'skill_type_id'
     ];
 
-    /** @var string[]  */
-    protected $appends = [
-        'skillTypeId'
-    ];
-
     /**
      * @return HasMany
      */
@@ -48,13 +43,5 @@ class Skill extends Model
     public function types() :HasOne
     {
         return $this->hasOne(SkillType::class,'id','skill_type_id');
-    }
-
-    /**
-     * @return int
-     */
-    public function getSkillTypeIdAttribute() :int
-    {
-        return $this->skill_type_id;
     }
 }
