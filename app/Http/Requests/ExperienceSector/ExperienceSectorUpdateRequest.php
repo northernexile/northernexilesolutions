@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Tag;
+namespace App\Http\Requests\ExperienceSector;
 
 use App\Http\Requests\AbstractFormRequest;
 
-class TagUpdateRequest extends AbstractFormRequest
+class ExperienceSectorUpdateRequest extends AbstractFormRequest
 {
     /**
      * @return string[]
@@ -13,7 +13,8 @@ class TagUpdateRequest extends AbstractFormRequest
     {
         return [
             'id' => 'required|integer',
-            'name'=>'required|string'
+            'sector_id' => 'required|integer',
+            'experience_id' => 'required|integer',
         ];
     }
 }

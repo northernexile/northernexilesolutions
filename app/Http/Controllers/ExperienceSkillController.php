@@ -2,48 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Tag\TagDeleteRequest;
-use App\Http\Requests\Tag\TagListRequest;
-use App\Http\Requests\Tag\TagCreateRequest;
-use App\Http\Requests\Tag\TagSearchRequest;
-use App\Http\Requests\Tag\TagUpdateRequest;
-use App\Http\Requests\Tag\TagViewRequest;
+use App\Http\Requests\ExperienceSkill\ExperienceSkillDeleteRequest;
+use App\Http\Requests\ExperienceSkill\ExperienceSkillListRequest;
+use App\Http\Requests\ExperienceSkill\ExperienceSkillCreateRequest;
+use App\Http\Requests\ExperienceSkill\ExperienceSkillSearchRequest;
+use App\Http\Requests\ExperienceSkill\ExperienceSkillUpdateRequest;
+use App\Http\Requests\ExperienceSkill\ExperienceSkillViewRequest;
 use App\Http\Traits\JsonResponseTrait;
-use App\Services\Tag\TagDeleteAllService;
-use App\Services\Tag\TagDeleteService;
-use App\Services\Tag\TagListService;
-use App\Services\Tag\TagSaveService;
-use App\Services\Tag\TagSearchService;
-use App\Services\Tag\TagViewService;
+use App\Services\ExperienceSkill\ExperienceSkillDeleteAllService;
+use App\Services\ExperienceSkill\ExperienceSkillDeleteService;
+use App\Services\ExperienceSkill\ExperienceSkillListService;
+use App\Services\ExperienceSkill\ExperienceSkillSaveService;
+use App\Services\ExperienceSkill\ExperienceSkillSearchService;
+use App\Services\ExperienceSkill\ExperienceSkillViewService;
 use Illuminate\Http\JsonResponse;
 
-class TagController extends Controller
+class ExperienceSkillController extends Controller
 {
     use JsonResponseTrait;
 
         /**
-     * @param TagListRequest $request
-     * @param TagListService $service
+     * @param ExperienceSkillListRequest $request
+     * @param ExperienceSkillListService $service
      * @return JsonResponse
      */
     public function index(
-        TagListRequest $request,
-        TagListService $service
+        ExperienceSkillListRequest $request,
+        ExperienceSkillListService $service
     ) :JsonResponse
     {
         $response =null;
 
         try {
             $response = $this->success(
-                'Listing Tags',
+                'Listing Technologies',
                 200,
                 [
-                    'Tags'=>$service->getList(),
+                    'technologies'=>$service->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list Tag',
+                'Could not list Technologies',
                 422,
                 [
                     'message'=>$throwable->getMessage()
@@ -55,24 +55,24 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagViewRequest $request
-     * @param TagViewService $service
+     * @param ExperienceSkillViewRequest $request
+     * @param ExperienceSkillViewService $service
      * @return JsonResponse
      */
     public function show(
-        TagViewRequest $request,
-        TagViewService $service
+        ExperienceSkillViewRequest $request,
+        ExperienceSkillViewService $service
     ) :JsonResponse
     {
         $response =null;
 
         try {
-            $tag = $service->setIdentity($request->route()->parameter('id'))->get();
+            $technology = $service->setIdentity($request->route()->parameter('id'))->get();
 
-            $response = $this->success('Tag found',200,['Tag'=>$tag]);
+            $response = $this->success('Technology found',200,['technology'=>$technology]);
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list tag',
+                'Could not show technology',
                 422,
                 [
                     'message'=>$throwable->getMessage()
@@ -84,31 +84,31 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagCreateRequest $request
-     * @param TagSaveService $service
+     * @param ExperienceSkillCreateRequest $request
+     * @param ExperienceSkillSaveService $service
      * @return JsonResponse
      */
     public function create(
-        TagCreateRequest $request,
-        TagSaveService   $service
+        ExperienceSkillCreateRequest $request,
+        ExperienceSkillSaveService   $service
     ) :JsonResponse {
         try {
             $saved = $service->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not save Tag');
+                throw new \Exception('Could not save technology');
             }
 
             $response = $this->success(
-                'Tag Saved',
+                'ExperienceSkill Saved',
                 200,
                 [
-                    'tag'=>$service->getEntity(false)
+                    'technology'=>$service->getEntity(false)
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Error creating tag.',
+                'Error creating technology.',
                 422,
                 [
                     'message'=>$throwable->getMessage(),
@@ -121,13 +121,13 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagUpdateRequest $request
-     * @param TagSaveService $service
+     * @param ExperienceSkillUpdateRequest $request
+     * @param ExperienceSkillSaveService $service
      * @return JsonResponse
      */
     public function update(
-        TagUpdateRequest $request,
-        TagSaveService   $service
+        ExperienceSkillUpdateRequest $request,
+        ExperienceSkillSaveService   $service
     ) :JsonResponse {
         try {
             $saved = $service
@@ -135,19 +135,19 @@ class TagController extends Controller
                 ->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not update Tag');
+                throw new \Exception('Could not update technology');
             }
 
             $response = $this->success(
-                'Tag Updated',
+                'Technology Updated',
                 200,
                 [
-                    'tag'=>$service->getEntity(false)
+                    'technology'=>$service->getEntity(false)
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Error updating tag.',
+                'Error updating technology.',
                 422,
                 [
                     'message'=>$throwable->getMessage(),
@@ -160,13 +160,13 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagDeleteRequest $request
-     * @param TagDeleteService $service
+     * @param ExperienceSkillDeleteRequest $request
+     * @param ExperienceSkillDeleteService $service
      * @return JsonResponse
      */
     public function delete(
-        TagDeleteRequest $request,
-        TagDeleteService $service
+        ExperienceSkillDeleteRequest $request,
+        ExperienceSkillDeleteService $service
     ) :JsonResponse
     {
         $response = null;
@@ -177,22 +177,22 @@ class TagController extends Controller
                 throw new \Exception('Could not delete record');
             }
 
-            $response = $this->success('Tag deleted',200,['message'=>'deleted','tag'=>$request->all()]);
+            $response = $this->success('Technology deleted',200,['message'=>'deleted','technology'=>$request->all()]);
         } catch (\Throwable $throwable) {
-            $response = $this->failure('Content delete failed',422,['message'=>$throwable->getMessage()]);
+            $response = $this->failure('Technology delete failed',422,['message'=>$throwable->getMessage()]);
         } finally {
             return $response;
         }
     }
 
     /**
-     * @param TagDeleteRequest $request
-     * @param TagDeleteAllService $service
+     * @param ExperienceSkillDeleteRequest $request
+     * @param ExperienceSkillDeleteAllService $service
      * @return JsonResponse
      */
     public function deleteAll(
-        TagDeleteRequest $request,
-        TagDeleteAllService $service
+        ExperienceSkillDeleteRequest $request,
+        ExperienceSkillDeleteAllService $service
     ) :JsonResponse
     {
         $response = null;
@@ -201,10 +201,10 @@ class TagController extends Controller
             $deleted = $service->truncate();
 
             if(!$deleted){
-                throw new \Exception('Could not delete all Tags');
+                throw new \Exception('Could not delete all technologies');
             }
             $response = $this->success(
-              'Tag deleted',
+              'Technologies deleted',
               200,
               []
             );
@@ -216,26 +216,26 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagSearchRequest $request
-     * @param TagSearchService $service
+     * @param ExperienceSkillSearchRequest $request
+     * @param ExperienceSkillSearchService $service
      * @return JsonResponse
      */
     public function search(
-        TagSearchRequest $request,
-        TagSearchService $service
+        ExperienceSkillSearchRequest $request,
+        ExperienceSkillSearchService $service
     ) :JsonResponse
     {
         $response = null;
 
         try {
             $term = $request->route()->parameter('term');
-            $tag = $service->setTerm($term)->search();
+            $technologies = $service->setTerm($term)->search();
 
             $response = $this->success(
-                $tag->count().' Tag found',
+                $technologies->count().' technologies found',
                 200,
                 [
-                    'tag' =>  $tag
+                    'technologies' =>  $technologies
                 ]
             );
         } catch (\Throwable $throwable) {

@@ -2,48 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Tag\TagDeleteRequest;
-use App\Http\Requests\Tag\TagListRequest;
-use App\Http\Requests\Tag\TagCreateRequest;
-use App\Http\Requests\Tag\TagSearchRequest;
-use App\Http\Requests\Tag\TagUpdateRequest;
-use App\Http\Requests\Tag\TagViewRequest;
+use App\Http\Requests\ExperienceTag\ExperienceTagDeleteRequest;
+use App\Http\Requests\ExperienceTag\ExperienceTagListRequest;
+use App\Http\Requests\ExperienceTag\ExperienceTagCreateRequest;
+use App\Http\Requests\ExperienceTag\ExperienceTagSearchRequest;
+use App\Http\Requests\ExperienceTag\ExperienceTagUpdateRequest;
+use App\Http\Requests\ExperienceTag\ExperienceTagViewRequest;
 use App\Http\Traits\JsonResponseTrait;
-use App\Services\Tag\TagDeleteAllService;
-use App\Services\Tag\TagDeleteService;
-use App\Services\Tag\TagListService;
-use App\Services\Tag\TagSaveService;
-use App\Services\Tag\TagSearchService;
-use App\Services\Tag\TagViewService;
+use App\Services\ExperienceTag\ExperienceTagDeleteAllService;
+use App\Services\ExperienceTag\ExperienceTagDeleteService;
+use App\Services\ExperienceTag\ExperienceTagListService;
+use App\Services\ExperienceTag\ExperienceTagSaveService;
+use App\Services\ExperienceTag\ExperienceTagSearchService;
+use App\Services\ExperienceTag\ExperienceTagViewService;
 use Illuminate\Http\JsonResponse;
 
-class TagController extends Controller
+class ExperienceTagController extends Controller
 {
     use JsonResponseTrait;
 
         /**
-     * @param TagListRequest $request
-     * @param TagListService $service
+     * @param ExperienceTagListRequest $request
+     * @param ExperienceTagListService $service
      * @return JsonResponse
      */
     public function index(
-        TagListRequest $request,
-        TagListService $service
+        ExperienceTagListRequest $request,
+        ExperienceTagListService $service
     ) :JsonResponse
     {
         $response =null;
 
         try {
             $response = $this->success(
-                'Listing Tags',
+                'Listing Experience Tags',
                 200,
                 [
-                    'Tags'=>$service->getList(),
+                    'experience_tags'=>$service->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list Tag',
+                'Could not list Experience Tags',
                 422,
                 [
                     'message'=>$throwable->getMessage()
@@ -55,13 +55,13 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagViewRequest $request
-     * @param TagViewService $service
+     * @param ExperienceTagViewRequest $request
+     * @param ExperienceTagViewService $service
      * @return JsonResponse
      */
     public function show(
-        TagViewRequest $request,
-        TagViewService $service
+        ExperienceTagViewRequest $request,
+        ExperienceTagViewService $service
     ) :JsonResponse
     {
         $response =null;
@@ -69,10 +69,10 @@ class TagController extends Controller
         try {
             $tag = $service->setIdentity($request->route()->parameter('id'))->get();
 
-            $response = $this->success('Tag found',200,['Tag'=>$tag]);
+            $response = $this->success('ExperienceTag found',200,['experience_tags'=>$tag]);
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list tag',
+                'Could not find experience tag',
                 422,
                 [
                     'message'=>$throwable->getMessage()
@@ -84,31 +84,31 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagCreateRequest $request
-     * @param TagSaveService $service
+     * @param ExperienceTagCreateRequest $request
+     * @param ExperienceTagSaveService $service
      * @return JsonResponse
      */
     public function create(
-        TagCreateRequest $request,
-        TagSaveService   $service
+        ExperienceTagCreateRequest $request,
+        ExperienceTagSaveService   $service
     ) :JsonResponse {
         try {
             $saved = $service->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not save Tag');
+                throw new \Exception('Could not save experience tag');
             }
 
             $response = $this->success(
                 'Tag Saved',
                 200,
                 [
-                    'tag'=>$service->getEntity(false)
+                    'experience_tag'=>$service->getEntity(false)
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Error creating tag.',
+                'Error creating experience tag.',
                 422,
                 [
                     'message'=>$throwable->getMessage(),
@@ -121,13 +121,13 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagUpdateRequest $request
-     * @param TagSaveService $service
+     * @param ExperienceTagUpdateRequest $request
+     * @param ExperienceTagSaveService $service
      * @return JsonResponse
      */
     public function update(
-        TagUpdateRequest $request,
-        TagSaveService   $service
+        ExperienceTagUpdateRequest $request,
+        ExperienceTagSaveService   $service
     ) :JsonResponse {
         try {
             $saved = $service
@@ -135,19 +135,19 @@ class TagController extends Controller
                 ->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not update Tag');
+                throw new \Exception('Could not update Experience Tag');
             }
 
             $response = $this->success(
-                'Tag Updated',
+                'Experience Tag Updated',
                 200,
                 [
-                    'tag'=>$service->getEntity(false)
+                    'experience_tag'=>$service->getEntity(false)
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Error updating tag.',
+                'Error updating experience tag.',
                 422,
                 [
                     'message'=>$throwable->getMessage(),
@@ -160,13 +160,13 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagDeleteRequest $request
-     * @param TagDeleteService $service
+     * @param ExperienceTagDeleteRequest $request
+     * @param ExperienceTagDeleteService $service
      * @return JsonResponse
      */
     public function delete(
-        TagDeleteRequest $request,
-        TagDeleteService $service
+        ExperienceTagDeleteRequest $request,
+        ExperienceTagDeleteService $service
     ) :JsonResponse
     {
         $response = null;
@@ -177,22 +177,22 @@ class TagController extends Controller
                 throw new \Exception('Could not delete record');
             }
 
-            $response = $this->success('Tag deleted',200,['message'=>'deleted','tag'=>$request->all()]);
+            $response = $this->success('Experience Tag deleted',200,['message'=>'deleted','experience_tag'=>$request->all()]);
         } catch (\Throwable $throwable) {
-            $response = $this->failure('Content delete failed',422,['message'=>$throwable->getMessage()]);
+            $response = $this->failure('Tag delete failed',422,['message'=>$throwable->getMessage()]);
         } finally {
             return $response;
         }
     }
 
     /**
-     * @param TagDeleteRequest $request
-     * @param TagDeleteAllService $service
+     * @param ExperienceTagDeleteRequest $request
+     * @param ExperienceTagDeleteAllService $service
      * @return JsonResponse
      */
     public function deleteAll(
-        TagDeleteRequest $request,
-        TagDeleteAllService $service
+        ExperienceTagDeleteRequest $request,
+        ExperienceTagDeleteAllService $service
     ) :JsonResponse
     {
         $response = null;
@@ -201,10 +201,10 @@ class TagController extends Controller
             $deleted = $service->truncate();
 
             if(!$deleted){
-                throw new \Exception('Could not delete all Tags');
+                throw new \Exception('Could not delete all Experience Tags');
             }
             $response = $this->success(
-              'Tag deleted',
+              'Experience Tag deleted',
               200,
               []
             );
@@ -216,13 +216,13 @@ class TagController extends Controller
     }
 
     /**
-     * @param TagSearchRequest $request
-     * @param TagSearchService $service
+     * @param ExperienceTagSearchRequest $request
+     * @param ExperienceTagSearchService $service
      * @return JsonResponse
      */
     public function search(
-        TagSearchRequest $request,
-        TagSearchService $service
+        ExperienceTagSearchRequest $request,
+        ExperienceTagSearchService $service
     ) :JsonResponse
     {
         $response = null;
@@ -232,10 +232,10 @@ class TagController extends Controller
             $tag = $service->setTerm($term)->search();
 
             $response = $this->success(
-                $tag->count().' Tag found',
+                $tag->count().' Experience Tags found',
                 200,
                 [
-                    'tag' =>  $tag
+                    'experience_tag' =>  $tag
                 ]
             );
         } catch (\Throwable $throwable) {

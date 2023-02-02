@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\IndexedModelArrayTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -26,6 +27,14 @@ class Skill extends Model
         'icon',
         'skill_type_id'
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function experiences() :HasMany
+    {
+        return $this->hasMany(ExperienceSkill::class);
+    }
 
     /**
      * @return SkillType
