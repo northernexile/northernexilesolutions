@@ -16,7 +16,7 @@ export default {
         return response.data.data.sector
     },
 
-    async getAllTechnologies(){
+    async getAllSectors(){
         return await Api().get('sectors').then((response) => {
             return response.data.data.sectors
         }).catch((error)=>{
