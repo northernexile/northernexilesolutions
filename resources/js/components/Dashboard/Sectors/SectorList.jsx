@@ -3,10 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
 import {deleteSector, getAllSectors, addSector} from "../../../redux/actions/sectorActions";
 import {Chip} from "@mui/material";
 import {FormProvider, useForm} from "react-hook-form";
-import Identity from "../../../controls/Identity";
 import FormRowInput from "../../../controls/rows/FormRowInput";
-import FormRowMultilineInput from "../../../controls/rows/FormRowMultilineInput";
-import FormRowInputDate from "../../../controls/rows/FormRowInputDate";
 import {useFormHooks} from "../../../hooks/useFormHooks";
 
 const SectorList = () => {
