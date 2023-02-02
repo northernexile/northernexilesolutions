@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  * @property null|string $icon
  * @property int $skill_type_id
+ * @property int $skillTypeId
  */
 class Skill extends Model
 {
@@ -26,6 +27,11 @@ class Skill extends Model
         'name',
         'icon',
         'skill_type_id'
+    ];
+
+    /** @var string[]  */
+    protected $appends = [
+        'skillTypeId'
     ];
 
     /**
@@ -42,5 +48,13 @@ class Skill extends Model
     public function types() :HasOne
     {
         return $this->hasOne(SkillType::class,'id','skill_type_id');
+    }
+
+    /**
+     * @return int
+     */
+    public function getSkillTypeIdAttribute() :int
+    {
+        return $this->skill_type_id;
     }
 }

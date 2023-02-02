@@ -1,6 +1,7 @@
 
 import {configureStore} from '@reduxjs/toolkit';
 import {technologySlice} from './slices/technologySlice'
+import {technologyTypeSlice} from './slices/technologyTypeSlice'
 import {contentSlice} from './slices/contentSlice'
 import {pageSlice} from './slices/pageSlice'
 import {sectorSlice} from './slices/sectorSlice'
@@ -28,6 +29,7 @@ const store=configureStore(
             experienceSector:experienceSectorSlice.reducer,
             error:errorSlice.reducer,
             technology:technologySlice.reducer,
+            technologyType:technologyTypeSlice.reducer,
             content:contentSlice.reducer,
             contact:contactSlice.reducer,
             pages:pageSlice.reducer,
