@@ -6,7 +6,7 @@ export default {
 
     async getAllTechnologies(){
         return await Api().get('skills/types').then((response) => {
-            return response.data.data.skills
+            return response.data.data.skillTypes
         }).catch((error)=>{
             return error.response.data
         });
