@@ -1,6 +1,7 @@
 
 import {Technology} from "./types";
 interface InitialState  {
+    technology:Technology,
     technologies:Technology[]
 }
 

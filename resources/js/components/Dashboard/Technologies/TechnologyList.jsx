@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
 import {deleteTechnology, addTechnology, getAllTechnologies} from "../../../redux/actions/technologyActions";
+import {getAllTechnologyTypes} from "../../../redux/actions/technologySliceActions";
 import {Chip} from "@mui/material";
 import {FormProvider, useForm} from "react-hook-form";
 import FormRowInput from "../../../controls/rows/FormRowInput";
@@ -13,15 +14,16 @@ const TechnologyList = () => {
     const {control,handleSubmit} = useForm()
     const dispatch = useAppDispatch();
     const technologies = useAppSelector(state => state.technology.technologies)
-
+    const technologyTypes = useAppSelector(state => state.technologyType.technologyTypes)
     useEffect(() => {
         handleLoad()
     }, []);
 
-    console.log(technologies)
+    console.log(technologyTypes);
 
     const handleLoad = () => {
         dispatch(getAllTechnologies())
+            .then(()=>dispatch(getAllTechnologyTypes()))
         console.log(technologies)
     }
 

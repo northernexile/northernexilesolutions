@@ -1,9 +1,15 @@
 
 export type Technology = {
     id: any,
+    skillTypeId?:any,
     name: string,
     icon:string,
     description:string
+}
+
+export type TechnologyType = {
+    id?:any,
+    name?:string
 }
 
 export type Content = {

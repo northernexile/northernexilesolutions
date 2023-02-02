@@ -12,7 +12,7 @@ class SkillsListService
      * @param string $orderBy
      * @return Collection
      */
-    public function getList(array $columns = ['id','name','icon'],string $orderBy = 'id') :Collection
+    public function getList(array $columns = ['id','name','icon','skill_type_id'],string $orderBy = 'id') :Collection
     {
         return Skill::orderBy($orderBy)->get($columns);
     }
