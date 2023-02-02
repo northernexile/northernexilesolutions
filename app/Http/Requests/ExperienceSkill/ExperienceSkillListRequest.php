@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Tag;
+namespace App\Http\Requests\ExperienceSkill;
 
 use App\Http\Requests\AbstractFormRequest;
 
-class TagUpdateRequest extends AbstractFormRequest
+class ExperienceSkillListRequest extends AbstractFormRequest
 {
     /**
      * @return string[]
@@ -12,8 +12,6 @@ class TagUpdateRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer',
-            'name'=>'required|string'
         ];
     }
 }

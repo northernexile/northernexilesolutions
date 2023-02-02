@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Services\ExperienceSector;
+namespace App\Services\ExperienceSkill;
 
-use App\Models\ExperienceSector;
+use App\Models\ExperienceSkill;
 use App\Services\Abstracts\AbstractSaveService;
 use App\Services\Abstracts\IdentifiableInterface;
 use App\Services\Abstracts\IdentifiableTrait;
 use App\Services\Abstracts\PropertiesTrait;
 use App\Services\Abstracts\SaveableTrait;
 
-class ExperienceSectorSaveService extends AbstractSaveService implements IdentifiableInterface
+class ExperienceSkillSaveService extends AbstractSaveService implements IdentifiableInterface
 {
     use IdentifiableTrait;
     use PropertiesTrait;
@@ -17,14 +17,14 @@ class ExperienceSectorSaveService extends AbstractSaveService implements Identif
 
     /**
      * @param bool $create
-     * @return ExperienceSector|null
+     * @return ExperienceSkill|null
      */
-    public function getEntity(bool $create = true) :?ExperienceSector
+    public function getEntity(bool $create = true) :?ExperienceSkill
     {
         if(!is_null($this->identity)){
-            $result = ExperienceSector::findOrFail($this->identity);
+            $result = ExperienceSkill::findOrFail($this->identity);
         } else {
-            $result = ($create) ? new ExperienceSector() : null;
+            $result = ($create) ? new ExperienceSkill() : null;
         }
 
         return $result;

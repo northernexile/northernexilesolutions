@@ -56,4 +56,20 @@ class Experience extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function technologies() :HasMany
+    {
+        return $this->hasMany(ExperienceSkill::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tags() :HasMany
+    {
+        return $this->hasMany(ExperienceTag::class);
+    }
 }

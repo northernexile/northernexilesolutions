@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Services\ExperienceSector;
+namespace App\Services\ExperienceSkill;
 
-use App\Models\ExperienceSector;
+use App\Models\ExperienceSkill;
 use App\Services\Abstracts\Search\AbstractSearchByTerm;
 use Illuminate\Database\Eloquent\Collection;
 
-class ExperienceSectorSearchService extends AbstractSearchByTerm
+class ExperienceSkillSearchService extends AbstractSearchByTerm
 {
     /**
      * @return Collection
      */
     public function search(): Collection
     {
-        return ExperienceSector::where(function ($query){
+        return ExperienceSkill::where(function ($query){
             return $query->where('id','=',$this->term);
         })->get();
     }
