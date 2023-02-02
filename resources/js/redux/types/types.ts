@@ -76,3 +76,9 @@ export type Experience = {
     start?:string,
     stop?:string
 }
+
+export type Project = {
+    id?:any,
+    experienceId?:any,
+    description?:string
+}

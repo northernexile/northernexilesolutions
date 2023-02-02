@@ -1,5 +1,5 @@
 
-import {Contact, Experience} from "./types";
+import {Experience} from "./types";
 
 interface InitialState {
     experience:Experience,
