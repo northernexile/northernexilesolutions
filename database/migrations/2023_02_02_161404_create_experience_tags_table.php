@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('experience_tags', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('experience_id')->nullable(false);
+            $table->unsignedBigInteger('tag_id')->nullable(false);
+            $table->unique(['experience_id','tag_id']);
+            $table->foreign('experience_id')->references('id')->on('experiences');
+            $table->foreign('tag_id')->references('id')->on('tags');
             $table->timestamps();
         });
     }
