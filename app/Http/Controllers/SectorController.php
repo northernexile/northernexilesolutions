@@ -7,11 +7,13 @@ use App\Http\Requests\Sector\SectorDeleteRequest;
 use App\Http\Requests\Sector\SectorListRequest;
 use App\Http\Requests\Sector\SectorUpdateRequest;
 use App\Http\Traits\JsonResponseTrait;
+use App\Services\Sector\SectorInUseService;
 use App\Services\Sector\SectorViewService;
 use App\Services\Sector\SectorDeleteAllService;
 use App\Services\Sector\SectorDeleteService;
 use App\Services\Sector\SectorSaveService;
 use App\Services\Sector\SectorListService;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 class SectorController extends Controller
@@ -97,7 +99,7 @@ class SectorController extends Controller
             $saved = $service->setProperties($request->all())->save();
 
             if(!$saved){
-                throw new \Exception('Sector not created');
+                throw new Exception('Sector not created');
             }
 
             $response = $this->success(
@@ -135,7 +137,7 @@ class SectorController extends Controller
                 ->setProperties($request->all())
                 ->save();
             if(!$saved) {
-                throw new \Exception('Could not update sector');
+                throw new Exception('Could not update sector');
             }
 
             $response = $this->success(
@@ -162,19 +164,27 @@ class SectorController extends Controller
     /**
      * @param SectorDeleteRequest $request
      * @param SectorDeleteService $service
+     * @param SectorInUseService $inUseService
      * @return JsonResponse
      */
     public function delete(
         SectorDeleteRequest $request,
-        SectorDeleteService $service
+        SectorDeleteService $service,
+        SectorInUseService $inUseService
     ) :JsonResponse
     {
         $response = null;
         try {
-            $deleted = $service->setIdentity($request->route()->parameter('id'))->delete();
+            $id = $request->route()->parameter('id');
+
+            if($inUseService->setId($id)->isInUse()){
+                throw new Exception('Sector is in use on work experience, delete failed');
+            }
+
+            $deleted = $service->setIdentity($id)->delete();
 
             if(!$deleted){
-                throw new \Exception('Could not delete record');
+                throw new Exception('Could not delete record');
             }
 
             $response = $this->success('Sector deleted',200,['message'=>'deleted','Sector'=>$request->all()]);
@@ -201,7 +211,7 @@ class SectorController extends Controller
             $deleted = $service->truncate();
 
             if (!$deleted) {
-                throw new \Exception('Could not delete all sectors');
+                throw new Exception('Could not delete all sectors');
             }
             $response = $this->success(
                 'sectors deleted',
