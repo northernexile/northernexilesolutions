@@ -27,6 +27,7 @@ import {ToastContainer} from "react-toastify";
 import Experience from "./components/Dashboard/Experience/Experience";
 import ExperienceCreate from "./components/Dashboard/Experience/ExperienceCreate";
 import ExperienceEdit from "./components/Dashboard/Experience/ExperienceEdit";
+import Sectors from "./components/Dashboard/Sectors/Sectors";
 
 
 const router = createBrowserRouter([
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/experience/:id",
                 element: <ExperienceEdit />
+            },
+            {
+                path: "/dashboard/sectors",
+                element:<Sectors />
             }
         ]
     }

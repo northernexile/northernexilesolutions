@@ -16,7 +16,7 @@ export const sectorSlice = createSlice({
     name: SetSectorAction,
     initialState: initialState,
     reducers: {
-        setSector: (state,action: PayloadAction<Array<Sector>>) => {
+        setSectors: (state,action: PayloadAction<Array<Sector>>) => {
             state.sectors = action.payload
         },
         setActiveSector: (state,action: PayloadAction<Sector>) => {

@@ -82,3 +82,29 @@ export type Project = {
     experienceId?:any,
     description?:string
 }
+
+export type Tag = {
+    id?:any,
+    name?:string
+}
+
+export type ExperienceTag = {
+    id?:any,
+    tagId?:any,
+    experienceId?:any,
+}
+
+export type ExperienceTechnology = {
+    id?:any,
+    skillId?:any,
+    experienceId?:any,
+}
+
+export type ExperienceSector = {
+    id?:any,
+    sectorId?:any,
+    experienceId?:any,
+}
+
+
+

@@ -10,12 +10,20 @@ import Drawer from '@mui/material/Drawer';
 import {Link} from "react-router-dom";
 import {Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {useEffect, useState} from 'react';
-import {ContactMail, Home, LoginRounded, Person, LogoutRounded, Dashboard, Mail, History} from "@mui/icons-material";
+import {
+    ContactMail,
+    Home,
+    LoginRounded,
+    Person,
+    LogoutRounded,
+    Dashboard,
+    Mail,
+    History,
+    Factory
+} from "@mui/icons-material";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {useGetUserDetailsQuery} from "../../redux/services/authService";
 import {setCredentials, logout} from "../../redux/slices/authSlice";
-
-
 export default function ButtonAppBar() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const dispatch = useAppDispatch();
@@ -57,6 +65,12 @@ export default function ButtonAppBar() {
                         <History />
                     </ListItemIcon>
                     <Link to={`/dashboard/experience`}><ListItemText primary="Experience"/> </Link>
+                </ListItemButton>
+                <ListItemButton>
+                    <ListItemIcon>
+                        <Factory />
+                    </ListItemIcon>
+                    <Link to={`/dashboard/sectors`}><ListItemText primary="Sectors" /></Link>
                 </ListItemButton>
             </>
         }
