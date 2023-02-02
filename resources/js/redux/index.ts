@@ -13,12 +13,19 @@ import contactSlice from "./slices/contactSlice";
 import errorSlice from "./slices/errorSlice";
 import {experienceSlice} from "./slices/experienceSlice"
 import projectSlice from "./slices/projectSlice";
+import {tagSlice} from "./slices/tagSlice";
+import {experienceTechnologySlice} from "./slices/experienceTechnologySlice";
+import {experienceTagSlice} from "./slices/experienceTagSlice";
+import {experienceSectorSlice} from "./slices/experienceSectors";
 
 const store=configureStore(
     {
         reducer:{
             projects:projectSlice.reducer,
             experience:experienceSlice.reducer,
+            experienceTechnology:experienceTechnologySlice.reducer,
+            experienceTagSlice:experienceTagSlice.reducer,
+            experienceSector:experienceSectorSlice.reducer,
             error:errorSlice.reducer,
             technology:technologySlice.reducer,
             content:contentSlice.reducer,
@@ -26,6 +33,7 @@ const store=configureStore(
             pages:pageSlice.reducer,
             sectors:sectorSlice.reducer,
             company:companySlice.reducer,
+            tag:tagSlice.reducer,
             cloud:tagCloudSlice.reducer,
             services:serviceSlice.reducer,
             auth:authReducer,
