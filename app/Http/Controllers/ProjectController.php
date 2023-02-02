@@ -2,48 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]DeleteRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]ListRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]CreateRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]SearchRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]UpdateRequest;
-use App\Http\Requests\[ModuleSingular]\[ModuleSingular]ViewRequest;
+use App\Http\Requests\Project\ProjectDeleteRequest;
+use App\Http\Requests\Project\ProjectListRequest;
+use App\Http\Requests\Project\ProjectCreateRequest;
+use App\Http\Requests\Project\ProjectSearchRequest;
+use App\Http\Requests\Project\ProjectUpdateRequest;
+use App\Http\Requests\Project\ProjectViewRequest;
 use App\Http\Traits\JsonResponseTrait;
-use App\Services\[ModuleSingular]\[ModuleSingular]DeleteAllService;
-use App\Services\[ModuleSingular]\[ModuleSingular]DeleteService;
-use App\Services\[ModuleSingular]\[ModuleSingular]ListService;
-use App\Services\[ModuleSingular]\[ModuleSingular]SaveService;
-use App\Services\[ModuleSingular]\[ModuleSingular]SearchService;
-use App\Services\[ModuleSingular]\[ModuleSingular]ViewService;
+use App\Services\Project\ProjectDeleteAllService;
+use App\Services\Project\ProjectDeleteService;
+use App\Services\Project\ProjectListService;
+use App\Services\Project\ProjectSaveService;
+use App\Services\Project\ProjectSearchService;
+use App\Services\Project\ProjectViewService;
 use Illuminate\Http\JsonResponse;
 
-class [ModuleSingular]Controller extends Controller
+class ProjectController extends Controller
 {
     use JsonResponseTrait;
 
         /**
-     * @param [ModuleSingular]ListRequest $request
-     * @param [ModuleSingular]ListService $service
+     * @param ProjectListRequest $request
+     * @param ProjectListService $service
      * @return JsonResponse
      */
     public function index(
-        [ModuleSingular]ListRequest $request,
-        [ModuleSingular]ListService $service
+        ProjectListRequest $request,
+        ProjectListService $service
     ) :JsonResponse
     {
         $response =null;
 
         try {
             $response = $this->success(
-                'Listing [ModulePlural]',
+                'Listing Projects',
                 200,
                 [
-                    '[ModulePlural]'=>$service->getList(),
+                    'projects'=>$service->getListByExperienceId(
+                        $request->get('experience_id')
+                    ),
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list [ModuleSingular]',
+                'Could not list Project',
                 422,
                 [
                     'message'=>$throwable->getMessage()
@@ -55,24 +57,24 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]ViewRequest $request
-     * @param [ModuleSingular]ViewService $service
+     * @param ProjectViewRequest $request
+     * @param ProjectViewService $service
      * @return JsonResponse
      */
     public function show(
-        [ModuleSingular]ViewRequest $request,
-        [ModuleSingular]ViewService $service
+        ProjectViewRequest $request,
+        ProjectViewService $service
     ) :JsonResponse
     {
         $response =null;
 
         try {
-            $[ModuleSingularLowercase] = $service->setIdentity($request->route()->parameter('id'))->get();
+            $project = $service->setIdentity($request->route()->parameter('id'))->get();
 
-            $response = $this->success('[ModuleSingular] found',200,['[ModuleSingular]'=>$[ModuleSingularLowercase]]);
+            $response = $this->success('Project found',200,['project'=>$project]);
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list [ModuleSingularLowercase]',
+                'Could not list project',
                 422,
                 [
                     'message'=>$throwable->getMessage()
@@ -84,31 +86,31 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]CreateRequest $request
-     * @param [ModuleSingular]SaveService $service
+     * @param ProjectCreateRequest $request
+     * @param ProjectSaveService $service
      * @return JsonResponse
      */
     public function create(
-        [ModuleSingular]CreateRequest $request,
-        [ModuleSingular]SaveService   $service
+        ProjectCreateRequest $request,
+        ProjectSaveService   $service
     ) :JsonResponse {
         try {
             $saved = $service->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not save [ModuleSingular]');
+                throw new \Exception('Could not save project');
             }
 
             $response = $this->success(
-                '[ModuleSingular] Saved',
+                'Project Saved',
                 200,
                 [
-                    '[ModuleSingularLowercase]'=>$service->getEntity(false)
+                    'project'=>$service->getEntity(false)
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Error creating [ModuleSingularLowercase].',
+                'Error creating project.',
                 422,
                 [
                     'message'=>$throwable->getMessage(),
@@ -121,13 +123,13 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]UpdateRequest $request
-     * @param [ModuleSingular]SaveService $service
+     * @param ProjectUpdateRequest $request
+     * @param ProjectSaveService $service
      * @return JsonResponse
      */
     public function update(
-        [ModuleSingular]UpdateRequest $request,
-        [ModuleSingular]SaveService   $service
+        ProjectUpdateRequest $request,
+        ProjectSaveService   $service
     ) :JsonResponse {
         try {
             $saved = $service
@@ -135,19 +137,19 @@ class [ModuleSingular]Controller extends Controller
                 ->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not update [ModuleSingular]');
+                throw new \Exception('Could not update project');
             }
 
             $response = $this->success(
-                '[ModuleSingular] Updated',
+                'Project Updated',
                 200,
                 [
-                    '[ModuleSingularLowercase]'=>$service->getEntity(false)
+                    'project'=>$service->getEntity(false)
                 ]
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Error updating [ModuleSingularLowercase].',
+                'Error updating project.',
                 422,
                 [
                     'message'=>$throwable->getMessage(),
@@ -160,13 +162,13 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]DeleteRequest $request
-     * @param [ModuleSingular]DeleteService $service
+     * @param ProjectDeleteRequest $request
+     * @param ProjectDeleteService $service
      * @return JsonResponse
      */
     public function delete(
-        [ModuleSingular]DeleteRequest $request,
-        [ModuleSingular]DeleteService $service
+        ProjectDeleteRequest $request,
+        ProjectDeleteService $service
     ) :JsonResponse
     {
         $response = null;
@@ -174,25 +176,25 @@ class [ModuleSingular]Controller extends Controller
             $deleted = $service->setIdentity($request->route()->parameter('id'))->delete();
 
             if(!$deleted){
-                throw new \Exception('Could not delete record');
+                throw new \Exception('Could not delete project');
             }
 
-            $response = $this->success('[ModuleSingular] deleted',200,['message'=>'deleted','[ModuleSingularLowercase]'=>$request->all()]);
+            $response = $this->success('Project deleted',200,['message'=>'deleted','project'=>$request->all()]);
         } catch (\Throwable $throwable) {
-            $response = $this->failure('Content delete failed',422,['message'=>$throwable->getMessage()]);
+            $response = $this->failure('Project delete failed',422,['message'=>$throwable->getMessage()]);
         } finally {
             return $response;
         }
     }
 
     /**
-     * @param [ModuleSingular]DeleteRequest $request
-     * @param [ModuleSingular]DeleteAllService $service
+     * @param ProjectDeleteRequest $request
+     * @param ProjectDeleteAllService $service
      * @return JsonResponse
      */
     public function deleteAll(
-        [ModuleSingular]DeleteRequest $request,
-        [ModuleSingular]DeleteAllService $service
+        ProjectDeleteRequest $request,
+        ProjectDeleteAllService $service
     ) :JsonResponse
     {
         $response = null;
@@ -201,10 +203,10 @@ class [ModuleSingular]Controller extends Controller
             $deleted = $service->truncate();
 
             if(!$deleted){
-                throw new \Exception('Could not delete all [ModuleSingular]');
+                throw new \Exception('Could not delete all projects');
             }
             $response = $this->success(
-              '[ModuleSingular] deleted',
+              'Projects deleted',
               200,
               []
             );
@@ -216,26 +218,26 @@ class [ModuleSingular]Controller extends Controller
     }
 
     /**
-     * @param [ModuleSingular]SearchRequest $request
-     * @param [ModuleSingular]SearchService $service
+     * @param ProjectSearchRequest $request
+     * @param ProjectSearchService $service
      * @return JsonResponse
      */
     public function search(
-        [ModuleSingular]SearchRequest $request,
-        [ModuleSingular]SearchService $service
+        ProjectSearchRequest $request,
+        ProjectSearchService $service
     ) :JsonResponse
     {
         $response = null;
 
         try {
             $term = $request->route()->parameter('term');
-            $[ModuleSingularLowercase] = $service->setTerm($term)->search();
+            $project = $service->setTerm($term)->search();
 
             $response = $this->success(
-                $[ModuleSingularLowercase]->count().' [ModuleSingular] found',
+                $project->count().' project(s) found',
                 200,
                 [
-                    '[ModuleSingularLowercase]' =>  $[ModuleSingularLowercase]
+                    'projects' =>  $project
                 ]
             );
         } catch (\Throwable $throwable) {

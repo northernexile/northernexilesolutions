@@ -32,6 +32,7 @@ Route::prefix('cloud')->group(function (){
 });
 
 include 'api/experience.php';
+include 'api/project.php';
 include 'api/contact.php';
 include 'api/auth.php';
 include 'api/pages.php';

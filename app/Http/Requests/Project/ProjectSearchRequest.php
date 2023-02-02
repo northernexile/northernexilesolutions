@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\[ModuleSingular];
+namespace App\Http\Requests\Project;
 
 use App\Http\Requests\AbstractFormRequest;
 
-class [ModuleSingular]UpdateRequest extends AbstractFormRequest
+class ProjectSearchRequest extends AbstractFormRequest
 {
     /**
      * @return string[]
@@ -12,7 +12,7 @@ class [ModuleSingular]UpdateRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            [Columns]
+            'term'=>'required'
         ];
     }
 }
