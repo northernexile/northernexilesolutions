@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\[ModuleSingular];
 
-class [ModuleSingular]UpdateRequest
+use App\Http\Requests\AbstractFormRequest;
+
+class [ModuleSingular]UpdateRequest extends AbstractFormRequest
 {
     /**
      * @return string[]

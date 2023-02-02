@@ -38,7 +38,7 @@ class [ModuleSingular]Controller extends Controller
                 'Listing [ModulePlural]',
                 200,
                 [
-                    '[ModulePlural]'=>$[ModuleSingularLowercase]ListService->getList(),
+                    '[ModulePlural]'=>$service->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {
@@ -229,7 +229,7 @@ class [ModuleSingular]Controller extends Controller
 
         try {
             $term = $request->route()->parameter('term');
-            $content = $service->setTerm($term)->search();
+            $[ModuleSingularLowercase] = $service->setTerm($term)->search();
 
             $response = $this->success(
                 $[ModuleSingularLowercase]->count().' [ModuleSingular] found',

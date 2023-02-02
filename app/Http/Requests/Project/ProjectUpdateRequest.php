@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Project;
 
-class ProjectUpdateRequest
+use App\Http\Requests\AbstractFormRequest;
+
+class ProjectUpdateRequest extends AbstractFormRequest
 {
     /**
      * @return string[]

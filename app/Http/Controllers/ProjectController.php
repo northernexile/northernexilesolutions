@@ -38,7 +38,7 @@ class ProjectController extends Controller
                 'Listing Projects',
                 200,
                 [
-                    'Projects'=>$service->getListByExperienceId(
+                    'projects'=>$service->getListByExperienceId(
                         $request->get('experience_id')
                     ),
                 ]
@@ -71,7 +71,7 @@ class ProjectController extends Controller
         try {
             $project = $service->setIdentity($request->route()->parameter('id'))->get();
 
-            $response = $this->success('Project found',200,['Project'=>$project]);
+            $response = $this->success('Project found',200,['project'=>$project]);
         } catch (\Throwable $throwable) {
             $response = $this->failure(
                 'Could not list project',
@@ -98,7 +98,7 @@ class ProjectController extends Controller
             $saved = $service->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not save Project');
+                throw new \Exception('Could not save project');
             }
 
             $response = $this->success(
@@ -137,7 +137,7 @@ class ProjectController extends Controller
                 ->setProperties($request->all())->save();
 
             if(!$saved) {
-                throw new \Exception('Could not update Project');
+                throw new \Exception('Could not update project');
             }
 
             $response = $this->success(
@@ -176,12 +176,12 @@ class ProjectController extends Controller
             $deleted = $service->setIdentity($request->route()->parameter('id'))->delete();
 
             if(!$deleted){
-                throw new \Exception('Could not delete record');
+                throw new \Exception('Could not delete project');
             }
 
             $response = $this->success('Project deleted',200,['message'=>'deleted','project'=>$request->all()]);
         } catch (\Throwable $throwable) {
-            $response = $this->failure('Content delete failed',422,['message'=>$throwable->getMessage()]);
+            $response = $this->failure('Project delete failed',422,['message'=>$throwable->getMessage()]);
         } finally {
             return $response;
         }
@@ -203,10 +203,10 @@ class ProjectController extends Controller
             $deleted = $service->truncate();
 
             if(!$deleted){
-                throw new \Exception('Could not delete all Project');
+                throw new \Exception('Could not delete all projects');
             }
             $response = $this->success(
-              'Project deleted',
+              'Projects deleted',
               200,
               []
             );
@@ -231,13 +231,13 @@ class ProjectController extends Controller
 
         try {
             $term = $request->route()->parameter('term');
-            $content = $service->setTerm($term)->search();
+            $project = $service->setTerm($term)->search();
 
             $response = $this->success(
-                $project->count().' Project found',
+                $project->count().' project(s) found',
                 200,
                 [
-                    'project' =>  $project
+                    'projects' =>  $project
                 ]
             );
         } catch (\Throwable $throwable) {
