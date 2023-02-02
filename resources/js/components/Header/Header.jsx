@@ -19,7 +19,7 @@ import {
     Dashboard,
     Mail,
     History,
-    Factory
+    Factory, Code
 } from "@mui/icons-material";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {useGetUserDetailsQuery} from "../../redux/services/authService";
@@ -71,6 +71,12 @@ export default function ButtonAppBar() {
                         <Factory />
                     </ListItemIcon>
                     <Link to={`/dashboard/sectors`}><ListItemText primary="Sectors" /></Link>
+                </ListItemButton>
+                <ListItemButton>
+                    <ListItemIcon>
+                        <Code />
+                    </ListItemIcon>
+                    <Link to={`/dashboard/technologies`}><ListItemText primary="Technologies" /></Link>
                 </ListItemButton>
             </>
         }
