@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
 import {deleteTechnology, addTechnology, getAllTechnologies} from "../../../redux/actions/technologyActions";
-import {getAllTechnologyTypes} from "../../../redux/actions/technologySliceActions";
+import {getAllTechnologyTypes} from "../../../redux/actions/technologyTypeActions";
 import {Chip} from "@mui/material";
 import {FormProvider, useForm} from "react-hook-form";
 import FormRowInput from "../../../controls/rows/FormRowInput";

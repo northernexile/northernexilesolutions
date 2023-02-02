@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Technology\CreateTechnologyRequest;
+use App\Http\Requests\Technology\DeleteTechnologyRequest;
 use App\Http\Traits\JsonResponseTrait;
 use App\Models\Skill;
+use App\Services\Skills\SkillInUseService;
 use App\Services\Skills\SkillsCreateService;
+use App\Services\Skills\SkillsDeleteService;
 use App\Services\Skills\SkillsListService;
 use App\Services\Skills\SkillsSearchService;
 use Illuminate\Http\JsonResponse;
@@ -91,6 +94,49 @@ class SkillsController extends Controller
             $response = $this->success('Search complete',200,['skills'=>$skills,'count'=>$skills->count()]);
         } catch (\Throwable $throwable) {
             $response = $this->failure('Search failed',422,['message'=>$throwable->getMessage()]);
+        } finally {
+            return $response;
+        }
+    }
+
+    /**
+     * @param DeleteTechnologyRequest $request
+     * @param SkillInUseService $inUseService
+     * @return JsonResponse
+     */
+    public function delete(
+        DeleteTechnologyRequest $request,
+        SkillInUseService $inUseService,
+        SkillsDeleteService $deleteService
+    ) :JsonResponse
+    {
+        $response = null;
+
+        try {
+            $idToDelete = $request->route()->parameter('id');
+
+            if($inUseService->setId($idToDelete)->isInUse()){
+                throw new \Exception('Skill is in use');
+            }
+
+            $deleted = $deleteService->setIdentity($idToDelete)->delete();
+
+            $response = $this->success(
+                'Skill '.$idToDelete.' deleted',
+                200,
+                [
+                    'skill'=>$deleted
+                ]
+            );
+
+        } catch (\Throwable $throwable) {
+            $response = $this->failure(
+              'Delete skill',
+              433,
+              [
+                  'message'=>$throwable->getMessage()
+              ]
+            );
         } finally {
             return $response;
         }
