@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Services\Tag;
+namespace App\Services\Skills;
 
-use App\Models\Tag;
-use App\Services\Abstracts\AbstractSaveService;
+use App\Models\Skill;
 use App\Services\Abstracts\IdentifiableInterface;
 use App\Services\Abstracts\IdentifiableTrait;
+use App\Services\Abstracts\PropertiesInterface;
 use App\Services\Abstracts\PropertiesTrait;
 use App\Services\Abstracts\SaveableTrait;
 
-class TagSaveService extends AbstractSaveService implements IdentifiableInterface
+class SkillsCreateService implements IdentifiableInterface,PropertiesInterface
 {
     use IdentifiableTrait;
     use PropertiesTrait;
@@ -17,14 +17,14 @@ class TagSaveService extends AbstractSaveService implements IdentifiableInterfac
 
     /**
      * @param bool $create
-     * @return Tag|null
+     * @return Skill|null
      */
-    public function getEntity(bool $create = true) :?Tag
+    public function getEntity(bool $create = true) :?Skill
     {
         if(!is_null($this->identity)){
-            $result = Tag::findOrFail($this->identity);
+            $result = Skill::findOrFail($this->identity);
         } else {
-            $result = ($create) ? new Tag() : null;
+            $result = ($create) ? new Skill() : null;
         }
 
         return $result;
