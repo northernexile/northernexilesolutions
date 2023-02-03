@@ -6,10 +6,11 @@ use App\Models\Project;
 use App\Services\Abstracts\AbstractSaveService;
 use App\Services\Abstracts\IdentifiableInterface;
 use App\Services\Abstracts\IdentifiableTrait;
+use App\Services\Abstracts\PropertiesInterface;
 use App\Services\Abstracts\PropertiesTrait;
 use App\Services\Abstracts\SaveableTrait;
 
-class ProjectSaveService extends AbstractSaveService implements IdentifiableInterface
+class ProjectSaveService extends AbstractSaveService implements IdentifiableInterface,PropertiesInterface
 {
     use IdentifiableTrait;
     use PropertiesTrait;
@@ -19,7 +20,7 @@ class ProjectSaveService extends AbstractSaveService implements IdentifiableInte
      * @param bool $create
      * @return Project|null
      */
-    public function getEntity(bool $create = true) :?Content
+    public function getEntity(bool $create = true) :?Project
     {
         if(!is_null($this->identity)){
             $result = Project::findOrFail($this->identity);

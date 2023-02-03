@@ -16,14 +16,17 @@ export default {
             experience_id:project.experienceId,
             description:project.description
         }).then((response) => {
-            return response.data.data.experience
+            return response.data.data.project
         }).catch((error) => {
             return error.response.data
         })
     },
 
-    async getAllByExperienceId(experienceId){
-        return await Api().get('project',{params:{experience_id:experienceId}}).then((response) => {
+    async getAllByExperienceId(experience){
+        let params = {experience_id:experience.id}
+
+        return await Api().get('project',{params})
+            .then((response) => {
             return response.data.data.projects
         }).catch((error)=>{
             return error.response.data
