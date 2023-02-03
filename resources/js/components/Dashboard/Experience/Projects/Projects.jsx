@@ -16,6 +16,7 @@ const Projects = () => {
     const methods = useForm();
     const { handleSubmit, reset, control, setValue, watch,register } = methods;
     const projects = useAppSelector(state => state.projects.projects)
+    const [editingProject,setEditingProject] = useState({id:null})
     const [editing, setEditing] = useState(false);
 
 
@@ -23,6 +24,14 @@ const Projects = () => {
         setValue('experienceId',experience.id)
         dispatch(getAllProjectsForExperience(experience))
     },[])
+
+    const handleProjectDelete = (id) => {
+        console.log(id)
+    }
+
+    const handleProjectEdit = (id) => {
+        console.log(id)
+    }
 
     const projectList = () => {
         return (
@@ -44,8 +53,8 @@ const Projects = () => {
                             <TableCell>{project.id}</TableCell>
                             <TableCell>{project.description}</TableCell>
                             <TableCell>
-                                <IconButton style={{marginRight:3}}><Edit /></IconButton>
-                                <IconButton><Delete /></IconButton>
+                                <IconButton onClick={() => handleProjectEdit(project.id)} style={{marginRight:3}}><Edit /></IconButton>
+                                <IconButton onClick={() => handleProjectDelete(project.id)}><Delete /></IconButton>
                             </TableCell>
                         </TableRow>
                     ))}
