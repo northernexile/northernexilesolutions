@@ -29,6 +29,12 @@ export default function Dashboard() {
             name:'Technologies',
             icon:<Code />,
             route: '/dashboard/technologies'
+        },
+        {
+            id:5,
+            name:'Tags',
+            icon:<Label />,
+            route:'/dashboard/tags'
         }
     ];
 

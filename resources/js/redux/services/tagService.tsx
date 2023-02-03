@@ -3,8 +3,8 @@ import Api from '../api/api'
 import {Tag} from "../types/types";
 
 export default {
-    async add(name){
-        const response = await Api().post('tag',{name:name})
+    async add(tag:Tag){
+        const response = await Api().post('tag',tag)
         return response.data.data.tag;
     },
 
