@@ -29,6 +29,7 @@ import ExperienceCreate from "./components/Dashboard/Experience/ExperienceCreate
 import ExperienceEdit from "./components/Dashboard/Experience/ExperienceEdit";
 import Sectors from "./components/Dashboard/Sectors/Sectors";
 import Technologies from "./components/Dashboard/Technologies/Technologies";
+import Tags from "./components/Dashboard/Tags/Tags";
 
 
 const router = createBrowserRouter([
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/technologies",
                 element:<Technologies />
+            },
+            {
+                path: "/dashboard/tags",
+                element: <Tags />
             }
         ]
     }
