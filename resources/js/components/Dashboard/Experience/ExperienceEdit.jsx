@@ -3,7 +3,7 @@
 import React from "react";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import {Link, useParams} from "react-router-dom";
-import {cardStyle} from "../../../snippets/cardStyle";
+import {cardStyle, secondCardStyle} from "../../../snippets/cardStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
 import ResumeEdit from "../../Resume/Data/ResumeEdit";
@@ -32,12 +32,36 @@ export default function ExperienceEdit() {
                     <ResumeEdit id={id} />
                 </CardContent>
             </Card>
-            <Card elevation={2} style={cardStyle}>
+            <Card elevation={2} style={secondCardStyle}>
                 <CardHeader
                     className={`title-bar`}
                     title={`Projects`} />
                 <CardContent>
                     <Projects experienceId={id} />
+                </CardContent>
+            </Card>
+            <Card elevation={2} style={secondCardStyle}>
+                <CardHeader
+                    className={`title-bar`}
+                    title={`Technologies`} />
+                <CardContent>
+
+                </CardContent>
+            </Card>
+            <Card elevation={2} style={secondCardStyle}>
+                <CardHeader
+                    className={`title-bar`}
+                    title={`Sectors`} />
+                <CardContent>
+
+                </CardContent>
+            </Card>
+            <Card elevation={2} style={secondCardStyle}>
+                <CardHeader
+                    className={`title-bar`}
+                    title={`Tags`} />
+                <CardContent>
+
                 </CardContent>
             </Card>
         </Grid>
