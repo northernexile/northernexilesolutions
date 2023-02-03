@@ -175,7 +175,9 @@ class JsonTableImporter implements UsesTableInterface
             throw new \Exception(JsonTableImporter::NOTHING_TO_IMPORT);
         }
 
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table($this->tableName)->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         foreach ($contents as $item){
             $itemArray = get_object_vars($item);

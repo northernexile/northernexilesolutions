@@ -48,3 +48,16 @@ body{
     max-width: 200px;
     margin:5px;
 }
+
+.table{
+    table-layout: fixed;
+    th:first-child{
+        width:10%
+    }
+    th:nth-child(2){
+        width:77%;
+    }
+    th:last-child{
+        width:35%
+    }
+}
