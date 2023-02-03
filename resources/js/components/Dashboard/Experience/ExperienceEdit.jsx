@@ -7,6 +7,7 @@ import {cardStyle} from "../../../snippets/cardStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
 import ResumeEdit from "../../Resume/Data/ResumeEdit";
+import Projects from "./Projects/Projects";
 
 export default function ExperienceEdit() {
     let id = useParams()
@@ -29,6 +30,14 @@ export default function ExperienceEdit() {
                 />
                 <CardContent>
                     <ResumeEdit id={id} />
+                </CardContent>
+            </Card>
+            <Card elevation={2} style={cardStyle}>
+                <CardHeader
+                    className={`title-bar`}
+                    title={`Projects`} />
+                <CardContent>
+                    <Projects experienceId={id} />
                 </CardContent>
             </Card>
         </Grid>

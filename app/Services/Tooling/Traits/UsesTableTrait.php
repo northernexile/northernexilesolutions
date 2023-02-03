@@ -5,6 +5,7 @@ namespace App\Services\Tooling\Traits;
 use App\Services\Tooling\Export\JsonTableExporter;
 use App\Services\Tooling\Interfaces\UsesTableInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 trait UsesTableTrait
 {
@@ -30,12 +31,12 @@ trait UsesTableTrait
      */
     private function exists() :bool
     {
-        $exists = DB::table($this->tableName)->exists();
+        $exists = Schema::hasTable($this->tableName);
 
         if(!$exists){
             throw new \Exception(UsesTableInterface::TABLE_NOT_FOUND);
         }
 
-        return $exists;
+        return true;
     }
 }
