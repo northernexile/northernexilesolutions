@@ -2,7 +2,8 @@ import React from "react";
 import {Controller} from "react-hook-form";
 import {TextField} from "@mui/material";
 
-export const FormRowInput = ({name, label,control}) => {
+export const FormRowInput = ({name, label,control,id}) => {
+    const identity = id===undefined ? name : id
     return (
         <div className={`form-row`}>
             <Controller
@@ -22,6 +23,7 @@ export const FormRowInput = ({name, label,control}) => {
                         label={label}
                         fullWidth
                         className={`form-input form-input-text unlocked`}
+                        id={identity}
                     />
                 )}
             />

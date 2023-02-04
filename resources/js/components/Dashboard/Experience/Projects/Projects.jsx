@@ -1,8 +1,8 @@
 
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../../redux/hooks/hooks";
-import {addProject, getAllProjectsForExperience} from "../../../../redux/actions/projectActions";
+import {addProject, getAllProjectsForExperience, updateProject} from "../../../../redux/actions/projectActions";
 import {Alert, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import Button from "@mui/material/Button";
 import {Add, Cancel, Delete, Edit, Save} from "@mui/icons-material";
@@ -10,14 +10,15 @@ import {FormProvider, useForm} from "react-hook-form";
 import FormRowInput from "../../../../controls/rows/FormRowInput";
 import Identity from "../../../../controls/Identity";
 import IconButton from "@mui/material/IconButton";
+
 const Projects = () => {
     let experience = useParams();
     const dispatch = useAppDispatch()
     const methods = useForm();
-    const { handleSubmit, reset, control, setValue, watch,register } = methods;
+    const { handleSubmit, control, setValue} = methods;
     const projects = useAppSelector(state => state.projects.projects)
-    const [editingProject,setEditingProject] = useState({id:null})
     const [editing, setEditing] = useState(false);
+    const [editingItem,setEditingItem] = useState(null)
 
 
     useEffect(()=>{
@@ -30,7 +31,48 @@ const Projects = () => {
     }
 
     const handleProjectEdit = (id) => {
-        console.log(id)
+        setEditingItem(id)
+    }
+
+    const handleProjectEditSave = (id) =>{
+        let editDescriptionValue = document.getElementById('description').value
+
+        const payload = {
+            id:id,
+            description:editDescriptionValue
+        }
+
+        submitUpdate(payload)
+    }
+
+    const submitUpdate = (data) => {
+        dispatch(updateProject(data))
+            .then(() => {
+                setEditingItem(null)
+                dispatch(getAllProjectsForExperience(experience))
+            })
+    }
+
+    const projectDescription = (id,description) => {
+        setValue('description',description)
+        return (parseInt(editingItem) === parseInt(id))
+            ? <FormProvider {...methods}>
+                <form ref={editForm}  onSubmit={handleSubmit(submitUpdate)}>
+                    <FormRowInput id={`description`} name={'descriptionEdit'} label={`description`} control={control} />
+                </form>
+        </FormProvider>
+
+            : description
+    }
+
+    const saveEdit = (id) => {
+        return (parseInt(editingItem) === parseInt(id))
+            ? <IconButton onClick={() => handleProjectEditSave(id)} style={{marginRight:3}}>
+                <Save />
+              </IconButton>
+            : <IconButton onClick={() => handleProjectEdit(id)} style={{marginRight:3}}>
+                <Edit />
+            </IconButton>
     }
 
     const projectList = () => {
@@ -51,9 +93,9 @@ const Projects = () => {
                             key={project.id}
                         >
                             <TableCell>{project.id}</TableCell>
-                            <TableCell>{project.description}</TableCell>
+                            <TableCell>{projectDescription(project.id,project.description)}</TableCell>
                             <TableCell>
-                                <IconButton onClick={() => handleProjectEdit(project.id)} style={{marginRight:3}}><Edit /></IconButton>
+                                {saveEdit(project.id)}
                                 <IconButton onClick={() => handleProjectDelete(project.id)}><Delete /></IconButton>
                             </TableCell>
                         </TableRow>
@@ -74,9 +116,16 @@ const Projects = () => {
     }
 
     const createForm = () => {
+
         return (
-            (editing) ? <FormRowInput control={control} name={`description`} label={`Project description`} />:<></>
+            (editing)
+                ? editableRow()
+                :<></>
         )
+    }
+
+    const editableRow = () => {
+        return (<FormRowInput control={control} name={`description`} label={`Project description`} />)
     }
 
     const createProject = (data) => {
@@ -129,6 +178,14 @@ const Projects = () => {
 
             </>
         )
+    }
+
+    const handleClose = () => {
+
+    }
+
+    const deleteObject = () => {
+
     }
 
 
