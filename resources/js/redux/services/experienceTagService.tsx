@@ -19,6 +19,17 @@ export default {
         return response.data.data.experience_tag
     },
 
+    async toggle(experienceId,tagId){
+        return await Api().post(
+            `experience/tag/toggle/`,
+            {experience_id:experienceId,skill_id:tagId}
+        ).then((response)=>{
+            return response.data.data.technology
+        }).catch((error) => {
+            return error.response.data
+        })
+    },
+
     async getAll(){
         return await Api().get('experience/tag').then((response) => {
             return response.data.data.experience_tags

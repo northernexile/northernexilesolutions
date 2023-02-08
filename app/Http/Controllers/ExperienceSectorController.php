@@ -6,6 +6,7 @@ use App\Http\Requests\ExperienceSector\ExperienceSectorDeleteRequest;
 use App\Http\Requests\ExperienceSector\ExperienceSectorListRequest;
 use App\Http\Requests\ExperienceSector\ExperienceSectorCreateRequest;
 use App\Http\Requests\ExperienceSector\ExperienceSectorSearchRequest;
+use App\Http\Requests\ExperienceSector\ExperienceSectorToggleRequest;
 use App\Http\Requests\ExperienceSector\ExperienceSectorUpdateRequest;
 use App\Http\Requests\ExperienceSector\ExperienceSectorViewRequest;
 use App\Http\Traits\JsonResponseTrait;
@@ -14,6 +15,7 @@ use App\Services\ExperienceSector\ExperienceSectorDeleteService;
 use App\Services\ExperienceSector\ExperienceSectorListService;
 use App\Services\ExperienceSector\ExperienceSectorSaveService;
 use App\Services\ExperienceSector\ExperienceSectorSearchService;
+use App\Services\ExperienceSector\ExperienceSectorToggleService;
 use App\Services\ExperienceSector\ExperienceSectorViewService;
 use Illuminate\Http\JsonResponse;
 
@@ -240,6 +242,42 @@ class ExperienceSectorController extends Controller
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure('Search failed',422,['message'=>$throwable->getMessage()]);
+        } finally {
+            return $response;
+        }
+    }
+
+    /**
+     * @param ExperienceSectorToggleRequest $request
+     * @param ExperienceSectorToggleService $service
+     * @return JsonResponse
+     */
+    public function toggle(
+        ExperienceSectorToggleRequest $request,
+        ExperienceSectorToggleService $service
+    ) :JsonResponse
+    {
+        $response = null;
+
+        try {
+            $result = $service
+                ->setExperienceId($request->get('experience_id'))
+                ->setSectorId($request->get('sector_id'))
+                ->toggle();
+
+            $response = $this->success(
+              'Toggled experience sector',
+              200,
+              [
+                  'sector'=>$result
+              ]
+            );
+        } catch (\Throwable $throwable) {
+            $response = $this->failure(
+                'Couldnt get tags for experience',
+                422,
+                ['message'=>$throwable->getMessage()]
+            );
         } finally {
             return $response;
         }

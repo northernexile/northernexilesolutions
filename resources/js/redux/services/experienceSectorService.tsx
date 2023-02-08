@@ -19,6 +19,17 @@ export default {
         return response.data.data.experience_sector
     },
 
+    async toggle(experienceId,sectorId){
+        return await Api().post(
+            `experience/sectors/toggle/`,
+            {experience_id:experienceId,sector_id:sectorId}
+        ).then((response)=>{
+            return response.data.data.sector
+        }).catch((error) => {
+            return error.response.data
+        })
+    },
+
     async getAll(){
         return await Api().get('experience/sectors').then((response) => {
             return response.data.data.experience_sectors

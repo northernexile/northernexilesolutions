@@ -6,6 +6,7 @@ use App\Http\Requests\ExperienceTag\ExperienceTagDeleteRequest;
 use App\Http\Requests\ExperienceTag\ExperienceTagListRequest;
 use App\Http\Requests\ExperienceTag\ExperienceTagCreateRequest;
 use App\Http\Requests\ExperienceTag\ExperienceTagSearchRequest;
+use App\Http\Requests\ExperienceTag\ExperienceTagToggleRequest;
 use App\Http\Requests\ExperienceTag\ExperienceTagUpdateRequest;
 use App\Http\Requests\ExperienceTag\ExperienceTagViewRequest;
 use App\Http\Traits\JsonResponseTrait;
@@ -14,6 +15,7 @@ use App\Services\ExperienceTag\ExperienceTagDeleteService;
 use App\Services\ExperienceTag\ExperienceTagListService;
 use App\Services\ExperienceTag\ExperienceTagSaveService;
 use App\Services\ExperienceTag\ExperienceTagSearchService;
+use App\Services\ExperienceTag\ExperienceTagToggleService;
 use App\Services\ExperienceTag\ExperienceTagViewService;
 use Illuminate\Http\JsonResponse;
 
@@ -240,6 +242,38 @@ class ExperienceTagController extends Controller
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure('Search failed',422,['message'=>$throwable->getMessage()]);
+        } finally {
+            return $response;
+        }
+    }
+
+    /**
+     * @param ExperienceTagToggleRequest $request
+     * @param ExperienceTagToggleService $service
+     * @return JsonResponse
+     */
+    public function toggle(
+        ExperienceTagToggleRequest $request,
+        ExperienceTagToggleService $service
+    ) :JsonResponse
+    {
+        $response = null;
+
+        try {
+            $result = $service
+                ->setExperienceId($request->get('experience_id'))
+                ->setTagId($request->get('tag_id'))
+                ->toggle();
+
+            $response = $this->success('Toggled item',200,['tag'=>$result]);
+        } catch (\Throwable $throwable) {
+            $response = $this->failure(
+                'Could not toggle tag for experience',
+                422,
+                [
+                    'message'=>$throwable->getMessage()
+                ]
+            );
         } finally {
             return $response;
         }

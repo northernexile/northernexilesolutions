@@ -1,5 +1,5 @@
 
-import {ApiError, ExperienceTag} from "../types/types";
+import {ApiError, ExperienceTag, ExperienceTechnology} from "../types/types";
 import {ThunkAction} from "@reduxjs/toolkit";
 import {RootState} from "../index";
 import {AnyAction} from "redux";
@@ -7,6 +7,8 @@ import ExperienceTagService from "../services/experienceTagService";
 import experienceTagSlice from "../slices/experienceTagSlice";
 import isApiError from "../../snippets/isApiError";
 import {toast} from "react-toastify";
+import ExperienceTechnologyService from "../services/experienceTechnologyService";
+import {experienceTechnologyActions} from "./experienceTechnologyActions";
 
 export const experienceTagActions = experienceTagSlice.actions
 
@@ -20,6 +22,20 @@ export const addExperienceTag = (experienceTag:ExperienceTag):ThunkAction<void, 
         } else {
             toast.error(response.message)
         }
+    }
+}
+
+export const toggleExperienceTag = (experienceId:any,tagId:any):ThunkAction<void, RootState, unknown, AnyAction>=>{
+    return async (dispatch,getState) :Promise<void>=>{
+        const response:ExperienceTag|ApiError = await ExperienceTechnologyService.toggle(experienceId,tagId)
+
+        if(isApiError(response,200)) {
+            toast.error(response.message)
+            return
+        }
+
+        toast.success('Experience Tag loaded')
+        dispatch(experienceTagActions.setTag(response))
     }
 }
 
