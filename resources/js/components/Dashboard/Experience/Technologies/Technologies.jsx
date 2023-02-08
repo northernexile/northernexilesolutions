@@ -16,15 +16,13 @@ const Technologies = () => {
         getAssigned()
     },[])
 
-    console.log(technologies)
-    console.log(assigned)
-
     const getTechnologies = () => {
         dispatch(getAllTechnologies())
     }
 
     const getAssigned = () => {
-        dispatch(getAllExperienceTechnologies(experience)).then(() => {getTechnologies()})
+        dispatch(getAllExperienceTechnologies(experience))
+            .then(() => {getTechnologies()})
     }
 
     const isSelected = (technologyId) => {
