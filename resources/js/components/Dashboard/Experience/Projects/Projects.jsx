@@ -22,7 +22,6 @@ const Projects = () => {
     const deleteProject = (id) => {
         setDeletingId(id)
         setOpen(true)
-        console.log(open)
     }
 
     const projectList = () => {
@@ -45,13 +44,11 @@ const Projects = () => {
     }
 
     const closeDialog = () => {
-        console.log('closing')
         setDeletingId(null)
         setOpen(false)
     }
 
     const deleteItem = () => {
-        console.log(deletingId)
         setOpen(false)
         const project = {
             id:deletingId
