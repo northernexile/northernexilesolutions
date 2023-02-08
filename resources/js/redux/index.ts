@@ -25,7 +25,7 @@ const store=configureStore(
             projects:projectSlice.reducer,
             experience:experienceSlice.reducer,
             experienceTechnology:experienceTechnologySlice.reducer,
-            experienceTagSlice:experienceTagSlice.reducer,
+            experienceTag:experienceTagSlice.reducer,
             experienceSector:experienceSectorSlice.reducer,
             error:errorSlice.reducer,
             technology:technologySlice.reducer,

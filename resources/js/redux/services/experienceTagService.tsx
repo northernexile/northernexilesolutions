@@ -32,7 +32,7 @@ export default {
 
     async getAll(){
         return await Api().get('experience/tag').then((response) => {
-            return response.data.data.experience_tags
+            return response.data.data.experienceTags
         }).catch((error)=>{
             return error.response.data
         });

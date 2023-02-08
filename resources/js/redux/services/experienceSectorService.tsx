@@ -4,7 +4,7 @@ import {ExperienceSector} from "../types/types";
 
 export default {
     async add(experienceSector){
-        const response = await Api().post('experience/sectors',{
+        const response = await Api().post('experience/sector',{
             experience_id:experienceSector.experienceId,
             sector_id:experienceSector.sectorId
         })
@@ -13,7 +13,7 @@ export default {
 
     async update(experienceSector){
         const response = await Api().patch(
-            `experience/sectors/${experienceSector.id}`,
+            `experience/sector/${experienceSector.id}`,
             {experience_id:experienceSector.experienceId,sector_id:experienceSector.sectorId}
         )
         return response.data.data.experience_sector
@@ -21,7 +21,7 @@ export default {
 
     async toggle(experienceId,sectorId){
         return await Api().post(
-            `experience/sectors/toggle/`,
+            `experience/sector/toggle/`,
             {experience_id:experienceId,sector_id:sectorId}
         ).then((response)=>{
             return response.data.data.sector
@@ -31,14 +31,14 @@ export default {
     },
 
     async getAll(){
-        return await Api().get('experience/sectors').then((response) => {
-            return response.data.data.experience_sectors
+        return await Api().get('experience/sector').then((response) => {
+            return response.data.data.experienceSectors
         }).catch((error)=>{
             return error.response.data
         });
     },
     async getById(id){
-        return await Api().get(`experience/sectors/${id}`).then((response)=>{
+        return await Api().get(`experience/sector/${id}`).then((response)=>{
             return response.data.data.experience_sector;
         }).catch((error) => {
             return error.response.data
@@ -46,7 +46,7 @@ export default {
 
     },
     async delete(experienceSector:ExperienceSector){
-        return  await Api().delete(`experience/sectors/${experienceSector.id}`)
+        return  await Api().delete(`experience/sector/${experienceSector.id}`)
             .then((response) => {
                 return response.data.success
             }).catch((error) => {
