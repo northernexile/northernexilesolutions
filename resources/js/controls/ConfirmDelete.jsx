@@ -7,7 +7,23 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import React from "react";
 
-const ConfirmDelete = (title,identity,open,handleClose = ()=>{},handleDelete = ()=>{}) => {
+const ConfirmDelete = (params) => {
+    const title = params.title
+    const identity = params.identity
+    let open = params.open
+    const handleClose = params.handleClose
+    const handleDelete = params.handleDelete
+
+    const close = () => {
+        open = false
+        handleClose()
+    }
+
+    const deleteItem = () => {
+        open = false
+        handleDelete()
+    }
+
     return (
         <Dialog
             open={open}
@@ -16,20 +32,20 @@ const ConfirmDelete = (title,identity,open,handleClose = ()=>{},handleDelete = (
             aria-describedby="alert-dialog-description"
         >
             <DialogTitle>
-                {"Delete Message"}
+                {title}
             </DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
                     <Typography variant="p" component="div">
-                        Really delete message {identity}?
+                        Really delete item id: {identity}?
                     </Typography>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button variant={`contained`} color={`primary`} onClick={() => {handleDelete}} autoFocus>
+                <Button variant={`contained`} color={`primary`} onClick={() => deleteItem()} autoFocus>
                     Yes
                 </Button>
-                <Button variant={`contained`} color={`secondary`} onClick={() => {handleClose}}>No</Button>
+                <Button variant={`contained`} color={`secondary`} onClick={() => close()}>No</Button>
             </DialogActions>
         </Dialog>
     )
