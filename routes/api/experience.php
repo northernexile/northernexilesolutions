@@ -15,7 +15,9 @@ Route::prefix('experience')->group(function ($request) use ($sectionName) {
         Route::get('/', [ExperienceSectorController::class, 'index'])->name($sectionName . $subSectionName . '.index');
         Route::get('/{id}', [ExperienceSectorController::class, 'show'])->name($sectionName . $subSectionName . '.show');
         Route::put('/{id}', [ExperienceSectorController::class, 'update'])->name($sectionName . $subSectionName . '.save');
-        Route::post('/{id}', [ExperienceSectorController::class, 'create'])->name($sectionName . $subSectionName . '.save');
+        Route::post('/toggle',[ExperienceSectorController::class,'toggle'])
+            ->name($sectionName . $subSectionName . '.toggle');
+        Route::post('/', [ExperienceSectorController::class, 'create'])->name($sectionName . $subSectionName . '.save');
         Route::delete('/', [ExperienceSectorController::class, 'deleteAll'])->name($sectionName . $subSectionName . '.delete.all');
         Route::delete('/{id}', [ExperienceSectorController::class, 'delete'])->name($sectionName . $subSectionName . '.delete');
         Route::get('/search/{term}', [ExperienceSectorController::class, 'search'])->name($sectionName . $subSectionName . '.search');
@@ -27,10 +29,13 @@ Route::prefix('experience')->group(function ($request) use ($sectionName) {
         Route::get('/', [ExperienceSkillController::class, 'index'])->name($sectionName . $subSectionName . '.index');
         Route::get('/{id}', [ExperienceSkillController::class, 'show'])->name($sectionName . $subSectionName . '.show');
         Route::put('/{id}', [ExperienceSkillController::class, 'update'])->name($sectionName . $subSectionName . '.save');
+        Route::post('/toggle',[ExperienceSkillController::class,'toggle'])
+            ->name($sectionName . $subSectionName . '.toggle');
         Route::post('/{id}', [ExperienceSkillController::class, 'create'])->name($sectionName . $subSectionName . '.save');
         Route::delete('/', [ExperienceSkillController::class, 'deleteAll'])->name($sectionName . $subSectionName . '.delete.all');
         Route::delete('/{id}', [ExperienceSkillController::class, 'delete'])->name($sectionName . $subSectionName . '.delete');
-        Route::get('/search/{term}', [ExperienceSkillController::class, 'search'])->name($sectionName . $subSectionName . '.search');
+        Route::get('/search/{term}', [ExperienceSkillController::class, 'search'])
+            ->name($sectionName . $subSectionName . '.search');
     });
 
     Route::prefix('tag')->middleware(['auth:sanctum','owner'])->group(function ($request) use($sectionName){
@@ -38,7 +43,9 @@ Route::prefix('experience')->group(function ($request) use ($sectionName) {
         Route::get('/',[ExperienceTagController::class,'index'])->name($sectionName.$subSectionName.'.index');
         Route::get('/{id}',[ExperienceTagController::class,'show'])->name($sectionName.$subSectionName.'.show');
         Route::put('/{id}',[ExperienceTagController::class,'update'])->name($sectionName.$subSectionName.'.save');
-        Route::post('/{id}',[ExperienceTagController::class,'create'])->name($sectionName.$subSectionName.'.save');
+        Route::post('/toggle',[ExperienceTagController::class,'toggle'])
+            ->name($sectionName . $subSectionName . '.toggle');
+        Route::post('/}',[ExperienceTagController::class,'create'])->name($sectionName.$subSectionName.'.save');
         Route::delete('/',[ExperienceTagController::class,'deleteAll'])->name($sectionName.$subSectionName.'.delete.all');
         Route::delete('/{id}',[ExperienceTagController::class,'delete'])->name($sectionName.$subSectionName.'.delete');
         Route::get('/search/{term}',[ExperienceTagController::class,'search'])->name($sectionName.$subSectionName.'.search');

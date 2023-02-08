@@ -4,11 +4,14 @@ import {Experience, Project} from "../types/types";
 
 export default {
     async add(project){
-        const response = await Api().post('project',{
+        return  await Api().post('project',{
             experience_id:project.experienceId,
             description:project.description
+        }).then((response) => {
+            return response.data.data.project
+        }) .catch((error) => {
+            return error.response.data
         })
-        return response.data.data.experience;
     },
 
     async update(project){

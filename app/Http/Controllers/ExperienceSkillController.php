@@ -6,6 +6,7 @@ use App\Http\Requests\ExperienceSkill\ExperienceSkillDeleteRequest;
 use App\Http\Requests\ExperienceSkill\ExperienceSkillListRequest;
 use App\Http\Requests\ExperienceSkill\ExperienceSkillCreateRequest;
 use App\Http\Requests\ExperienceSkill\ExperienceSkillSearchRequest;
+use App\Http\Requests\ExperienceSkill\ExperienceSkillToggleRequest;
 use App\Http\Requests\ExperienceSkill\ExperienceSkillUpdateRequest;
 use App\Http\Requests\ExperienceSkill\ExperienceSkillViewRequest;
 use App\Http\Traits\JsonResponseTrait;
@@ -14,6 +15,7 @@ use App\Services\ExperienceSkill\ExperienceSkillDeleteService;
 use App\Services\ExperienceSkill\ExperienceSkillListService;
 use App\Services\ExperienceSkill\ExperienceSkillSaveService;
 use App\Services\ExperienceSkill\ExperienceSkillSearchService;
+use App\Services\ExperienceSkill\ExperienceSkillToggleService;
 use App\Services\ExperienceSkill\ExperienceSkillViewService;
 use Illuminate\Http\JsonResponse;
 
@@ -240,6 +242,30 @@ class ExperienceSkillController extends Controller
             );
         } catch (\Throwable $throwable) {
             $response = $this->failure('Search failed',422,['message'=>$throwable->getMessage()]);
+        } finally {
+            return $response;
+        }
+    }
+
+    public function toggle(
+        ExperienceSkillToggleRequest $request,
+        ExperienceSkillToggleService $service
+    ) :JsonResponse
+    {
+        $response = null;
+        try {
+            $result = $service
+                ->setSkillId($request->get('skill_id'))
+                ->setExperienceId($request->get('experience_id'))
+                ->toggle();
+
+            $response =  $this->success(
+                'Toggled item',
+                200,
+                ['technology'=>$result]
+            );
+        } catch (\Throwable $throwable) {
+            $response = $this->failure('Error toggling',422,['message'=>$throwable->getMessage()]);
         } finally {
             return $response;
         }

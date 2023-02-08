@@ -13,7 +13,6 @@ class ProjectUpdateRequest extends AbstractFormRequest
     {
         return [
             'id' => 'required|integer',
-            'experience_id'=>'required|integer',
             'description'=>'required|string'
         ];
     }

@@ -8,6 +8,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
 import ResumeEdit from "../../Resume/Data/ResumeEdit";
 import Projects from "./Projects/Projects";
+import Technologies from "./Technologies/Technologies";
+import Sectors from "./Sectors/Sectors";
+import Tags from "./Tags/Tags";
 
 export default function ExperienceEdit() {
     let id = useParams()
@@ -45,7 +48,7 @@ export default function ExperienceEdit() {
                     className={`title-bar`}
                     title={`Technologies`} />
                 <CardContent>
-
+                    <Technologies />
                 </CardContent>
             </Card>
             <Card elevation={2} style={secondCardStyle}>
@@ -53,7 +56,7 @@ export default function ExperienceEdit() {
                     className={`title-bar`}
                     title={`Sectors`} />
                 <CardContent>
-
+                    <Sectors />
                 </CardContent>
             </Card>
             <Card elevation={2} style={secondCardStyle}>
@@ -61,7 +64,7 @@ export default function ExperienceEdit() {
                     className={`title-bar`}
                     title={`Tags`} />
                 <CardContent>
-
+                    <Tags />
                 </CardContent>
             </Card>
         </Grid>

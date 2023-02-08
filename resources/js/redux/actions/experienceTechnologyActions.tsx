@@ -1,5 +1,5 @@
 
-import {ApiError, ExperienceTechnology} from "../types/types";
+import {ApiError, Experience, ExperienceTechnology} from "../types/types";
 import {ThunkAction} from "@reduxjs/toolkit";
 import {RootState} from "../index";
 import {AnyAction} from "redux";
@@ -37,6 +37,20 @@ export const viewExperienceTechnology = (id:any):ThunkAction<void, RootState, un
     }
 }
 
+export const toggleExperienceTechnology = (experienceId:any,technologyId:any):ThunkAction<void, RootState, unknown, AnyAction>=>{
+    return async (dispatch,getState) :Promise<void>=>{
+        const response:ExperienceTechnology|ApiError = await ExperienceTechnologyService.toggle(experienceId,technologyId)
+
+        if(isApiError(response,200)) {
+            toast.error(response.message)
+            return
+        }
+
+        toast.success('Experience Technology loaded')
+        dispatch(experienceTechnologyActions.setTechnology(response))
+    }
+}
+
 export const updateExperienceTechnology = (experienceTechnology:ExperienceTechnology):ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async (dispatch,getState) :Promise<void>=>{
         const response:ExperienceTechnology|ApiError = await ExperienceTechnologyService.update(experienceTechnology)
@@ -62,9 +76,9 @@ export const deleteExperienceTechnology = (experienceTechnology:ExperienceTechno
     }
 }
 
-export const getAllExperienceTechnologies = ():ThunkAction<void, RootState, unknown, AnyAction>=> {
+export const getAllExperienceTechnologies = (experience:Experience):ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async (dispatch,getState) :Promise<void>=>{
-        const response:ExperienceTechnology[]|ApiError = await ExperienceTechnologyService.getAllTechnologies()
+        const response:ExperienceTechnology[]|ApiError = await ExperienceTechnologyService.getAllTechnologies(experience)
 
         if(isApiError(response,200)) {
             toast.error(response.message)

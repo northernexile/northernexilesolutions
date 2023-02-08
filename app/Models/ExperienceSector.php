@@ -15,7 +15,7 @@ class ExperienceSector extends Model
     /**
      * @var string
      */
-    public $table = 'experience_sector';
+    public $table = 'experience_sectors';
 
     /**
      * @var bool
