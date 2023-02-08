@@ -40,7 +40,9 @@ class ExperienceTagController extends Controller
                 'Listing Experience Tags',
                 200,
                 [
-                    'experience_tags'=>$service->getList(),
+                    'experience_tags'=>$service
+                        ->setExperienceId($request->get('experience_id'))
+                        ->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {

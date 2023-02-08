@@ -40,7 +40,9 @@ class ExperienceSkillController extends Controller
                 'Listing Technologies',
                 200,
                 [
-                    'technologies'=>$service->getList(),
+                    'technologies'=>$service->setExperienceId(
+                        $request->get('experience_id')
+                    )->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {

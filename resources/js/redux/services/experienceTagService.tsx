@@ -22,16 +22,16 @@ export default {
     async toggle(experienceId,tagId){
         return await Api().post(
             `experience/tag/toggle/`,
-            {experience_id:experienceId,skill_id:tagId}
+            {experience_id:experienceId,tag_id:tagId}
         ).then((response)=>{
-            return response.data.data.technology
+            return response.data.data.tag
         }).catch((error) => {
             return error.response.data
         })
     },
 
-    async getAll(){
-        return await Api().get('experience/tag').then((response) => {
+    async getAll(experience){
+        return await Api().get('experience/tag',{params:{experience_id:experience.id}}).then((response) => {
             return response.data.data.experienceTags
         }).catch((error)=>{
             return error.response.data

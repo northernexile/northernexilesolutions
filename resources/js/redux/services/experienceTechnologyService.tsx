@@ -31,7 +31,7 @@ export default {
     },
 
     async getAllTechnologies(experience){
-        return await Api().get('experience/skills',{params:{experienceId:experience.id}}).then((response) => {
+        return await Api().get('experience/skills',{params:{experience_id:experience.id}}).then((response) => {
             return response.data.data.technologies
         }).catch((error)=>{
             return error.response.data

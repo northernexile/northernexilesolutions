@@ -40,7 +40,9 @@ class ExperienceSectorController extends Controller
                 'Listing ExperienceSectors',
                 200,
                 [
-                    'experience_sectors'=>$service->getList(),
+                    'experience_sectors'=>$service
+                        ->setExperienceId($request->get('experience_id'))
+                        ->getList(),
                 ]
             );
         } catch (\Throwable $throwable) {
