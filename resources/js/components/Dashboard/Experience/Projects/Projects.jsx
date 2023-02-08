@@ -3,7 +3,7 @@ import React, { useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../../redux/hooks/hooks";
 import {getAllProjectsForExperience,deleteProject as removeProject} from "../../../../redux/actions/projectActions";
-import {Alert, Chip, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import { TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import Create from "./Create";
 import Project from "./Project";
 import ConfirmDelete from "../../../../controls/ConfirmDelete";

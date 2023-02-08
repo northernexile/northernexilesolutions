@@ -27,10 +27,13 @@ Route::prefix('experience')->group(function ($request) use ($sectionName) {
         Route::get('/', [ExperienceSkillController::class, 'index'])->name($sectionName . $subSectionName . '.index');
         Route::get('/{id}', [ExperienceSkillController::class, 'show'])->name($sectionName . $subSectionName . '.show');
         Route::put('/{id}', [ExperienceSkillController::class, 'update'])->name($sectionName . $subSectionName . '.save');
+        Route::post('/toggle',[ExperienceSkillController::class,'toggle'])
+            ->name($sectionName . $subSectionName . '.toggle');
         Route::post('/{id}', [ExperienceSkillController::class, 'create'])->name($sectionName . $subSectionName . '.save');
         Route::delete('/', [ExperienceSkillController::class, 'deleteAll'])->name($sectionName . $subSectionName . '.delete.all');
         Route::delete('/{id}', [ExperienceSkillController::class, 'delete'])->name($sectionName . $subSectionName . '.delete');
-        Route::get('/search/{term}', [ExperienceSkillController::class, 'search'])->name($sectionName . $subSectionName . '.search');
+        Route::get('/search/{term}', [ExperienceSkillController::class, 'search'])
+            ->name($sectionName . $subSectionName . '.search');
     });
 
     Route::prefix('tag')->middleware(['auth:sanctum','owner'])->group(function ($request) use($sectionName){

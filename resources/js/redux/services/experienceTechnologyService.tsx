@@ -19,9 +19,20 @@ export default {
         return response.data.data.experience_technology
     },
 
-    async getAllTechnologies(){
-        return await Api().get('experience/skills').then((response) => {
-            return response.data.data.experience_technologies
+    async toggle(experienceId,technologyId){
+        return await Api().post(
+            `experience/skills/toggle/`,
+            {experience_id:experienceId,skill_id:technologyId}
+        ).then((response)=>{
+            return response.data.data.technology
+        }).catch((error) => {
+            return error.response.data
+        })
+    },
+
+    async getAllTechnologies(experience){
+        return await Api().get('experience/skills',{params:{experienceId:experience.id}}).then((response) => {
+            return response.data.data.technologies
         }).catch((error)=>{
             return error.response.data
         });
