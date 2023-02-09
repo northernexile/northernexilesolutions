@@ -24,6 +24,7 @@ class CVService
             $item = new \stdClass();
             $item->title = $experience->title;
             $item->company = $experience->company;
+            $item->description = $experience->description;
             $item->projects = $this->getExperienceProjects($experience->id);
             $item->startMonthYear = Carbon::parse($experience->start)->format('M Y');
             $item->endMonthYear = (is_null($experience->stop))
@@ -84,9 +85,7 @@ class CVService
     ) :\Illuminate\Support\Collection
     {
         $name = $this->getObjectName($list,$identifier);
-        $collectionHasKey = $collection->contains(function ($chip) use ($name){
-            return $chip->name = $name;
-        });
+        $collectionHasKey = $collection->contains($name);
 
         if(!$collectionHasKey){
             $item = new \stdClass();
