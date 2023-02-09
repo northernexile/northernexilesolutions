@@ -116,3 +116,22 @@ export type CV = {
     cv:any
 }
 
+export type Color = {
+    red:any,
+    green:any,
+    blue:any,
+    rgba:string,
+    hex:string
+}
+
+export type DataSet = {
+    label:string,
+    data:any,
+    backgroundColor:Color
+}
+
+export type Chart = {
+    labels:any,
+    datasets:any
+}
+
