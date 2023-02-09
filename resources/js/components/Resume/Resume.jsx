@@ -1,6 +1,7 @@
 
 import React from "react";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import CV from "./CV";
 
 export default function Resume() {
     return (
@@ -19,7 +20,7 @@ export default function Resume() {
             >
                 <CardHeader className={`title-bar`} title={`Our Experience`}/>
                 <CardContent>
-                    TODO
+                    <CV />
                 </CardContent>
             </Card>
         </Grid>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CurrentCVController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagCloudController;
 use App\Http\Controllers\UserProfileController;
@@ -27,6 +28,11 @@ Route::prefix('profile')->group(function () {
 
 Route::prefix('cloud')->group(function (){
    Route::get('/',[TagCloudController::class,'index']);
+});
+
+Route::prefix('cv')->group(function (){
+    Route::get('/',[CurrentCVController::class,'index'])
+        ->name('api.cv');
 });
 
 include 'api/tag.php';
