@@ -112,5 +112,7 @@ export type ExperienceSector = {
     experienceId?:any,
 }
 
-
+export type CV = {
+    cv:any
+}
 
