@@ -2,11 +2,7 @@
 import {Chart,DataSet,Color} from "./types"
 
 interface InitialState {
-    charts:[],
-    chart:{
-        labels:[],
-        datasets:[]
-    }
+    chart:{}
 }
 
 const SetChartAction = 'Chart'

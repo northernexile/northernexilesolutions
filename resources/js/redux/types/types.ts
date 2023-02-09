@@ -131,7 +131,6 @@ export type DataSet = {
 }
 
 export type Chart = {
-    labels:any,
-    datasets:any
+    chart:any
 }
 

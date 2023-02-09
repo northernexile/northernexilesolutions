@@ -1,9 +1,19 @@
 
-import React from "react";
-import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import React, {useState} from "react";
+import {Card, CardContent, CardHeader, Grid, Tab, Tabs} from "@mui/material";
 import CV from "./CV";
+import Box from "@mui/material/Box";
+import Graphs from "./Graphs";
+import Education from "./Education";
 
 export default function Resume() {
+
+    const [tabIndex,setTabIndex] = useState(0)
+
+    const handleTabChange = (event, newTabIndex) => {
+        setTabIndex(newTabIndex);
+    };
+
     return (
         <Grid item xs={12}>
             <Card elevation={2}
@@ -20,7 +30,22 @@ export default function Resume() {
             >
                 <CardHeader className={`title-bar`} title={`Our Experience`}/>
                 <CardContent>
-                    <CV />
+                    <Tabs value={tabIndex} onChange={handleTabChange}>
+                        <Tab label="Work History" />
+                        <Tab label="Technical Record" />
+                        <Tab label="Education" />
+                    </Tabs>
+                    <Box sx={2}>
+                        {tabIndex === 0 && (
+                            <CV />
+                        )}
+                        {tabIndex === 1 && (
+                            <Graphs />
+                        )}
+                        {tabIndex === 2 && (
+                            <Education />
+                        )}
+                    </Box>
                 </CardContent>
             </Card>
         </Grid>

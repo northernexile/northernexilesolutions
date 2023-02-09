@@ -3,7 +3,6 @@ import {Paper, Grid, Typography, Chip} from "@mui/material";
 
 const Role = (item) => {
     const roleItem = item.item
-
     const projects = () => {
         return roleItem.projects.map((project,index)=>(
             <li>{project.description}</li>
@@ -13,9 +12,6 @@ const Role = (item) => {
     const showProjects = () => {
         return roleItem.projects.length > 0
     }
-
-    console.log(showProjects())
-
     const projectSection = () => {
         return (showProjects())
             ? <ul>{projects()}</ul>
