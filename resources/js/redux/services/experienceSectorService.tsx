@@ -30,8 +30,8 @@ export default {
         })
     },
 
-    async getAll(){
-        return await Api().get('experience/sector').then((response) => {
+    async getAll(experience){
+        return await Api().get('experience/sector',{params:{experience_id:experience.id}}).then((response) => {
             return response.data.data.experienceSectors
         }).catch((error)=>{
             return error.response.data

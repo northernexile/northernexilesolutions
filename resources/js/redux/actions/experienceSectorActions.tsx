@@ -78,9 +78,9 @@ export const deleteExperienceSector = (experienceSector:ExperienceSector):ThunkA
     }
 }
 
-export const getAllExperienceSectors = ():ThunkAction<void, RootState, unknown, AnyAction>=> {
+export const getAllExperienceSectors = (experience:ExperienceSector):ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async (dispatch,getState) :Promise<void>=>{
-        const response:ExperienceSector[]|ApiError = await ExperienceSectorService.getAll()
+        const response:ExperienceSector[]|ApiError = await ExperienceSectorService.getAll(experience)
 
         if(isApiError(response,200)) {
             toast.error(response.message)

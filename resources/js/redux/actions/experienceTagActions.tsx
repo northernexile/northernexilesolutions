@@ -27,7 +27,7 @@ export const addExperienceTag = (experienceTag:ExperienceTag):ThunkAction<void, 
 
 export const toggleExperienceTag = (experienceId:any,tagId:any):ThunkAction<void, RootState, unknown, AnyAction>=>{
     return async (dispatch,getState) :Promise<void>=>{
-        const response:ExperienceTag|ApiError = await ExperienceTechnologyService.toggle(experienceId,tagId)
+        const response:ExperienceTag|ApiError = await ExperienceTagService.toggle(experienceId,tagId)
 
         if(isApiError(response,200)) {
             toast.error(response.message)
@@ -78,9 +78,9 @@ export const deleteExperienceTag = (experienceTag:ExperienceTag):ThunkAction<voi
     }
 }
 
-export const getAllExperienceTags = ():ThunkAction<void, RootState, unknown, AnyAction>=> {
+export const getAllExperienceTags = (experience:ExperienceTag):ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async (dispatch,getState) :Promise<void>=>{
-        const response:ExperienceTag[]|ApiError = await ExperienceTagService.getAll()
+        const response:ExperienceTag[]|ApiError = await ExperienceTagService.getAll(experience)
 
         if(isApiError(response,200)) {
             toast.error(response.message)

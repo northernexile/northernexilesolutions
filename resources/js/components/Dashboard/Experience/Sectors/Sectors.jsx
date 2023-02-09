@@ -28,7 +28,7 @@ const Sectors = () => {
     const isSelected = (sectorId) => {
         let selected = false;
         const assignedSector = assigned.find((filter)=>{
-            return parseInt(filter.skill_id) === parseInt(sectorId)
+            return parseInt(filter.sector_id) === parseInt(sectorId)
         })
 
         if(assignedSector !== undefined){

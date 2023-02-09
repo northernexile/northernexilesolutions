@@ -51,6 +51,7 @@ class ExperienceTagToggleService
         $experienceTag = new ExperienceTag();
         $experienceTag->experience_id = $experience->id;
         $experienceTag->tag_id = $tag->id;
+        $experienceTag->save();
         return $experienceTag;
     }
 }

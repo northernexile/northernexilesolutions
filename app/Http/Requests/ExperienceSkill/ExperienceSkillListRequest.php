@@ -12,6 +12,7 @@ class ExperienceSkillListRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
+            'experience_id'=>'required|integer'
         ];
     }
 }
