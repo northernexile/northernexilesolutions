@@ -12,7 +12,7 @@ ChartJS.register(
     Legend
 );
 
-const Frameworks = ({labels,datasets,title = 'Framework Experience',displayTitle= true}) => {
+const BarGraph = ({labels,datasets,title = 'Framework Experience',displayTitle= true}) => {
     const data = {
         labels:labels,
         datasets:datasets
@@ -39,4 +39,4 @@ const Frameworks = ({labels,datasets,title = 'Framework Experience',displayTitle
     )
 }
 
-export default Frameworks
+export default BarGraph

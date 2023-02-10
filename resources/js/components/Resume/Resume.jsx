@@ -8,7 +8,7 @@ import Education from "./Education";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {getCv} from "../../redux/actions/cvActions";
-import {getChart} from "../../redux/actions/chartActions";
+import {getChart,getAllCharts} from "../../redux/actions/chartActions";
 
 export default function Resume() {
 
@@ -21,9 +21,31 @@ export default function Resume() {
         dispatch(getCv())
     },[])
 
-    const frameworks = useAppSelector(state => state.chart.chart);
+    const charts = useAppSelector(state => state.chart.charts);
 
-    useEffect(() => dispatch(getChart()),[])
+    console.log(charts)
+
+    const getChartItem = (key) => {
+        return charts.find((chart)=>{
+            return chart.title === key
+        })
+    }
+
+    const graphs = () => {
+        return (charts.length > 0)
+            ? graphMarkup()
+            : <></>
+    }
+
+    const graphMarkup = () => {
+        return (<Graphs
+                sectors={getChartItem('sector')}
+                frameworks={getChartItem('framework')}
+            />)
+
+    }
+
+    useEffect(() => dispatch(getAllCharts()),[])
 
     const handleChange = (event, newValue) => {
         setTabIndex(newValue);
@@ -57,7 +79,7 @@ export default function Resume() {
                             <CV cv={cv} />
                         </TabPanel>
                         <TabPanel value="2">
-                            <Graphs frameworks={frameworks} />
+                            {graphs()}
                         </TabPanel>
                         <TabPanel value="3">
                             <Education />
