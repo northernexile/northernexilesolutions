@@ -48,11 +48,12 @@ class DataSet implements \JsonSerializable
     }
 
     /**
-     * @return RGBaColor
+     * @return string
      */
-    public function getBackgroundColor(): RGBaColor
+    public function getBackgroundColor(): string
     {
-        return $this->backgroundColor;
+        $backgroundColor = $this->backgroundColor;
+        return $backgroundColor->getRGBAString();
     }
 
     /**

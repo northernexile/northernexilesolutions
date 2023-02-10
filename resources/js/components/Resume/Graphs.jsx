@@ -1,19 +1,14 @@
 
-import React, {useEffect} from "react"
-import {useAppDispatch,useAppSelector} from "../../redux/hooks/hooks";
-import {getChart} from "../../redux/actions/chartActions";
+import React from "react"
+import Frameworks from "./Graphs/Frameworks";
 
-const Graphs = () => {
 
-    const dispatch = useAppDispatch();
-    const frameworks = useAppSelector(state => state.chart.chart);
-
-    useEffect(() => dispatch(getChart()),[])
-
-    console.log(frameworks)
+const Graphs = ({frameworks}) => {
 
     return (
-        <>Graphs</>
+        <div className={`graphs`}>
+            <Frameworks datasets={frameworks.datasets} labels={frameworks.labels} />
+        </div>
     )
 }
 
