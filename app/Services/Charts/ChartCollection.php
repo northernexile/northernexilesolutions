@@ -19,13 +19,16 @@ class ChartCollection
     /**
      * @param FrameworkExperienceChart $frameworkExperienceChart
      * @param SectorExperienceChart $sectorExperienceChart
+     * @param TechnologyExperienceChart $technologyExperienceChart
      */
     public function __construct(
         FrameworkExperienceChart $frameworkExperienceChart,
-        SectorExperienceChart $sectorExperienceChart
+        SectorExperienceChart $sectorExperienceChart,
+        TechnologyExperienceChart $technologyExperienceChart
     ){
         $this->charts['framework'] = $frameworkExperienceChart;
         $this->charts['sector'] = $sectorExperienceChart;
+        $this->charts['technology'] = $technologyExperienceChart;
     }
 
     /**
