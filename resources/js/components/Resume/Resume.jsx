@@ -37,12 +37,12 @@ export default function Resume() {
             : <></>
     }
 
-    console.log(getChartItem('framework'))
-
     const graphMarkup = () => {
-        return <>
-            <Graphs frameworks={getChartItem('framework')} />
-        </>
+        return (<Graphs
+                sectors={getChartItem('sector')}
+                frameworks={getChartItem('framework')}
+            />)
+
     }
 
     useEffect(() => dispatch(getAllCharts()),[])
