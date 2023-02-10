@@ -39,6 +39,24 @@ class ColorPalette
         return ColorPalette::colors[$color];
     }
 
+    /**
+     * @param string $color
+     * @return RGBaColor
+     */
+    public static function getColor(string $color) :RGBaColor
+    {
+        $color = self::colors[$color];
+
+        $rgbaColor = new RGBaColor();
+        $rgbaColor
+            ->setRed($color[0])
+            ->setGreen($color[1])
+            ->setBlue($color[2])
+            ->setOpacity($color[3]);
+
+        return $rgbaColor;
+    }
+
     public static function getRandomColor() :RGBaColor
     {
         $color =  collect(self::colors)->random(1)->first();

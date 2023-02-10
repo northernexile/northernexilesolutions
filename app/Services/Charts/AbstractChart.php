@@ -59,7 +59,7 @@ abstract class AbstractChart implements \JsonSerializable
     {
         return [
             'labels'=>$this->labels,
-            'datasets'=>$this->dataSets
+            'datasets'=>[$this->dataSets]
         ];
     }
 }

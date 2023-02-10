@@ -57,18 +57,18 @@ class FrameworkExperienceChart
             ->toArray();
     }
 
-    private function getFrameworkCollection(\Illuminate\Database\Eloquent\Collection $relevantSkills) :Collection
+    private function getFrameworkDataSet(\Illuminate\Database\Eloquent\Collection $relevantSkills) :DataSet
     {
-        $frameworks = collect();
+        $dataSet = $this->dataSetFactory->getDataSet();
+        $dataSet->setLabel('Framework experience in months');
+        $dataSet->setBackgroundColor(ColorPalette::getColor(ColorPalette::COLOR_RED));
+        $initialData = [];
         foreach ($relevantSkills as $relevantSkill){
-            $dataSet = $this->dataSetFactory->getDataSet();
-            $dataSet->setLabel($relevantSkill->name);
-            $dataSet->setData(0);
-            $dataSet->setBackgroundColor(ColorPalette::getRandomColor());
-            $frameworks->add($dataSet);
+            $initialData[$relevantSkill->name] = 0;
+            $dataSet->setData($initialData);
         }
 
-        return $frameworks;
+        return $dataSet;
     }
 
     /**
@@ -85,22 +85,20 @@ class FrameworkExperienceChart
             ->join('skills','skills.id','=','experience_skills.skill_id')
             ->get(['skill_id','experience_id','name']);
 
-        $frameworks = $this->getFrameworkCollection($relevantSkills);
+        $frameworkDataSet = $this->getFrameworkDataSet($relevantSkills);
 
         foreach ($experienceSkills as $experienceSkill){
-            /** @var DataSet $framework */
-            $framework = $frameworks->filter(function ($framework) use ($experienceSkill){
-                return $framework->getLabel() == $experienceSkill->name;
-            })->first();
+            $frameworkData = $frameworkDataSet->getData();
 
             $this->addExperienceDuration($experienceSkill);
 
-            $currentValue = $framework->getData();
+            $currentValue = $frameworkData[$experienceSkill->name];
             $currentValue += $this->experiences[$experienceSkill->experience_id];
-            $framework->setData($currentValue);
+            $frameworkData[$experienceSkill->name] = $currentValue;
+            $frameworkDataSet->setData($frameworkData);
         }
 
-        return $frameworks;
+        return collect($frameworkDataSet);
     }
 
     private function addExperienceDuration(ExperienceSkill $experienceSkill) :void

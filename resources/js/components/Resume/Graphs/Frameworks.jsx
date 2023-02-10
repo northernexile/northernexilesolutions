@@ -12,24 +12,26 @@ ChartJS.register(
     Legend
 );
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'Chart.js Bar Chart',
-        },
-    },
-};
-
-const Frameworks = ({labels,datasets}) => {
+const Frameworks = ({labels,datasets,title = 'Framework Experience',displayTitle= true}) => {
     const data = {
         labels:labels,
         datasets:datasets
     }
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: displayTitle,
+                text: title,
+            },
+        },
+    };
+
+
 
     return (
         <Bar data={data} options={options} />

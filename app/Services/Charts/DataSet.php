@@ -6,8 +6,8 @@ class DataSet implements \JsonSerializable
 {
     /** @var string  */
     private string $label;
-    /** @var float  */
-    private float $data;
+    /** @var array  */
+    private array $data = [];
     /** @var RGBaColor  */
     private RGBaColor $backgroundColor;
 
@@ -30,18 +30,18 @@ class DataSet implements \JsonSerializable
     }
 
     /**
-     * @return float
+     * @return array
      */
-    public function getData(): float
+    public function getData(): array
     {
         return $this->data;
     }
 
     /**
-     * @param float $data
+     * @param array $data
      * @return DataSet
      */
-    public function setData(float $data): DataSet
+    public function setData(array $data = []): DataSet
     {
         $this->data = $data;
         return $this;
@@ -73,7 +73,7 @@ class DataSet implements \JsonSerializable
     {
         return [
             'label'=>$this->getLabel(),
-            'data'=>$this->getData(),
+            'data'=>array_values($this->getData()),
             'backgroundColor'=>$this->getBackgroundColor(),
         ];
     }
