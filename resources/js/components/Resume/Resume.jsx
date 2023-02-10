@@ -41,6 +41,7 @@ export default function Resume() {
         return (<Graphs
                 sectors={getChartItem('sector')}
                 frameworks={getChartItem('framework')}
+                technologies={getChartItem('technology')}
             />)
 
     }
