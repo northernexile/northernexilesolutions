@@ -19,10 +19,12 @@ import {experienceTechnologySlice} from "./slices/experienceTechnologySlice";
 import {experienceTagSlice} from "./slices/experienceTagSlice";
 import {experienceSectorSlice} from "./slices/experienceSectors";
 import {cvSlice} from "./slices/cvSlice"
+import {chartSlice} from "./slices/chartSlice"
 
 const store=configureStore(
     {
         reducer:{
+            chart:chartSlice.reducer,
             cv:cvSlice.reducer,
             projects:projectSlice.reducer,
             experience:experienceSlice.reducer,
