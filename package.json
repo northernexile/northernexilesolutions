@@ -39,6 +39,7 @@
         "mui-datatables": "^4.3.0",
         "prop-types": "^15.8.1",
         "react-chartjs-2": "^5.2.0",
+        "react-helmet": "^6.1.0",
         "react-hook-form": "^7.43.0",
         "react-hook-form-mui": "^5.13.1",
         "react-multi-carousel": "^2.8.2",

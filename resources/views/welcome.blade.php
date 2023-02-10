@@ -3,6 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta
+            name="description"
+            content="Based in The Forest of Dean, we provide web development solutions, primarily on a contract basis." />        <meta name="twitter:card" content="summary_large_image" />        <meta name="twitter:site" content="@user" />        <meta name="twitter:creator" content="@user" />        <meta name="twitter:title" content="Pets - Products" />        <meta name="twitter:description" content="Best Products for your pet" />        <meta name="twitter:image" content="url_to_image"/>        <meta property="og:title" content="Pets - Products" />        <meta property="og:description" content="Best Products for your pet" />
+        <meta property="og:url" content="northernexilesolutions.com" />
+        <meta property="og:site_name" content="Northern Exile Solutions Ltd" />
+        <meta property="og:locale" content="en_GB" />
+        <meta property="og:type" content="article" />
 
         <title>Northern Exile Solutions Ltd</title>
         {{ viteAssets() }}
@@ -25,7 +32,16 @@
             <div id="root">
 
             </div>
-
+            <noscript>
+                <h2>About Us</h2>
+                <p>Based in The Forest of Dean, we provide web development solutions, primarily on a contract basis.</p>
+                <h2>Services</h2>
+                <ul>
+                    <li>Software and App Development</li>
+                    <li>Website builds</li>
+                    <li>Coaching</li>
+                </ul>
+            </noscript>
         </div>
     </body>
 </html>
