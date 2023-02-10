@@ -19,6 +19,7 @@ const Frameworks = ({labels,datasets,title = 'Framework Experience',displayTitle
     }
 
     const options = {
+        maintainAspectRatio:false,
         responsive: true,
         plugins: {
             legend: {
