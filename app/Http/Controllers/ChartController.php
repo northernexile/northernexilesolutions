@@ -68,10 +68,13 @@ class ChartController extends Controller
     ):JsonResponse
     {
         try {
-            $charts = [];
+            $charts = collect();
 
-            foreach ($chartCollection->getChartCollection() as $chart){
-                $charts[] = $chart->getChartData();
+            foreach ($chartCollection->getChartCollection() as $key => $chart){
+                $chartItem = new \stdClass();
+                $chartItem->data = $chart->getChartData();
+                $chartItem->title = $key;
+                $charts->add($chartItem);
             }
 
             $response = $this->success(

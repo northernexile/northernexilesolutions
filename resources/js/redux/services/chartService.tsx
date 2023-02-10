@@ -3,7 +3,7 @@ import Api from "../api/api";
 export default {
     async getAll(){
         return await Api().get('chart/all').then((response) => {
-            return response.data.data.chart
+            return response.data.data.charts
         }).catch((error)=>{
             return error.response.data
         });

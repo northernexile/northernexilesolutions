@@ -10,7 +10,7 @@ class FrameworkExperienceChart extends AbstractChartProvider implements ChartPro
 {
     const TYPE_FRAMEWORK = 2;
     /** @var string  */
-    protected string $title = '';
+    protected string $title = 'Frameworks';
     /** @var string  */
     protected string $color = ColorPalette::COLOR_RED;
     /** @var int|null  */

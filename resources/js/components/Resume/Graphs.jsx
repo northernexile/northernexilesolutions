@@ -11,7 +11,7 @@ const Graphs = ({frameworks}) => {
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                     <div style={{minHeight:400}}>
-                        <Frameworks datasets={frameworks.datasets} labels={frameworks.labels} />
+                        <Frameworks datasets={frameworks.data.datasets} labels={frameworks.data.labels} />
                     </div>
                 </Grid>
             </Grid>

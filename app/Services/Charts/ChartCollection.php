@@ -24,8 +24,8 @@ class ChartCollection
         FrameworkExperienceChart $frameworkExperienceChart,
         SectorExperienceChart $sectorExperienceChart
     ){
-        $this->charts[] = $frameworkExperienceChart;
-        $this->charts[] = $sectorExperienceChart;
+        $this->charts['framework'] = $frameworkExperienceChart;
+        $this->charts['sector'] = $sectorExperienceChart;
     }
 
     /**

@@ -4,7 +4,8 @@ import {createSlice,PayloadAction} from "@reduxjs/toolkit";
 import Chart from "../types/chart";
 
 const initialState : InitialState = {
-    chart:{}
+    chart:{},
+    charts:[]
 }
 
 export const chartSlice = createSlice({
@@ -13,6 +14,9 @@ export const chartSlice = createSlice({
     reducers: {
         setChart: (state,action: PayloadAction<any>) => {
             state.chart = action.payload
+        },
+        setCharts: (state,action: PayloadAction<any>)=>{
+            state.charts = action.payload
         }
     }
 });
