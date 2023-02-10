@@ -41,6 +41,11 @@
                     <li>Website builds</li>
                     <li>Coaching</li>
                 </ul>
+                <ul>
+                    <li>Companies House Number: 12192292</li>
+                    <li>VAT Registered: 331449319</li>
+                    </li>Copyright Northern Exile Solutions Ltd 2003</li>
+                </ul>
             </noscript>
         </div>
     </body>
