@@ -2,13 +2,11 @@
 
 namespace App\Services\Charts;
 
-use App\Models\Experience;
 use App\Models\ExperienceSkill;
 use App\Models\Skill;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
-class FrameworkExperienceChart extends AbstractChartProvider
+class FrameworkExperienceChart extends AbstractChartProvider implements ChartProviderInterface
 {
     const TYPE_FRAMEWORK = 2;
     /** @var string  */
@@ -48,14 +46,11 @@ class FrameworkExperienceChart extends AbstractChartProvider
         $frameworkDataSet = $this->getDataSet($relevantSkills);
 
         foreach ($experienceSkills as $experienceSkill){
-            $frameworkData = $frameworkDataSet->getData();
-
-            $this->addExperienceDuration($experienceSkill->experience_id);
-
-            $currentValue = $frameworkData[$experienceSkill->name];
-            $currentValue += $this->experiences[$experienceSkill->experience_id];
-            $frameworkData[$experienceSkill->name] = $currentValue;
-            $frameworkDataSet->setData($frameworkData);
+            $frameworkDataSet = $this->addExperienceValue(
+                $frameworkDataSet,
+                $experienceSkill->name,
+                $experienceSkill->experience_id
+            );
         }
 
         return collect($frameworkDataSet);

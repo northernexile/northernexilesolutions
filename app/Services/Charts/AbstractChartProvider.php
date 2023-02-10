@@ -17,7 +17,11 @@ abstract class AbstractChartProvider
     /** @var string  */
     protected string $title = '';
 
+    protected string $color = ColorPalette::COLOR_RED;
+
     protected ?int $type = null;
+
+
 
     /**
      * @param ChartFactory $chartFactory
@@ -74,6 +78,25 @@ abstract class AbstractChartProvider
             $difference = $stop->diffInMonths($start);
             $this->experiences[$experienceId] = $difference;
         }
+    }
+
+    /**
+     * @param DataSet $dataSet
+     * @param string $name
+     * @param int $identifier
+     * @return DataSet
+     */
+    protected function addExperienceValue(DataSet $dataSet,string $name,int $identifier) :DataSet
+    {
+        $data = $dataSet->getData();
+        $this->addExperienceDuration($identifier);
+
+        $currentValue = $data[$name];
+        $currentValue += $this->experiences[$identifier];
+        $data[$name] = $currentValue;
+        $dataSet->setData($data);
+
+        return $dataSet;
     }
 
     /**
