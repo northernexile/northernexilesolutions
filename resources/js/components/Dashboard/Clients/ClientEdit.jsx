@@ -7,6 +7,8 @@ import {cardStyle, secondCardStyle} from "../../../snippets/cardStyle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../services/icons/icons";
 import ClientEditData from "./ClientEditData"
+import ClientAddresses from "./Addresses/ClientAddresses";
+import ClientInvoices from "./Invoices/ClientInvoices";
 export default function ClientEdit() {
     let id = useParams()
 
@@ -28,6 +30,24 @@ export default function ClientEdit() {
                 />
                 <CardContent>
                     <ClientEditData id={id} />
+                </CardContent>
+            </Card>
+
+            <Card elevation={2} style={secondCardStyle}>
+                <CardHeader
+                    className={`title-bar`}
+                    title={`Addresses`} />
+                <CardContent>
+                    <ClientAddresses clientId={id} />
+                </CardContent>
+            </Card>
+
+            <Card elevation={2} style={secondCardStyle}>
+                <CardHeader
+                    className={`title-bar`}
+                    title={`Invoices`} />
+                <CardContent>
+                    <ClientInvoices clientId={id} />
                 </CardContent>
             </Card>
         </Grid>

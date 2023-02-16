@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\[ModuleSingular];
+namespace App\Services\ClientInvoice;
 
-use App\Models\[ModuleSingular];
+use App\Models\ClientInvoice;
 use App\Services\Abstracts\AbstractSaveService;
 use App\Services\Abstracts\IdentifiableInterface;
 use App\Services\Abstracts\IdentifiableTrait;
@@ -10,7 +10,7 @@ use App\Services\Abstracts\PropertiesTrait;
 use App\Services\Abstracts\PropertiesInterface;
 use App\Services\Abstracts\SaveableTrait;
 
-class [ModuleSingular]SaveService extends AbstractSaveService implements IdentifiableInterface, PropertiesInterface
+class ClientInvoiceSaveService extends AbstractSaveService implements IdentifiableInterface, PropertiesInterface
 {
     use IdentifiableTrait;
     use PropertiesTrait;
@@ -18,14 +18,14 @@ class [ModuleSingular]SaveService extends AbstractSaveService implements Identif
 
     /**
      * @param bool $create
-     * @return [ModuleSingular]|null
+     * @return ClientInvoice|null
      */
-    public function getEntity(bool $create = true) :?[ModuleSingular]
+    public function getEntity(bool $create = true) :?ClientInvoice
     {
         if(!is_null($this->identity)){
-            $result = [ModuleSingular]::findOrFail($this->identity);
+            $result = ClientInvoice::findOrFail($this->identity);
         } else {
-            $result = ($create) ? new [ModuleSingular]() : null;
+            $result = ($create) ? new ClientInvoice() : null;
         }
 
         return $result;
