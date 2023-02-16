@@ -35,6 +35,7 @@ Route::prefix('cv')->group(function (){
         ->name('api.cv');
 });
 
+include 'api/address.php';
 include 'api/client.php';
 include 'api/charts.php';
 include 'api/tag.php';
