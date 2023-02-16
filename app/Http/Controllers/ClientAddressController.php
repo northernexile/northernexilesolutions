@@ -72,7 +72,7 @@ class ClientAddressController extends Controller
             $response = $this->success('Client Address found',200,['client_address'=>$clientAddress]);
         } catch (\Throwable $throwable) {
             $response = $this->failure(
-                'Could not list clientaddress',
+                'Could not find client address',
                 422,
                 [
                     'message'=>$throwable->getMessage()

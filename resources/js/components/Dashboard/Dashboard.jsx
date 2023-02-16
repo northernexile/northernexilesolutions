@@ -1,7 +1,7 @@
 
 import React from "react";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
-import {Code, Factory, History, Label, Mail} from "@mui/icons-material";
+import {Code, Factory, History, Label, Mail, People} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 export default function Dashboard() {
 

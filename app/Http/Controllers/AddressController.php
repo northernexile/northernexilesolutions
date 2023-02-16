@@ -15,6 +15,7 @@ use App\Services\Address\AddressListService;
 use App\Services\Address\AddressSaveService;
 use App\Services\Address\AddressSearchService;
 use App\Services\Address\AddressViewService;
+use App\Services\ClientAddress\ClientAddressSaveService;
 use Illuminate\Http\JsonResponse;
 
 class AddressController extends Controller
@@ -86,24 +87,38 @@ class AddressController extends Controller
     /**
      * @param AddressCreateRequest $request
      * @param AddressSaveService $service
+     * @param ClientAddressSaveService $clientAddressSaveService
      * @return JsonResponse
      */
     public function create(
         AddressCreateRequest $request,
-        AddressSaveService   $service
+        AddressSaveService   $service,
+        ClientAddressSaveService $clientAddressSaveService
     ) :JsonResponse {
         try {
-            $saved = $service->setProperties($request->all())->save();
+            $addressParams = $request->except('client_id');
+
+            $saved = $service->setProperties($addressParams)->save();
 
             if(!$saved) {
                 throw new \Exception('Could not save Address');
+            }
+
+            $clientId = $request->get('client_id',false);
+
+            $address = $service->getEntity(false);
+
+            if($clientId){
+                $clientAddressSaveService
+                    ->setProperties(['client_id'=>$clientId,'address_id'=>$address->id])
+                    ->save();
             }
 
             $response = $this->success(
                 'Address Saved',
                 200,
                 [
-                    'address'=>$service->getEntity(false)
+                    'address'=>$address
                 ]
             );
         } catch (\Throwable $throwable) {

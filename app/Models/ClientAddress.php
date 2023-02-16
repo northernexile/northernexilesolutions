@@ -35,4 +35,24 @@ class ClientAddress extends Model
     {
         return $this->belongsTo(Address::class);
     }
+
+    public function summarise() :string
+    {
+        $parts = [];
+        foreach ([
+            'thoroughfare',
+                     'address_line_1',
+                     'address_line_2',
+                     'address_line_3',
+                     'town',
+                     'county',
+                     'postcode',
+                 ] as $address){
+            if($this->$address){
+                $parts[] = $this->$address;
+            }
+        }
+
+        return implode(', ',$parts);
+    }
 }
