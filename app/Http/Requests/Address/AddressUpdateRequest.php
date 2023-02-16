@@ -12,14 +12,14 @@ class AddressUpdateRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required',
+            'id' => 'required|integer',
             'thoroughfare' => 'required|string',
-            'address_line_1' => 'sometimes|string',
-            'address_line_2' => 'sometimes|string',
-            'address_line_3' => 'sometimes|string',
-            'town' => 'sometimes|string',
-            'county' => 'sometimes|string',
-            'postcode' => 'sometimes|string',
+            'address_line_1' => 'nullable|sometimes|string',
+            'address_line_2' => 'nullable|sometimes|string',
+            'address_line_3' => 'nullable|sometimes|string',
+            'town' => 'nullable|sometimes|string',
+            'county' => 'nullable|sometimes|string',
+            'postcode' => 'nullable|sometimes|string',
         ];
     }
 }
