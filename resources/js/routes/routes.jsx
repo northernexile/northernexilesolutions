@@ -21,6 +21,7 @@ import React from "react";
 import Clients from "../components/Dashboard/Clients/Clients";
 import ClientCreate from "../components/Dashboard/Clients/ClientCreate";
 import ClientEdit from "../components/Dashboard/Clients/ClientEdit";
+import ClientAddressEdit from "../components/Dashboard/Clients/Addresses/ClientAddressEdit";
 
 const routes = createBrowserRouter([
     {
@@ -103,7 +104,13 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/dashboard/clients/create",
-                element: <ClientCreate />
+                element: <ClientCreate />,
+                exact:true,
+            },
+            {
+                path: "/dashboard/clients/addresses/:id",
+                element: <ClientAddressEdit />,
+                exact: true
             },
             {
                 path: "/dashboard/clients/:id",
