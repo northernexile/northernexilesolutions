@@ -135,3 +135,10 @@ export type Chart = {
     title:string
 }
 
+export type Client = {
+    id?:any,
+    name?:string,
+    email?:string,
+    phone?:string
+}
+

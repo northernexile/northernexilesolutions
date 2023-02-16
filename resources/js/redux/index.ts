@@ -20,10 +20,12 @@ import {experienceTagSlice} from "./slices/experienceTagSlice";
 import {experienceSectorSlice} from "./slices/experienceSectors";
 import {cvSlice} from "./slices/cvSlice"
 import {chartSlice} from "./slices/chartSlice"
+import {clientSlice} from "./slices/clientSlice"
 
 const store=configureStore(
     {
         reducer:{
+            client:clientSlice.reducer,
             chart:chartSlice.reducer,
             cv:cvSlice.reducer,
             projects:projectSlice.reducer,
