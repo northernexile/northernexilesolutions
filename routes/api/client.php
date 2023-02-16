@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientAddressController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientInvoiceController;
+use App\Http\Controllers\ClientInvoiceItemController;
 use Illuminate\Support\Facades\Route;
 
 $sectionName = 'client';
@@ -22,6 +23,18 @@ Route::prefix('client')->middleware(['auth:sanctum','owner'])->group(function ($
 
     Route::prefix('invoices')->group(function ($request) use($sectionName){
         $sectionName.='.invoices';
+
+        Route::prefix('item')->group(function ($request) use($sectionName){
+            $sectionName.='.items';
+
+            Route::get('/',[ClientInvoiceItemController::class,'index'])->name($sectionName.'.index');
+            Route::get('/{id}',[ClientInvoiceItemController::class,'show'])->name($sectionName.'.show');
+            Route::patch('/{id}',[ClientInvoiceItemController::class,'update'])->name($sectionName.'.save');
+            Route::post('/',[ClientInvoiceItemController::class,'create'])->name($sectionName.'.save');
+            Route::delete('/',[ClientInvoiceItemController::class,'deleteAll'])->name($sectionName.'.delete.all');
+            Route::delete('/{id}',[ClientInvoiceItemController::class,'delete'])->name($sectionName.'.delete');
+            Route::get('/search/{term}',[ClientInvoiceItemController::class,'search'])->name($sectionName.'.search');
+        });
 
         Route::get('/',[ClientInvoiceController::class,'index'])->name($sectionName.'.index');
         Route::get('/{id}',[ClientInvoiceController::class,'show'])->name($sectionName.'.show');
