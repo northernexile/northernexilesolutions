@@ -16,12 +16,11 @@ export default function Resume() {
 
     const dispatch = useAppDispatch()
     const cv = useAppSelector(state => state.cv.cv)
+    const charts = useAppSelector(state => state.chart.charts);
 
     useEffect(()=>{
-        dispatch(getCv())
+        dispatch(getCv()).then(()=>dispatch(getAllCharts()))
     },[])
-
-    const charts = useAppSelector(state => state.chart.charts);
 
     console.log(charts)
 
@@ -45,8 +44,6 @@ export default function Resume() {
             />)
 
     }
-
-    useEffect(() => dispatch(getAllCharts()),[])
 
     const handleChange = (event, newValue) => {
         setTabIndex(newValue);
