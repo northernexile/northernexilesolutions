@@ -7,9 +7,10 @@ use App\Services\Abstracts\AbstractSaveService;
 use App\Services\Abstracts\IdentifiableInterface;
 use App\Services\Abstracts\IdentifiableTrait;
 use App\Services\Abstracts\PropertiesTrait;
+use App\Services\Abstracts\PropertiesInterface;
 use App\Services\Abstracts\SaveableTrait;
 
-class [ModuleSingular]SaveService extends AbstractSaveService implements IdentifiableInterface
+class [ModuleSingular]SaveService extends AbstractSaveService implements IdentifiableInterface, PropertiesInterface
 {
     use IdentifiableTrait;
     use PropertiesTrait;
@@ -19,7 +20,7 @@ class [ModuleSingular]SaveService extends AbstractSaveService implements Identif
      * @param bool $create
      * @return [ModuleSingular]|null
      */
-    public function getEntity(bool $create = true) :?Content
+    public function getEntity(bool $create = true) :?[ModuleSingular]
     {
         if(!is_null($this->identity)){
             $result = [ModuleSingular]::findOrFail($this->identity);

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('client_invoice_id')->nullable(false);
             $table->unsignedBigInteger('amount_in_pence_ex_vat')->nullable(false);
+            $table->date('item_date')->nullable(false);
             $table->string('description');
             $table->timestamps();
         });

@@ -22,8 +22,6 @@ export default function Resume() {
         dispatch(getCv()).then(()=>dispatch(getAllCharts()))
     },[])
 
-    console.log(charts)
-
     const getChartItem = (key) => {
         return charts.find((chart)=>{
             return chart.title === key

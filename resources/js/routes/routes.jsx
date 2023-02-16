@@ -18,6 +18,9 @@ import Sectors from "../components/Dashboard/Sectors/Sectors";
 import Technologies from "../components/Dashboard/Technologies/Technologies";
 import Tags from "../components/Dashboard/Tags/Tags";
 import React from "react";
+import Clients from "../components/Dashboard/Clients/Clients";
+import ClientCreate from "../components/Dashboard/Clients/ClientCreate";
+import ClientEdit from "../components/Dashboard/Clients/ClientEdit";
 
 const routes = createBrowserRouter([
     {
@@ -91,6 +94,20 @@ const routes = createBrowserRouter([
             {
                 path: "/dashboard/experience/:id",
                 element: <ExperienceEdit />,
+                exact: true
+            },
+            {
+                path: "/dashboard/clients",
+                element: <Clients />,
+                exact: true
+            },
+            {
+                path: "/dashboard/clients/create",
+                element: <ClientCreate />
+            },
+            {
+                path: "/dashboard/clients/:id",
+                element: <ClientEdit />,
                 exact: true
             },
             {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
 * @property int $id
@@ -40,4 +41,20 @@ class Client extends Model
         'email',
         'telephone'
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function clientAddresses() :HasMany
+    {
+        return $this->hasMany(ClientAddress::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function invoices() :HasMany
+    {
+        return $this->hasMany(ClientInvoice::class);
+    }
 }

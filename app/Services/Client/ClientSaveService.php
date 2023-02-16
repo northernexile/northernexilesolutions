@@ -6,10 +6,11 @@ use App\Models\Client;
 use App\Services\Abstracts\AbstractSaveService;
 use App\Services\Abstracts\IdentifiableInterface;
 use App\Services\Abstracts\IdentifiableTrait;
+use App\Services\Abstracts\PropertiesInterface;
 use App\Services\Abstracts\PropertiesTrait;
 use App\Services\Abstracts\SaveableTrait;
 
-class ClientSaveService extends AbstractSaveService implements IdentifiableInterface
+class ClientSaveService extends AbstractSaveService implements IdentifiableInterface,PropertiesInterface
 {
     use IdentifiableTrait;
     use PropertiesTrait;
@@ -19,7 +20,7 @@ class ClientSaveService extends AbstractSaveService implements IdentifiableInter
      * @param bool $create
      * @return Client|null
      */
-    public function getEntity(bool $create = true) :?Content
+    public function getEntity(bool $create = true) :?Client
     {
         if(!is_null($this->identity)){
             $result = Client::findOrFail($this->identity);
