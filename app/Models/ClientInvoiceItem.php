@@ -18,6 +18,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class ClientInvoiceItem extends Model
 {
+    const CURRENCY_SYMBOL = '£';
+
+    const CURRENCY = 'GBP';
+
     use HasFactory;
 
     /** @var string  */
@@ -41,11 +45,32 @@ class ClientInvoiceItem extends Model
         'item_date'
     ];
 
+    protected $appends = [
+        'ex_vat',
+        'currency_symbol',
+        'currency'
+    ];
+
     /**
      * @return BelongsTo
      */
     public function invoice() :BelongsTo
     {
         return $this->belongsTo(ClientInvoice::class);
+    }
+
+    public function getExVatAttribute() :string
+    {
+        return number_format($this->amount_in_pence_ex_vat / 100,2);
+    }
+
+    public function getCurrencySymbolAttribute() :string
+    {
+        return self::CURRENCY_SYMBOL;
+    }
+
+    public function getCurrencyAttribute() :string
+    {
+        return self::CURRENCY;
     }
 }

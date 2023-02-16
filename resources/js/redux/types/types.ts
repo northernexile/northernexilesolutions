@@ -142,3 +142,38 @@ export type Client = {
     phone?:string
 }
 
+export type Address = {
+    id?:any,
+    thoroughfare?:string,
+    address_line_1?:string,
+    address_line_2?:string,
+    address_line_3?:string,
+    town?:string,
+    county?:string,
+    postcode?:string,
+}
+
+export type ClientInvoice = {
+    id?:any,
+    client_id?:any,
+    status?:any,
+    created_at?:any,
+    updated_at?:any
+}
+
+export type ClientInvoiceItem = {
+    id?:any,
+    client_invoice_id?:any,
+    amount_in_pence_ex_vat?:any,
+    ex_vat?:any,
+    currency?:string,
+    currency_symbol?:string,
+    description?:string,
+    item_date?:any
+}
+
+export type ClientAddress = {
+    id?:any,
+    client_id?:any,
+    address_id?:any,
+}
