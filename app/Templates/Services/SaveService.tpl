@@ -7,9 +7,10 @@ use App\Services\Abstracts\AbstractSaveService;
 use App\Services\Abstracts\IdentifiableInterface;
 use App\Services\Abstracts\IdentifiableTrait;
 use App\Services\Abstracts\PropertiesTrait;
+use App\Services\Abstracts\PropertiesInterface;
 use App\Services\Abstracts\SaveableTrait;
 
-class [ModuleSingular]SaveService extends AbstractSaveService implements IdentifiableInterface
+class [ModuleSingular]SaveService extends AbstractSaveService implements IdentifiableInterface, PropertiesInterface
 {
     use IdentifiableTrait;
     use PropertiesTrait;
