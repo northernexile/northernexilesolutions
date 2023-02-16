@@ -19,7 +19,7 @@ class ClientSaveService extends AbstractSaveService implements IdentifiableInter
      * @param bool $create
      * @return Client|null
      */
-    public function getEntity(bool $create = true) :?Content
+    public function getEntity(bool $create = true) :?Client
     {
         if(!is_null($this->identity)){
             $result = Client::findOrFail($this->identity);

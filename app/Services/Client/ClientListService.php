@@ -11,7 +11,7 @@ class ClientListService
      * @param array $columns
      * @return Collection
      */
-    public function getList(array $columns=['id','name','text']) :Collection
+    public function getList(array $columns=['id','name','email','phone']) :Collection
     {
         return Client::get($columns);
     }

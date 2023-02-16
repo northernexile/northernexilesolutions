@@ -12,7 +12,9 @@ class ClientCreateRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-          'id' => 'required'
+          'name'=>'required|string',
+          'email'=>'sometimes|email',
+          'phone'=>'sometimes|string',
         ];
     }
 }

@@ -35,6 +35,12 @@ export default function Dashboard() {
             name:'Tags',
             icon:<Label />,
             route:'/dashboard/tags'
+        },
+        {
+            id:6,
+            name:'Clients',
+            icon:<People />,
+            route: '/dashboard/clients'
         }
     ];
 
