@@ -8,7 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getBrandIcon from "../../../../services/icons/icons";
 import ClientAddressEditData from "./ClientAddressEditData";
 export default function ClientAddressEdit() {
-    let id = useParams()
+    let params = useParams()
 
     return (
         <Grid item xs={12}>
@@ -20,14 +20,14 @@ export default function ClientAddressEdit() {
                     title={`View/Edit Client Address`}
                     action={
                         <>
-                            <Link to={`/dashboard/clients/`+id}>
+                            <Link to={`/dashboard/clients/`+params.id}>
                                 <FontAwesomeIcon icon={getBrandIcon(`faArrowCircleLeft`)} />
                             </Link>
                         </>
                     }
                 />
                 <CardContent>
-                    <ClientAddressEditData id={id} />
+                    <ClientAddressEditData />
                 </CardContent>
             </Card>
         </Grid>

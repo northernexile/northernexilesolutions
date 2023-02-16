@@ -10,7 +10,7 @@ class ClientAddressListService
     const DEFAULTS = [
         'client_addresses.id',
         'client_id',
-        'addresses.id',
+        'address_id',
         'thoroughfare',
         'address_line_1',
         'address_line_2',

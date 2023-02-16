@@ -14,6 +14,6 @@ class ClientAddressViewService implements IdentifiableInterface
      */
     public function get() :ClientAddress
     {
-        return ClientAddress::findOrFail($this->identity);
+        return ClientAddress::with(['address'])->findOrFail($this->identity);
     }
 }
