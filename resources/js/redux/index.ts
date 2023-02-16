@@ -21,10 +21,18 @@ import {experienceSectorSlice} from "./slices/experienceSectors";
 import {cvSlice} from "./slices/cvSlice"
 import {chartSlice} from "./slices/chartSlice"
 import {clientSlice} from "./slices/clientSlice"
+import {addressSlice} from "./slices/addressSlice";
+import {clientInvoiceSlice} from "./slices/clientInvoiceSlice"
+import {clientInvoiceItemSlice} from "./slices/clientInvoiceItemSlice"
+import {clientAddressSlice} from "./slices/clientAddressSlice"
 
 const store=configureStore(
     {
         reducer:{
+            address:addressSlice.reducer,
+            clientInvoice:clientInvoiceSlice.reducer,
+            clientInvoiceItem:clientInvoiceItemSlice.reducer,
+            clientAddress:clientAddressSlice.reducer,
             client:clientSlice.reducer,
             chart:chartSlice.reducer,
             cv:cvSlice.reducer,
