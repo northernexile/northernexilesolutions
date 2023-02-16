@@ -11,14 +11,16 @@ export const chartActions = chartSlice.actions
 
 export const getAllCharts = ():ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async (dispatch,getState) :Promise<void>=>{
-        const response:any|ApiError = await chartService.getAll()
+        if(getState().chart.charts.length === 0) {
+            const response: any | ApiError = await chartService.getAll()
 
-        if(isApiError(response,200)) {
-            toast.error(response.message)
-            return
+            if (isApiError(response, 200)) {
+                toast.error(response.message)
+                return
+            }
+
+            dispatch(chartActions.setCharts(response))
         }
-
-        dispatch(chartActions.setCharts(response))
     }
 }
 

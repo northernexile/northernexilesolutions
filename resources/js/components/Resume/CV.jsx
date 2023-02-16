@@ -1,7 +1,5 @@
 
-import React, {useEffect} from "react";
-import {useAppDispatch,useAppSelector} from "../../redux/hooks/hooks";
-import {getCv} from "../../redux/actions/cvActions";
+import React from "react";
 import Role from "./Role";
 
 const CV = ({cv}) => {

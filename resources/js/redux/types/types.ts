@@ -131,6 +131,7 @@ export type DataSet = {
 }
 
 export type Chart = {
-    chart:any
+    data:any,
+    title:string
 }
 
