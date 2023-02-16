@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientAddressController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientInvoiceController;
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,17 @@ use Illuminate\Support\Facades\Route;
 $sectionName = 'client';
 
 Route::prefix('client')->middleware(['auth:sanctum','owner'])->group(function ($request) use($sectionName){
+
+    Route::prefix('addresses')->group(function ($request) use($sectionName){
+        $sectionName.='.addresses';
+        Route::get('/',[ClientAddressController::class,'index'])->name($sectionName.'.index');
+        Route::get('/{id}',[ClientAddressController::class,'show'])->name($sectionName.'.show');
+        Route::patch('/{id}',[ClientAddressController::class,'update'])->name($sectionName.'.save');
+        Route::post('/',[ClientAddressController::class,'create'])->name($sectionName.'.save');
+        Route::delete('/',[ClientAddressController::class,'deleteAll'])->name($sectionName.'.delete.all');
+        Route::delete('/{id}',[ClientAddressController::class,'delete'])->name($sectionName.'.delete');
+        Route::get('/search/{term}',[ClientAddressController::class,'search'])->name($sectionName.'.search');
+    });
 
     Route::prefix('invoices')->group(function ($request) use($sectionName){
         $sectionName.='.invoices';
