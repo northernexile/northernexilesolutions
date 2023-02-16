@@ -151,6 +151,8 @@ export type Address = {
     town?:string,
     county?:string,
     postcode?:string,
+
+    client_id?:any
 }
 
 export type ClientInvoice = {

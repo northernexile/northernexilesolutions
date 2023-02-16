@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import {Link} from "react-router-dom";
-import {Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Divider, List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {useEffect, useState} from 'react';
 import {
     ContactMail,

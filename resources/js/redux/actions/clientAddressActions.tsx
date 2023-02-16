@@ -63,9 +63,9 @@ export const deleteClientAddress = (clientAddress:ClientAddress):ThunkAction<voi
     }
 }
 
-export const getAllClientAddresses = ():ThunkAction<void, RootState, unknown, AnyAction>=> {
+export const getAllClientAddresses = (clientId:any):ThunkAction<void, RootState, unknown, AnyAction>=> {
     return async (dispatch,getState) :Promise<void>=>{
-        const response:ClientAddress[]|ApiError = await ClientAddressService.getAll()
+        const response:ClientAddress[]|ApiError = await ClientAddressService.getAll(clientId)
 
         if(isApiError(response,200)) {
             toast.error(response.message)
