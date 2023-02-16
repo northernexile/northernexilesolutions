@@ -10,8 +10,8 @@ $sectionName = 'client';
 
 Route::prefix('client')->middleware(['auth:sanctum','owner'])->group(function ($request) use($sectionName){
 
-    Route::prefix('addresses')->group(function ($request) use($sectionName){
-        $sectionName.='.addresses';
+    Route::prefix('address')->group(function ($request) use($sectionName){
+        $sectionName.='.address';
         Route::get('/',[ClientAddressController::class,'index'])->name($sectionName.'.index');
         Route::get('/{id}',[ClientAddressController::class,'show'])->name($sectionName.'.show');
         Route::patch('/{id}',[ClientAddressController::class,'update'])->name($sectionName.'.save');
@@ -21,11 +21,11 @@ Route::prefix('client')->middleware(['auth:sanctum','owner'])->group(function ($
         Route::get('/search/{term}',[ClientAddressController::class,'search'])->name($sectionName.'.search');
     });
 
-    Route::prefix('invoices')->group(function ($request) use($sectionName){
-        $sectionName.='.invoices';
+    Route::prefix('invoice')->group(function ($request) use($sectionName){
+        $sectionName.='.invoice';
 
         Route::prefix('item')->group(function ($request) use($sectionName){
-            $sectionName.='.items';
+            $sectionName.='.item';
 
             Route::get('/',[ClientInvoiceItemController::class,'index'])->name($sectionName.'.index');
             Route::get('/{id}',[ClientInvoiceItemController::class,'show'])->name($sectionName.'.show');
